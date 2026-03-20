@@ -9,6 +9,8 @@ public class SectionManager : MonoBehaviour
     public Vector3 respawnPoint { get; private set; }
     public Vector3 respawnRotation { get; private set; }
 
+    public UniversalStateManagerScriptableObject universalStateManagerScriptableObject;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -23,11 +25,23 @@ public class SectionManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && SetSectionAsCurrent(other.gameObject.GetComponent<GloveScript>()))
         {
-            SaveSnapshot();
-            SetSectionAsCurrent(other.gameObject.GetComponent<GloveScript>());
+            StartCoroutine(EnterSectionRoutine());
         }
+
+    }
+
+    IEnumerator EnterSectionRoutine()
+    {
+        universalStateManagerScriptableObject.SetSavingState(true);
+        Debug.Log("Entered new section, saving state...");
+
+        SaveSnapshot();
+
+        yield return new WaitForSeconds(1.0f);
+
+        universalStateManagerScriptableObject.SetSavingState(false);
     }
 
     private void SaveSnapshot()
@@ -46,8 +60,8 @@ public class SectionManager : MonoBehaviour
         }
     }
 
-    private void SetSectionAsCurrent(GloveScript playerScript)
+    private bool SetSectionAsCurrent(GloveScript playerScript)
     {
-        playerScript.SetCurrentSection(this);
+        return playerScript.SetNewCurrentSection(this);
     }
 }

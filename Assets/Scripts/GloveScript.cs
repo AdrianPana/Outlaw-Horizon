@@ -55,7 +55,7 @@ public class GloveScript : MonoBehaviour
         playerInputActions.Player.Clear.started += ToggleWindNone;
         playerInputActions.Player.Ability.started += ShowAbilityMenu;
         playerInputActions.Player.Ability.canceled += HideAbilityMenu;
-        playerInputActions.Player.Reset.started += ResetScene;
+        playerInputActions.Player.Reset.started += ResetSceneCallback;
 
         universalStateManagerScriptableObject.modifierButtonSelectedEvent.AddListener(MenuModifierSelected);
 
@@ -68,7 +68,7 @@ public class GloveScript : MonoBehaviour
         playerInputActions.Player.Clear.started -= ToggleWindNone;
         playerInputActions.Player.Ability.started -= ShowAbilityMenu;
         playerInputActions.Player.Ability.canceled -= HideAbilityMenu;
-        playerInputActions.Player.Reset.started -= ResetScene;
+        playerInputActions.Player.Reset.started -= ResetSceneCallback;
 
         universalStateManagerScriptableObject.modifierButtonSelectedEvent.RemoveListener(MenuModifierSelected);
     }
@@ -146,7 +146,12 @@ public class GloveScript : MonoBehaviour
         menuSelectedModifier = modifier;
     }
 
-    private void ResetScene(InputAction.CallbackContext ctx)
+    private void ResetSceneCallback(InputAction.CallbackContext ctx)
+    {
+        ResetScene();
+    }
+
+    public void ResetScene()
     {
         // tp back to checkpoint
         if (currentSection.respawnPoint != null)
@@ -156,11 +161,16 @@ public class GloveScript : MonoBehaviour
 
         // reload snapshot
         currentSection.ResetSection();
-
     }
 
-    public void SetCurrentSection(SectionManager section)
+    public bool SetNewCurrentSection(SectionManager section)
     {
+        if (currentSection == section)
+        {
+            return false;
+        }
+
         currentSection = section;
+        return true;
     }
 }

@@ -16,6 +16,8 @@ public class UniversalStateManagerScriptableObject : ScriptableObject
     public UnityEvent<(Vector3, float, WindDirection)> windChangedEvent;
     [System.NonSerialized]
     public UnityEvent<Modifier> modifierButtonSelectedEvent;
+    [System.NonSerialized]
+    public UnityEvent<bool> savingStateEvent;
 
     private void OnEnable()
     {
@@ -31,6 +33,10 @@ public class UniversalStateManagerScriptableObject : ScriptableObject
         if (modifierButtonSelectedEvent == null)
         {
             modifierButtonSelectedEvent = new UnityEvent<Modifier>();
+        }
+        if (savingStateEvent == null)
+        {
+            savingStateEvent = new UnityEvent<bool>();
         }
     }
 
@@ -68,5 +74,11 @@ public class UniversalStateManagerScriptableObject : ScriptableObject
     public void SelectModifier(Modifier modifier)
     {
         modifierButtonSelectedEvent.Invoke(modifier);
-    } 
+    }
+
+    // Used to trigger saving state when player enters a new section
+    public void SetSavingState(bool isSaving)
+    {
+        savingStateEvent.Invoke(isSaving);
+    }
 }

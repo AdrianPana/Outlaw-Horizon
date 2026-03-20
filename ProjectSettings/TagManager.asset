@@ -6,6 +6,7 @@ TagManager:
   tags:
   - CinemachineTarget
   - GlobalVolume
+  - Damage
   layers:
   - Default
   - TransparentFX

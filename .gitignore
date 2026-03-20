@@ -27,7 +27,7 @@ Builds/
 /[Uu]ser[Ss]ettings/
 
 # Visual Studio
-.vs/
+.vs/*
 *.csproj
 *.sln
 *.suo
@@ -54,3 +54,15 @@ desktop.ini
 
 # Crashlytics
 crashlytics-build.properties
+.vs/Outlaw Horizon/CopilotIndices/17.12.53.23981/SemanticSymbols.db-shm
+.vs/Outlaw Horizon/FileContentIndex/b006c7f2-3023-4e42-9990-92001771d01e.vsidx
+.vs/Outlaw Horizon/FileContentIndex/d17fd8c7-801f-4ba1-bc3f-d8718e44ad63.vsidx
+.vs/Outlaw Horizon/v17/.suo
+.vs/Outlaw Horizon/v17/DocumentLayout.backup.json
+.vs/Outlaw Horizon/v17/DocumentLayout.json
+.vs/Outlaw Horizon/v17/DocumentLayout.json
+.vs/Outlaw Horizon/v17/DocumentLayout.backup.json
+.vs/Outlaw Horizon/v17/.suo
+.vs/Outlaw Horizon/FileContentIndex/d17fd8c7-801f-4ba1-bc3f-d8718e44ad63.vsidx
+.vs/Outlaw Horizon/FileContentIndex/b006c7f2-3023-4e42-9990-92001771d01e.vsidx
+.vs/Outlaw Horizon/CopilotIndices/17.12.53.23981/SemanticSymbols.db-shm

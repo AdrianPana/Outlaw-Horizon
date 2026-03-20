@@ -68,9 +68,11 @@
     <Compile Include="Assets\Scripts\GloveScript.cs" />
     <Compile Include="Assets\Scripts\CustomPlayerController.cs" />
     <Compile Include="Assets\Scripts\WheelButtonController.cs" />
+    <Compile Include="Assets\Scripts\DamageObject.cs" />
     <Compile Include="Assets\Scripts\ObjectInteractScript.cs" />
     <Compile Include="Assets\Scripts\ModifierTimer.cs" />
     <Compile Include="Assets\Scripts\UniversalStateManagerScriptableObject.cs" />
+    <Compile Include="Assets\Scripts\SavingUIController.cs" />
     <Compile Include="Assets\Scripts\SectionManager.cs" />
     <Compile Include="Assets\InputSystem_Actions.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
