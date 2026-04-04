@@ -68,6 +68,16 @@ namespace StarterAssets
         [Tooltip("What layers the character uses as ground")]
         public LayerMask GroundLayers;
 
+        [Header("Ledge Detection")]
+        [Tooltip("Whether or not the player is currently on a ledge")]
+        public bool OnLedge = false;
+
+        [Tooltip("The distance the sphere cast from the origin to check for ledges when not grounded")]
+        public float LedgeCheckDistance = 0.5f;
+
+        [Tooltip("The offset so that the hands allign with the ledge")]
+        public float HangOffset = 1.0f;
+
         [Header("Cinemachine")]
         [Tooltip("The follow target set in the Cinemachine Virtual Camera that the camera will follow")]
         public GameObject CinemachineCameraTarget;
@@ -102,7 +112,7 @@ namespace StarterAssets
         private float _animationBlend;
         private float _targetRotation = 0.0f;
         private float _rotationVelocity;
-        private float _verticalVelocity;
+        public float _verticalVelocity;
         private float _terminalVelocity = 10.0f;
         private bool bufferedJump;
 
@@ -118,6 +128,7 @@ namespace StarterAssets
         private int _animIDJump;
         private int _animIDFreeFall;
         private int _animIDMotionSpeed;
+        private int _animIDOnLedge;
 
 #if ENABLE_INPUT_SYSTEM
         private PlayerInput _playerInput;
@@ -130,6 +141,8 @@ namespace StarterAssets
         private const float _threshold = 0.01f;
 
         private bool _hasAnimator;
+
+        RaycastHit forwardHit;
 
         private bool IsCurrentDeviceMouse
         {
@@ -182,6 +195,7 @@ namespace StarterAssets
             rb.angularVelocity = Vector3.zero;
 
             GroundedCheck();
+            LedgeCheck();
             JumpAndGravity();
             Move();
             SnapToGround();
@@ -199,6 +213,7 @@ namespace StarterAssets
             _animIDJump = Animator.StringToHash("Jump");
             _animIDFreeFall = Animator.StringToHash("FreeFall");
             _animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
+            _animIDOnLedge = Animator.StringToHash("OnLedge");
         }
 
         private void GroundedCheck()
@@ -290,10 +305,11 @@ namespace StarterAssets
 
             // normalise input direction
             Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
+            Debug.Log("OnLedge: " + OnLedge);
 
             // note: Vector2's != operator uses approximation so is not floating point error prone, and is cheaper than magnitude
             // if there is a move input rotate player when the player is moving
-            if (_input.move != Vector2.zero)
+            if (_input.move != Vector2.zero && !OnLedge)
             {
                 _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg +
                                   _mainCamera.transform.eulerAngles.y;
@@ -307,12 +323,13 @@ namespace StarterAssets
             // Input movement
             Vector3 inputMove = Vector3.zero;
 
-            if (_input.move != Vector2.zero)
+            if (_input.move != Vector2.zero && !OnLedge)
             {
                 Vector3 moveDirection = transform.forward * _speed;
 
                 if (Grounded)
                 {
+                    // CHECK FOR RAMP AHEAD
                     Vector3 forwardCastOrigin = transform.position + transform.forward * _capsuleCollider.radius + Vector3.up;
                     //if (Physics.SphereCast(forwardCastOrigin, _capsuleCollider.radius, Vector3.down, out RaycastHit forwardHit,
                     //    1, GroundLayers, QueryTriggerInteraction.Ignore))
@@ -358,16 +375,54 @@ namespace StarterAssets
             }
         }
 
+        private void LedgeCheck()
+        {
+            if (Grounded)
+            {
+                _animator.SetBool(_animIDOnLedge, false);
+                return;
+            }
+
+            if (_verticalVelocity > 1.0f)
+                return;
+
+            // If falling, check for a collision in front of the player at the height of a ledge.
+            Vector3 forwardCastOrigin = transform.position + transform.forward * _capsuleCollider.radius + Vector3.up * 1.75f;
+            if (Physics.SphereCast(forwardCastOrigin, _capsuleCollider.radius, Vector3.down, out RaycastHit forwardHit,
+                LedgeCheckDistance, GroundLayers, QueryTriggerInteraction.Ignore))
+            {
+                OnLedge = true;
+                _verticalVelocity = 0;
+                _animator.SetBool(_animIDJump, false);
+                _animator.SetBool(_animIDFreeFall, false);
+                _animator.SetBool(_animIDOnLedge, false);
+                transform.position = new Vector3(transform.position.x, forwardHit.point.y - 1.0f - HangOffset, transform.position.z);
+
+                // rotate to face the ledge
+                Vector3 ledgeFacing = forwardHit.point - transform.position;
+                ledgeFacing.y = 0;
+                if (ledgeFacing != Vector3.zero)
+                    transform.rotation = Quaternion.LookRotation(ledgeFacing.normalized);
+            }
+
+            if (_hasAnimator)
+            {
+                _animator.SetBool(_animIDOnLedge, OnLedge);
+            }
+        }
+
         private void JumpAndGravity()
         {
             // If on the ground or recently left it, perform jump
-            if (Grounded || _coyoteTimeDelta >= 0)
+            if (Grounded || _coyoteTimeDelta >= 0 || OnLedge)
             {
                 // Jump
                 if ((_input.jump || bufferedJump) && _jumpTimeoutDelta <= 0.0f)
                 {
                     // the square root of H * -2 * G = how much velocity needed to reach desired height
-                    _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
+                    _verticalVelocity = Mathf.Sqrt(JumpHeight * (OnLedge ? 2f : 1f) * -2f * Gravity);
+
+                    OnLedge = false;
 
                     // update animator if using character
                     if (_hasAnimator)
@@ -383,7 +438,8 @@ namespace StarterAssets
                 }
             }
 
-            if (Grounded)
+            // Basic grounded behaviour
+            if (Grounded && !OnLedge)
             {
                 // reset the fall timeout timer
                 _fallTimeoutDelta = FallTimeout;
@@ -402,9 +458,10 @@ namespace StarterAssets
                     _verticalVelocity = -0.5f;
                 }
             }
-            else
+            //
+            else if (!OnLedge)
             {
-                // If we press jump while still in the ground, start a timer.
+                // If we press jump while not on the ground, start a timer.
                 // If we hit the ground again while the timer is running, jump.
                 if (_input.jump)
                 {
@@ -441,12 +498,16 @@ namespace StarterAssets
                 {
                     _coyoteTimeDelta -= Time.deltaTime;
                 }
-                // if we are not grounded, do not jump      
+                // if we are not grounded and not in coyote time, do not jump      
                 _input.jump = false;
             }
 
+            if (OnLedge)
+            {
+                _verticalVelocity = 0f; // hard lock
+            }
             // apply gravity over time if under terminal (multiply by delta time twice to linearly speed up over time)
-            if (_verticalVelocity < _terminalVelocity)
+            else if (_verticalVelocity < _terminalVelocity)
             {
                 _verticalVelocity += Gravity * Time.deltaTime;
             }
@@ -454,7 +515,7 @@ namespace StarterAssets
 
         private void SnapToGround()
         {
-            if (!Grounded)
+            if (!Grounded || OnLedge)
                 return;
 
             if (_verticalVelocity > 0.0f)
@@ -491,10 +552,12 @@ namespace StarterAssets
                 GroundedRadius);
             
             Gizmos.DrawSphere(
-                transform.position + transform.forward * GroundedRadius + Vector3.up,
+                transform.position + transform.forward * GroundedRadius + Vector3.up * 2.0f,
                 GroundedRadius);
 
-            
+            Gizmos.DrawSphere(
+                transform.position + transform.forward * GroundedRadius + Vector3.up * (2.0f - LedgeCheckDistance),
+                GroundedRadius);
         }
 
         private void OnFootstep(AnimationEvent animationEvent)

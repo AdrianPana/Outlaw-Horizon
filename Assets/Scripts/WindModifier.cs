@@ -2,7 +2,7 @@ using UnityEngine;
 using Game.Resources;
 using Unity.VisualScripting;
 
-[RequireComponent(typeof(ResettableModifierObject))]
+[RequireComponent(typeof(ResettableModifierObject), typeof(Collider), typeof(Rigidbody))]
 public class WindModifier : MonoBehaviour
 {
     private Rigidbody rb;
