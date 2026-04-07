@@ -85,6 +85,9 @@ namespace StarterAssets
         [Tooltip("Step height")]
         public float stepHeight;
 
+        public float lowerDist = 0.1f;
+        public float upperDist = 0.2f;
+
         [Header("Cinemachine")]
         [Tooltip("The follow target set in the Cinemachine Virtual Camera that the camera will follow")]
         public GameObject CinemachineCameraTarget;
@@ -121,7 +124,7 @@ namespace StarterAssets
         public float _verticalVelocity;
         private float _terminalVelocity = 10.0f;
         private bool bufferedJump;
-        private bool _onRamp = false;
+        private bool _isSteppingUp;
 
         // timeout deltatime
         private float _jumpBufferingDelta;
@@ -329,6 +332,8 @@ namespace StarterAssets
 
             // Input movement
             Vector3 inputMove = Vector3.zero;
+            Debug.DrawRay(transform.position + new Vector3(0, 0.1f, 0), transform.forward * lowerDist, Color.cyan, 0.1f);
+            Debug.DrawRay(transform.position + new Vector3(0, stepHeight + 0.1f, 0), transform.forward * upperDist, Color.green, 0.1f);
 
             if (_input.move != Vector2.zero && !OnLedge)
             {
@@ -336,40 +341,34 @@ namespace StarterAssets
 
                 if (Grounded)
                 {
-                    _onRamp = false;
                     // CHECK FOR RAMP AHEAD
-                    Vector3 forwardCastOrigin = transform.position + transform.forward * _capsuleCollider.radius * 2.0f + Vector3.up;
-                    if (Physics.SphereCast(forwardCastOrigin, _capsuleCollider.radius, Vector3.down, out RaycastHit forwardHit,
-                        1 - stepHeight, GroundLayers, QueryTriggerInteraction.Ignore))
+                    if (Physics.Raycast(transform.position + new Vector3(0, 0.1f, 0), transform.forward, out RaycastHit hitLower, lowerDist))
                     {
+                        float hitAngle = Vector3.Angle(Vector3.up, hitLower.normal);
+                        float groundAngle = Vector3.Angle(Vector3.up, _groundHit.normal);
+                        Debug.Log($"Hit angle: {hitAngle}, Ground angle: {groundAngle}");
 
-                        float forwardSlopeAngle = Vector3.Angle(Vector3.up, forwardHit.normal);
-                        if (forwardSlopeAngle < maxSlopeAngle)
+                        bool isStep = hitAngle > 85f;
+                        bool isOnFlat = groundAngle < 5f;
+
+                        if (isOnFlat || isStep)
                         {
-                            // lift player to slope height before moving forward
-                            float targetY = forwardHit.point.y;
-                            float currentY = rb.position.y;
-                            if (targetY > currentY)
+                            if (!Physics.Raycast(transform.position + new Vector3(0, stepHeight + 0.1f, 0), transform.forward, out RaycastHit hitUpper, upperDist))
                             {
-                                Vector3 lifted = rb.position;
-                                lifted.y = Mathf.MoveTowards(currentY, targetY, _speed * Time.fixedDeltaTime);
-                                rb.MovePosition(lifted);
+                                Vector3 aboveObstacle = hitLower.point + new Vector3(0, stepHeight, 0);
+                                if (Physics.Raycast(aboveObstacle, Vector3.down, out RaycastHit topHit, stepHeight, GroundLayers))
+                                {
+                                    rb.position = new Vector3(rb.position.x, topHit.point.y, rb.position.z);
+                                    _isSteppingUp = true;
+                                }
                             }
-
-                            moveDirection = Vector3.ProjectOnPlane(moveDirection, forwardHit.normal);
-                            _onRamp = true;
                         }
                     }
-                    else
-                    {
-                        // no surface ahead, fall back to current ground normal
-                        moveDirection = Vector3.ProjectOnPlane(moveDirection, _groundHit.normal);
-                        _onRamp = false;
-                    }
+
+                    moveDirection = Vector3.ProjectOnPlane(moveDirection, _groundHit.normal);
                 }
 
                 // inside Move(), right before inputMove = moveDirection
-                Debug.DrawRay(transform.position, moveDirection, Color.green, 0.1f);
                 inputMove = moveDirection;
             }
 
@@ -553,6 +552,12 @@ namespace StarterAssets
         {
             if (!Grounded || OnLedge)
                 return;
+
+            if (_isSteppingUp)
+            {
+                _isSteppingUp = false;
+                return;
+            }
 
             if (_verticalVelocity > 0.0f)
                 return;
