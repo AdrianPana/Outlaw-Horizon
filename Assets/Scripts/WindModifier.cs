@@ -46,6 +46,7 @@ public class WindModifier : MonoBehaviour
         {
             windStrength = 1f;
         }
+        obstacleMask = ~0;
     }
 
     private void OnEnable()

@@ -53,8 +53,11 @@ public class CollectorScript : MonoBehaviour
                 originalMaterial = rend.material;
                 rend.material = selectedMaterial;
 
-                tooltip.SetActive(true);
-                tooltip.transform.position = hit.transform.position + new Vector3(0, 1, 0);
+                if (tooltip != null)
+                {
+                    tooltip.SetActive(true);
+                    tooltip.transform.position = hit.transform.position + new Vector3(0, 1, 0);
+                }
             }
         }
         else
@@ -75,7 +78,8 @@ public class CollectorScript : MonoBehaviour
             selectedInteractor = null;
         }
 
-        tooltip.SetActive(false);
+        if (tooltip != null)
+            tooltip.SetActive(false);
     }
 
     void RotateTooltip()

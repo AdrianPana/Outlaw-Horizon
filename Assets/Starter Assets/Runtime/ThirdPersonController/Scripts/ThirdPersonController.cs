@@ -78,6 +78,13 @@ namespace StarterAssets
         [Tooltip("The offset so that the hands allign with the ledge")]
         public float HangOffset = 1.0f;
 
+        [Header("Slope Handling")]
+        [Tooltip("The maximum slope angle the character can walk up")]
+        public float maxSlopeAngle;
+
+        [Tooltip("Step height")]
+        public float stepHeight;
+
         [Header("Cinemachine")]
         [Tooltip("The follow target set in the Cinemachine Virtual Camera that the camera will follow")]
         public GameObject CinemachineCameraTarget;
@@ -97,7 +104,6 @@ namespace StarterAssets
         [Tooltip("Added when player sits on moving platform")]
         public Vector3 PlatformMovement = Vector3.zero;
         public Rideable _ridable;
-        public float maxSlopeAngle;
 
         private RaycastHit _groundHit;
         private CapsuleCollider _capsuleCollider;
@@ -115,6 +121,7 @@ namespace StarterAssets
         public float _verticalVelocity;
         private float _terminalVelocity = 10.0f;
         private bool bufferedJump;
+        private bool _onRamp = false;
 
         // timeout deltatime
         private float _jumpBufferingDelta;
@@ -329,24 +336,40 @@ namespace StarterAssets
 
                 if (Grounded)
                 {
+                    _onRamp = false;
                     // CHECK FOR RAMP AHEAD
-                    Vector3 forwardCastOrigin = transform.position + transform.forward * _capsuleCollider.radius + Vector3.up;
-                    //if (Physics.SphereCast(forwardCastOrigin, _capsuleCollider.radius, Vector3.down, out RaycastHit forwardHit,
-                    //    1, GroundLayers, QueryTriggerInteraction.Ignore))
-                    //{
-                    //    float forwardSlopeAngle = Vector3.Angle(Vector3.up, forwardHit.normal);
-                    //    if (forwardSlopeAngle < maxSlopeAngle)
-                    //    {
-                    //        moveDirection = Vector3.ProjectOnPlane(moveDirection, forwardHit.normal);
-                    //    }
-                    //}
-                    //else
-                    //{
+                    Vector3 forwardCastOrigin = transform.position + transform.forward * _capsuleCollider.radius * 2.0f + Vector3.up;
+                    if (Physics.SphereCast(forwardCastOrigin, _capsuleCollider.radius, Vector3.down, out RaycastHit forwardHit,
+                        1 - stepHeight, GroundLayers, QueryTriggerInteraction.Ignore))
+                    {
+
+                        float forwardSlopeAngle = Vector3.Angle(Vector3.up, forwardHit.normal);
+                        if (forwardSlopeAngle < maxSlopeAngle)
+                        {
+                            // lift player to slope height before moving forward
+                            float targetY = forwardHit.point.y;
+                            float currentY = rb.position.y;
+                            if (targetY > currentY)
+                            {
+                                Vector3 lifted = rb.position;
+                                lifted.y = Mathf.MoveTowards(currentY, targetY, _speed * Time.fixedDeltaTime);
+                                rb.MovePosition(lifted);
+                            }
+
+                            moveDirection = Vector3.ProjectOnPlane(moveDirection, forwardHit.normal);
+                            _onRamp = true;
+                        }
+                    }
+                    else
+                    {
                         // no surface ahead, fall back to current ground normal
                         moveDirection = Vector3.ProjectOnPlane(moveDirection, _groundHit.normal);
-                    //}
+                        _onRamp = false;
+                    }
                 }
 
+                // inside Move(), right before inputMove = moveDirection
+                Debug.DrawRay(transform.position, moveDirection, Color.green, 0.1f);
                 inputMove = moveDirection;
             }
 
@@ -392,11 +415,23 @@ namespace StarterAssets
                 LedgeCheckDistance, GroundLayers, QueryTriggerInteraction.Ignore))
             {
                 OnLedge = true;
+                _ridable = forwardHit.collider.GetComponent<Rideable>();
+
                 _verticalVelocity = 0;
                 _animator.SetBool(_animIDJump, false);
                 _animator.SetBool(_animIDFreeFall, false);
                 _animator.SetBool(_animIDOnLedge, false);
-                transform.position = new Vector3(transform.position.x, forwardHit.point.y - 1.0f - HangOffset, transform.position.z);
+
+                Vector3 hangPosition = new Vector3(
+                    transform.position.x,
+                    forwardHit.point.y - 1.0f - HangOffset,
+                    transform.position.z);
+
+                // add platform movement if hanging on a moving platform
+                if (_ridable != null)
+                    hangPosition += _ridable.Velocity * Time.fixedDeltaTime;
+
+                transform.position = hangPosition;
 
                 // rotate to face the ledge
                 Vector3 ledgeFacing = forwardHit.point - transform.position;
@@ -423,6 +458,7 @@ namespace StarterAssets
                     _verticalVelocity = Mathf.Sqrt(JumpHeight * (OnLedge ? 2f : 1f) * -2f * Gravity);
 
                     OnLedge = false;
+                    _ridable = null;
 
                     // update animator if using character
                     if (_hasAnimator)

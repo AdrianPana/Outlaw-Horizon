@@ -68,6 +68,7 @@
     <Compile Include="Assets\Scripts\GloveScript.cs" />
     <Compile Include="Assets\Scripts\CustomPlayerController.cs" />
     <Compile Include="Assets\Scripts\WheelButtonController.cs" />
+    <Compile Include="Assets\Scripts\Level3Script.cs" />
     <Compile Include="Assets\Scripts\DamageObject.cs" />
     <Compile Include="Assets\Scripts\ObjectInteractScript.cs" />
     <Compile Include="Assets\Scripts\ModifierTimer.cs" />
