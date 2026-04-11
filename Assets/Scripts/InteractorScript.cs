@@ -12,6 +12,16 @@ public class InteractorScript : MonoBehaviour
 
     private void Start()
     {
+
+    }
+
+    private void OnValidate()
+    {
+        if (rangeIndicator != null)
+        {
+            rangeIndicator.transform.localScale = new Vector3(range, 0.025f, range);
+        }
+
         switch (modifier)
         {
             case Modifier.WIND_NORTH:
@@ -23,8 +33,6 @@ public class InteractorScript : MonoBehaviour
             default:
                 break;
         }
-
-        rangeIndicator.transform.localScale = new Vector3(range, 0.025f, range);
     }
 
     public void ToggleModifier()

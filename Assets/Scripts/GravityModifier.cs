@@ -65,26 +65,26 @@ public class GravityModifier : MonoBehaviour
     {
         Debug.Log(rb.position);
 
-        //// resolve any existing penetration first
-        //Collider[] overlaps = Physics.OverlapBox(
-        //    rb.position,
-        //    GetHalfExtents(),
-        //    transform.rotation,
-        //    obstacleMask,
-        //    QueryTriggerInteraction.Ignore);
+        // resolve any existing penetration first
+        Collider[] overlaps = Physics.OverlapBox(
+            rb.position,
+            GetHalfExtents(),
+            transform.rotation,
+            obstacleMask,
+            QueryTriggerInteraction.Ignore);
 
-        //foreach (Collider overlap in overlaps)
-        //{
-        //    if (overlap.gameObject == gameObject) continue;
+        foreach (Collider overlap in overlaps)
+        {
+            if (overlap.gameObject == gameObject) continue;
 
-        //    if (Physics.ComputePenetration(
-        //        GetComponent<Collider>(), rb.position, transform.rotation,
-        //        overlap, overlap.transform.position, overlap.transform.rotation,
-        //        out Vector3 separationDir, out float separationDist))
-        //    {
-        //        rb.MovePosition(rb.position + separationDir * (separationDist + 0.01f));
-        //    }
-        //}
+            if (Physics.ComputePenetration(
+                GetComponent<Collider>(), rb.position, transform.rotation,
+                overlap, overlap.transform.position, overlap.transform.rotation,
+                out Vector3 separationDir, out float separationDist))
+            {
+                rb.MovePosition(rb.position + separationDir * (separationDist + 0.01f));
+            }
+        }
 
         if (delta == Vector3.zero)
             return;

@@ -1,6 +1,7 @@
 using UnityEngine;
 using Game.Resources;
 using Unity.VisualScripting;
+using static UnityEngine.LowLevelPhysics2D.PhysicsLayers;
 
 [RequireComponent(typeof(ResettableModifierObject), typeof(Collider), typeof(Rigidbody))]
 public class WindModifier : MonoBehaviour
@@ -47,6 +48,14 @@ public class WindModifier : MonoBehaviour
             windStrength = 1f;
         }
         obstacleMask = ~0;
+    }
+
+    void OnValidate()
+    {
+        int layer = LayerMask.NameToLayer("Modifiable");
+        if (layer == -1) return;
+
+        gameObject.layer = layer;
     }
 
     private void OnEnable()
