@@ -28,6 +28,9 @@ public class GloveScript : MonoBehaviour
 
     private ColorAdjustments colorAdjustments;
 
+    public GameObject goalPrefab;
+    private GameObject currentGoalInstance;
+
     private void Awake()
     {
         playerInputActions = new InputSystem_Actions();
@@ -174,5 +177,12 @@ public class GloveScript : MonoBehaviour
 
         currentSection = section;
         return true;
+    }
+    public void Update()
+    {
+        if (currentGoalInstance == null)
+        {
+            currentGoalInstance = Instantiate(goalPrefab, transform.position + Vector3.up, Quaternion.identity);
+        }
     }
 }
