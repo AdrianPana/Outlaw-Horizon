@@ -333,5 +333,8 @@ namespace StarterAssets
             targetPosition.y = _groundHit.point.y;
             _rb.MovePosition(targetPosition);
         }
+
+        private void OnFootstep(AnimationEvent animationEvent) { }
+        private void OnLand(AnimationEvent animationEvent) { }
     }
 }

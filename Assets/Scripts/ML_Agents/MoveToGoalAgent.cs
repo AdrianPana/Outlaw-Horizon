@@ -10,10 +10,14 @@ public class MoveToGoalAgent : Agent
     private StarterAssetsInputs _input;
     [SerializeField] private Transform targetTransform;
 
+    [SerializeField] private bool isTraining = false;
+
     [Header("Win/Lose state")]
     [SerializeField] private Material winMaterial;
     [SerializeField] private Material loseMaterial;
     [SerializeField] private MeshRenderer floorMeshRenderer;
+
+    private float _previousDistance;
 
     public override void Initialize()
     {
@@ -23,17 +27,44 @@ public class MoveToGoalAgent : Agent
 
     public override void OnEpisodeBegin()
     {
+        if (!isTraining) return;
+
+        if (Random.value > 0.5f)
+            transform.localPosition = new Vector3(Random.Range(1.8f, 4.6f) , 0.3f, Random.Range(-3f, -9f));
+        else
+            transform.localPosition = new Vector3(Random.Range(-2f, 0f), 1.5f, Random.Range(-13f, 1f));
+
         // Reset agent and target positions
-        transform.localPosition = new Vector3(3 , 0.3f, -6);
-        //transform.localPosition = new Vector3(68, 0.3f, -13);
         transform.localRotation = Quaternion.Euler(0, 90, 0);
-        //targetTransform.position = new Vector3(74, 0f, -14);
+
+        //transform.localPosition = new Vector3(68, 0.3f, -13);
+        int version = Random.Range(0, 4);
+        switch (version)
+        {
+            case 0:
+                targetTransform.localPosition = new Vector3(Random.Range(10f, 13f), 1.5f, Random.Range(-13f, 1f));
+                break;
+            case 1:
+                targetTransform.localPosition = new Vector3(Random.Range(-2f, 0f), 1.5f, Random.Range(-13f, 1f));
+                break;
+            case 2:
+                targetTransform.localPosition = new Vector3(Random.Range(0f, 11f), 1.5f, Random.Range(-2f, 1f));
+                break;
+            case 3:
+                targetTransform.localPosition = new Vector3(Random.Range(0f, 11f), 1.5f, Random.Range(-10f, -13f));
+                break;
+        }
+
+        _previousDistance = Vector3.Distance(transform.localPosition, targetTransform.localPosition);
     }
 
     public override void CollectObservations(VectorSensor sensor)
     {
         sensor.AddObservation(transform.localPosition);
         sensor.AddObservation(targetTransform.localPosition);
+        sensor.AddObservation(_controller.OnLedge);
+        sensor.AddObservation(_controller.Grounded);
+        sensor.AddObservation(_controller._verticalVelocity);
     }
 
     public override void OnActionReceived(ActionBuffers action)
@@ -43,6 +74,14 @@ public class MoveToGoalAgent : Agent
 
         _controller.aiMoveInput = new Vector2(moveX, moveZ);
         _controller.aiJump = action.DiscreteActions[0] > 0;
+
+        // reward for getting closer
+        float currentDistance = Vector3.Distance(transform.localPosition, targetTransform.localPosition);
+        float distanceDelta = _previousDistance - currentDistance;
+        AddReward(distanceDelta * 0.1f);
+        _previousDistance = currentDistance;
+
+        AddReward(-0.001f); // small time penalty
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)
@@ -56,6 +95,8 @@ public class MoveToGoalAgent : Agent
 
     private void OnTriggerEnter(Collider other)
     {
+        if (!isTraining) return;
+
         if (other.CompareTag("Goal"))
         {
             SetReward(1f);

@@ -8,6 +8,7 @@ TagManager:
   - GlobalVolume
   - Damage
   - Goal
+  - Platform
   layers:
   - Default
   - TransparentFX
