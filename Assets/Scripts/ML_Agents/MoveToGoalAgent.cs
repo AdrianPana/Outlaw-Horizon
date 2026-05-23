@@ -8,7 +8,8 @@ public class MoveToGoalAgent : Agent
 {
     private AIController _controller;
     private StarterAssetsInputs _input;
-    [SerializeField] private Transform targetTransform;
+    [SerializeField] private GameObject target;
+    private Transform targetTransform;
 
     [SerializeField] private bool isTraining = false;
 
@@ -25,14 +26,24 @@ public class MoveToGoalAgent : Agent
         _input = GetComponent<StarterAssetsInputs>();
     }
 
+    private void Update()
+    {
+        if (target == null)
+        {
+            target = GameObject.FindGameObjectWithTag("Goal");
+            if (target != null)
+                targetTransform = target.transform;
+        }
+    }
+
     public override void OnEpisodeBegin()
     {
         if (!isTraining) return;
 
-        if (Random.value > 0.5f)
+        //if (Random.value > 0.5f)
             transform.localPosition = new Vector3(Random.Range(1.8f, 4.6f) , 0.3f, Random.Range(-3f, -9f));
-        else
-            transform.localPosition = new Vector3(Random.Range(-2f, 0f), 1.5f, Random.Range(-13f, 1f));
+        //else
+        //    transform.localPosition = new Vector3(Random.Range(-2f, 0f), 1.5f, Random.Range(-13f, 1f));
 
         // Reset agent and target positions
         transform.localRotation = Quaternion.Euler(0, 90, 0);
@@ -60,8 +71,9 @@ public class MoveToGoalAgent : Agent
 
     public override void CollectObservations(VectorSensor sensor)
     {
-        sensor.AddObservation(transform.localPosition);
-        sensor.AddObservation(targetTransform.localPosition);
+        Vector3 directionToGoal = targetTransform.position - transform.position;
+        sensor.AddObservation(directionToGoal);
+        sensor.AddObservation(directionToGoal.magnitude);
         sensor.AddObservation(_controller.OnLedge);
         sensor.AddObservation(_controller.Grounded);
         sensor.AddObservation(_controller._verticalVelocity);
@@ -76,10 +88,10 @@ public class MoveToGoalAgent : Agent
         _controller.aiJump = action.DiscreteActions[0] > 0;
 
         // reward for getting closer
-        float currentDistance = Vector3.Distance(transform.localPosition, targetTransform.localPosition);
-        float distanceDelta = _previousDistance - currentDistance;
-        AddReward(distanceDelta * 0.1f);
-        _previousDistance = currentDistance;
+        //float currentDistance = Vector3.Distance(transform.position, targetTransform.position);
+        //float distanceDelta = _previousDistance - currentDistance;
+        //AddReward(distanceDelta * 0.1f);
+        //_previousDistance = currentDistance;
 
         AddReward(-0.001f); // small time penalty
     }
@@ -95,16 +107,26 @@ public class MoveToGoalAgent : Agent
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!isTraining) return;
-
         if (other.CompareTag("Goal"))
         {
+            if (!isTraining)
+            {
+                var player = GameObject.FindGameObjectWithTag("Player");
+                other.transform.position = player.transform.position + new Vector3(0, 0.5f, 0);
+                return;
+            }
+
             SetReward(1f);
             floorMeshRenderer.material = winMaterial;
             EndEpisode();
         }
         else if (other.TryGetComponent<DamageObject>(out _))
         {
+            if (!isTraining)
+            {
+                return;
+            }
+
             SetReward(-1f);
             floorMeshRenderer.material = loseMaterial;
             EndEpisode();

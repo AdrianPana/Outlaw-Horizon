@@ -180,9 +180,9 @@ public class GloveScript : MonoBehaviour
     }
     public void Update()
     {
-        if (currentGoalInstance == null)
-        {
-            currentGoalInstance = Instantiate(goalPrefab, transform.position + Vector3.up, Quaternion.identity);
-        }
+        //if (currentGoalInstance == null)
+        //{
+        //    currentGoalInstance = Instantiate(goalPrefab, transform.position + Vector3.up, Quaternion.identity, transform.parent);
+        //}
     }
 }
