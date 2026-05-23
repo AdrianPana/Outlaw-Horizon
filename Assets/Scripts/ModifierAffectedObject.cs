@@ -16,6 +16,7 @@ public class ModifierAffectedObject : MonoBehaviour
     public float passiveGravityStrength = 9.81f;
 
     private Rigidbody rb;
+    private Collider physicalCollider;
     private List<IModifierProvider> providers = new List<IModifierProvider>();
     private Vector3 momentumVelocity;
     private Vector3 currentModifierVelocity;
@@ -26,8 +27,17 @@ public class ModifierAffectedObject : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         rb.interpolation = RigidbodyInterpolation.Interpolate;
-        
-        // Find all providers on this object
+
+        // Identify the physical (non-trigger) collider for collision detection
+        foreach (var col in GetComponents<Collider>())
+        {
+            if (!col.isTrigger)
+            {
+                physicalCollider = col;
+                break;
+            }
+        }
+
         providers.AddRange(GetComponents<IModifierProvider>());
 
         if (behaviorType == BehaviorType.Controlled)
@@ -35,12 +45,16 @@ public class ModifierAffectedObject : MonoBehaviour
             rb.isKinematic = true;
             rb.useGravity = false;
             rb.freezeRotation = true;
+
+            obstacleMask = ~LayerMask.GetMask("Modifiable");
         }
         else
         {
             rb.isKinematic = false;
             rb.useGravity = true;
             rb.freezeRotation = false;
+
+            obstacleMask = ~0;
         }
     }
 
@@ -71,10 +85,24 @@ public class ModifierAffectedObject : MonoBehaviour
 
     private void HandleControlledMovement(bool isInfluenced)
     {
-        // 1. Momentum and Drag
+        if (float.IsNaN(momentumVelocity.x) || float.IsNaN(momentumVelocity.y) || float.IsNaN(momentumVelocity.z))
+        {
+            Debug.LogError($"[NaN] momentumVelocity is NaN on {name}", this);
+            momentumVelocity = Vector3.zero;
+        }
+        if (float.IsNaN(currentModifierVelocity.x) || float.IsNaN(currentModifierVelocity.y) || float.IsNaN(currentModifierVelocity.z))
+        {
+            Debug.LogError($"[NaN] currentModifierVelocity is NaN on {name}", this);
+            currentModifierVelocity = Vector3.zero;
+        }
+        if (float.IsNaN(passiveGravityVelocity.x) || float.IsNaN(passiveGravityVelocity.y) || float.IsNaN(passiveGravityVelocity.z))
+        {
+            Debug.LogError($"[NaN] passiveGravityVelocity is NaN on {name}", this);
+            passiveGravityVelocity = Vector3.zero;
+        }
+
         if (isInfluenced && !wasInfluenced)
         {
-            // If we were dynamic before (unlikely now but for robustness), capture it
             if (!rb.isKinematic)
             {
                 momentumVelocity = rb.linearVelocity;
@@ -83,30 +111,31 @@ public class ModifierAffectedObject : MonoBehaviour
             }
         }
 
-        // Apply drag to captured momentum
         momentumVelocity = Vector3.Lerp(momentumVelocity, Vector3.zero, kinematicDrag * Time.fixedDeltaTime);
 
-        // 2. Modifier Velocity
         Vector3 modifierForce = Vector3.zero;
         if (isInfluenced)
         {
             foreach (var provider in providers)
             {
-                modifierForce += provider.GetForceContribution(transform.position);
+                Vector3 contribution = provider.GetForceContribution(transform.position);
+                if (float.IsNaN(contribution.x) || float.IsNaN(contribution.y) || float.IsNaN(contribution.z))
+                {
+                    Debug.LogError($"[NaN] provider {provider} returned NaN force on {name}", this);
+                    contribution = Vector3.zero;
+                }
+                modifierForce += contribution;
             }
-            passiveGravityVelocity = Vector3.zero; // Modifiers override passive gravity
+            passiveGravityVelocity = Vector3.zero;
         }
         else
         {
-            // 3. Passive Gravity (Manual simulation to keep kinematic objects stable against player)
-            // We only apply this if not influenced by modifiers
             passiveGravityVelocity += Vector3.down * passiveGravityStrength * Time.fixedDeltaTime;
         }
 
         Vector3 targetModifierVelocity = modifierForce * speed;
         currentModifierVelocity = Vector3.Lerp(currentModifierVelocity, targetModifierVelocity, acceleration * Time.fixedDeltaTime);
 
-        // 4. Final Movement
         Vector3 totalVelocity = momentumVelocity + currentModifierVelocity + passiveGravityVelocity;
         MoveKinematicWithCollision(totalVelocity * Time.fixedDeltaTime);
     }
@@ -124,31 +153,38 @@ public class ModifierAffectedObject : MonoBehaviour
 
     private void MoveKinematicWithCollision(Vector3 delta)
     {
-        if (delta == Vector3.zero) return;
-
-        // Predictive collision detection using BoxCast (assuming BoxCollider for crates)
-        BoxCollider box = GetComponent<BoxCollider>();
-        if (box != null)
+        if (delta.sqrMagnitude < 0.00001f || physicalCollider == null)
         {
-            Vector3 center = transform.TransformPoint(box.center);
-            Vector3 halfExtents = Vector3.Scale(box.size, transform.lossyScale) * 0.5f;
+            if (delta.sqrMagnitude >= 0.00001f) rb.MovePosition(rb.position + delta);
+            return;
+        }
 
-            if (Physics.BoxCast(center, halfExtents, delta.normalized, out RaycastHit hit, transform.rotation, delta.magnitude, obstacleMask, QueryTriggerInteraction.Ignore))
+        if (rb.SweepTest(delta.normalized, out RaycastHit hit, delta.magnitude, QueryTriggerInteraction.Ignore))
+        {
+            // Check if it's a static obstacle (wall, floor, etc.)
+            if (((1 << hit.collider.gameObject.layer) & obstacleMask) != 0)
             {
                 float safeDist = Mathf.Max(0, hit.distance - 0.01f);
                 rb.MovePosition(rb.position + delta.normalized * safeDist);
-                
-                // Zero out velocity component hitting the wall
+
                 Vector3 normal = hit.normal;
                 currentModifierVelocity = Vector3.ProjectOnPlane(currentModifierVelocity, normal);
                 momentumVelocity = Vector3.ProjectOnPlane(momentumVelocity, normal);
                 passiveGravityVelocity = Vector3.ProjectOnPlane(passiveGravityVelocity, normal);
-                
                 return;
+            }
+
+            // Check if it's a pushable non-kinematic rigidbody (e.g. ambient crate)
+            Rigidbody hitRb = hit.collider.attachedRigidbody;
+            if (hitRb != null && !hitRb.isKinematic)
+            {
+                // Transfer velocity to the pushed object
+                Vector3 pushVelocity = Vector3.Project(delta / Time.fixedDeltaTime, delta.normalized);
+                hitRb.linearVelocity = Vector3.Lerp(hitRb.linearVelocity, pushVelocity, acceleration * Time.fixedDeltaTime);
             }
         }
 
+        // In both the "no hit" and "pushable hit" cases, move fully
         rb.MovePosition(rb.position + delta);
     }
 }
-
