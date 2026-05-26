@@ -1,0 +1,29 @@
+{
+    "MoveToGoal": {
+        "checkpoints": [
+            {
+                "steps": 463947,
+                "file_path": "results\\ClimbAgent_25_05\\MoveToGoal\\MoveToGoal-463947.onnx",
+                "reward": 1.250183873316821,
+                "creation_time": 1779747648.5424328,
+                "auxillary_file_paths": [
+                    "results\\ClimbAgent_25_05\\MoveToGoal\\MoveToGoal-463947.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 463947,
+            "file_path": "results\\ClimbAgent_25_05\\MoveToGoal.onnx",
+            "reward": 1.250183873316821,
+            "creation_time": 1779747648.5424328,
+            "auxillary_file_paths": [
+                "results\\ClimbAgent_25_05\\MoveToGoal\\MoveToGoal-463947.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.1.0",
+        "torch_version": "2.2.2+cu121"
+    }
+}
