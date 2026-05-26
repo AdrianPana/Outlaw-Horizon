@@ -22,7 +22,7 @@ public class MoveToGoalAgent : Agent
     private float _previousDistance;
     private int goalMoves;
     private bool _goalReached;
-
+    private bool _inferenceEnabled = true;
     public override void Initialize()
     {
         _controller = GetComponent<AIController>();
@@ -68,6 +68,13 @@ public class MoveToGoalAgent : Agent
 
     public override void OnActionReceived(ActionBuffers action)
     {
+        if (!_inferenceEnabled)
+        {
+            _controller.aiMoveInput = Vector2.zero;
+            _controller.aiJump = false;
+            return;
+        }
+
         float moveX = action.ContinuousActions[0];
         float moveZ = action.ContinuousActions[1];
 
@@ -192,6 +199,21 @@ public class MoveToGoalAgent : Agent
             case 3:
                 targetTransform.localPosition = new Vector3(Random.Range(2f, 9f), 1.5f, Random.Range(-10f, -13f));
                 break;
+        }
+    }
+
+    public void SetTarget(Transform newTarget)
+    {
+        targetTransform = newTarget;
+    }
+
+    public void EnableInference(bool enable)
+    {
+        _inferenceEnabled = enable;
+        if (!enable)
+        {
+            _controller.aiMoveInput = Vector2.zero;
+            _controller.aiJump = false;
         }
     }
 }
