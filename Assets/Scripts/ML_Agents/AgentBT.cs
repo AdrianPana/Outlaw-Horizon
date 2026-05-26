@@ -26,6 +26,7 @@ public class AgentBT : MonoBehaviour
     public BehaviorState currentState = BehaviorState.FOLLOWING;
 
     private bool _isAttacking = false;
+    private bool _isInvulnerable = false;
 
     private void Awake()
     {
@@ -77,7 +78,18 @@ public class AgentBT : MonoBehaviour
         yield return new WaitForSeconds(2f);
 
         _isAttacking = false;
-        // inference will be re-enabled on the next Update cycle
+    }
+
+    private IEnumerator TakeDamageRoutine(int damage)
+    {
+        _isInvulnerable = true;
+        hp = Mathf.Max(0, hp - damage);
+        Debug.Log("Took " + damage + " damage. HP is now " + hp);
+
+        yield return new WaitForSeconds(2f);
+
+        _isInvulnerable = false;
+        Debug.Log("Invulnerability ended");
     }
 
     private void SetState(BehaviorState newState)
@@ -86,6 +98,16 @@ public class AgentBT : MonoBehaviour
         {
             currentState = newState;
             Debug.Log("State changed to: " + newState);
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+
+    {
+        if (collision.gameObject.TryGetComponent<DamageObject>(out _))
+        {
+            if (!_isInvulnerable)
+                StartCoroutine(TakeDamageRoutine(3));
         }
     }
 }
