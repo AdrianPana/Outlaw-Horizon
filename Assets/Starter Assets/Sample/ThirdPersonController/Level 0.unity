@@ -483,7 +483,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6317471981403756754, guid: 7073b504f29511c4abe37fa74f6d311f, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1191,7 +1191,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6317471981403756754, guid: 7073b504f29511c4abe37fa74f6d311f, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1256,7 +1256,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6317471981403756754, guid: 7073b504f29511c4abe37fa74f6d311f, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1486,7 +1486,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6317471981403756754, guid: 7073b504f29511c4abe37fa74f6d311f, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1761,7 +1761,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6317471981403756754, guid: 7073b504f29511c4abe37fa74f6d311f, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2047,7 +2047,7 @@ PrefabInstance:
     - target: {fileID: 3054715589195458604, guid: 7073b504f29511c4abe37fa74f6d311f, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 90c4f52da08b1f84bb4de69699cb9230, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: a9c7378ffc1718c48aaafa18c1b8c839, type: 3}
     - target: {fileID: 3054715589195458604, guid: 7073b504f29511c4abe37fa74f6d311f, type: 3}
       propertyPath: m_BehaviorType
       value: 2
@@ -2090,7 +2090,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5500358552788547068, guid: 7073b504f29511c4abe37fa74f6d311f, type: 3}
       propertyPath: isTraining
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5500358552788547068, guid: 7073b504f29511c4abe37fa74f6d311f, type: 3}
       propertyPath: targetTransform

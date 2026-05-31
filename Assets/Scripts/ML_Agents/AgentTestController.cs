@@ -1,5 +1,3 @@
-// AgentTestController.cs
-using StarterAssets;
 using UnityEngine;
 using UnityEngine.InputSystem;
 

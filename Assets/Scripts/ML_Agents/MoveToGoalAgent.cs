@@ -162,45 +162,45 @@ public class MoveToGoalAgent : Agent
         _goalReached = false;
     }
 
-    //private void PlaceGoal()
-    //{
-    //    int version = Random.Range(0, 4);
-    //    switch (version)
-    //    {
-    //        case 0:
-    //            targetTransform.localPosition = new Vector3(Random.Range(10f, 13f), 1.5f, Random.Range(-13f, 1f));
-    //            break;
-    //        case 1:
-    //            targetTransform.localPosition = new Vector3(Random.Range(-2f, 0f), 1.5f, Random.Range(-13f, 1f));
-    //            break;
-    //        case 2:
-    //            targetTransform.localPosition = new Vector3(Random.Range(0f, 11f), 1.5f, Random.Range(-2f, 1f));
-    //            break;
-    //        case 3:
-    //            targetTransform.localPosition = new Vector3(Random.Range(0f, 11f), 1.5f, Random.Range(-10f, -13f));
-    //            break;
-    //    }
-    //}
-    
     private void PlaceGoal()
     {
         int version = Random.Range(0, 4);
         switch (version)
         {
             case 0:
-                targetTransform.localPosition = new Vector3(Random.Range(10f, 13f), 3.2f, Random.Range(-13f, 1f));
+                targetTransform.localPosition = new Vector3(Random.Range(10f, 13f), 1.5f, Random.Range(-13f, 1f));
                 break;
             case 1:
-                targetTransform.localPosition = new Vector3(Random.Range(-2f, 0f), 5f, Random.Range(-13f, 1f));
+                targetTransform.localPosition = new Vector3(Random.Range(-2f, 0f), 1.5f, Random.Range(-13f, 1f));
                 break;
             case 2:
-                targetTransform.localPosition = new Vector3(Random.Range(2f, 9f), 3.2f, Random.Range(-2f, 1f));
+                targetTransform.localPosition = new Vector3(Random.Range(0f, 11f), 1.5f, Random.Range(-2f, 1f));
                 break;
             case 3:
-                targetTransform.localPosition = new Vector3(Random.Range(2f, 9f), 1.5f, Random.Range(-10f, -13f));
+                targetTransform.localPosition = new Vector3(Random.Range(0f, 11f), 1.5f, Random.Range(-10f, -13f));
                 break;
         }
     }
+
+    //private void PlaceGoal()
+    //{
+    //    int version = Random.Range(0, 4);
+    //    switch (version)
+    //    {
+    //        case 0:
+    //            targetTransform.localPosition = new Vector3(Random.Range(10f, 13f), 3.2f, Random.Range(-13f, 1f));
+    //            break;
+    //        case 1:
+    //            targetTransform.localPosition = new Vector3(Random.Range(-2f, 0f), 5f, Random.Range(-13f, 1f));
+    //            break;
+    //        case 2:
+    //            targetTransform.localPosition = new Vector3(Random.Range(2f, 9f), 3.2f, Random.Range(-2f, 1f));
+    //            break;
+    //        case 3:
+    //            targetTransform.localPosition = new Vector3(Random.Range(2f, 9f), 1.5f, Random.Range(-10f, -13f));
+    //            break;
+    //    }
+    //}
 
     public void SetTarget(Transform newTarget)
     {

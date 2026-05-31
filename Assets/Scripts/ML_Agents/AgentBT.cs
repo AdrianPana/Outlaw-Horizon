@@ -37,12 +37,11 @@ public class AgentBT : MonoBehaviour
     private void Update()
     {
         if (player == null || exit == null) return;
-        if (_isAttacking) return; // don't interrupt an ongoing attack
+        if (_isAttacking) return;
 
         float attackRange = type == EnemyType.MELEE ? meleeRange : rangedRange;
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
-        // Priority 1: retreat if low hp
         if (hp < 5)
         {
             SetState(BehaviorState.RETREATING);
@@ -51,7 +50,6 @@ public class AgentBT : MonoBehaviour
             return;
         }
 
-        // Priority 2: attack if in range
         if (distanceToPlayer <= attackRange)
         {
             SetState(BehaviorState.ATTACKING);
@@ -59,7 +57,6 @@ public class AgentBT : MonoBehaviour
             return;
         }
 
-        // Priority 3: follow player
         SetState(BehaviorState.FOLLOWING);
         _agent.SetTarget(player);
         _agent.EnableInference(true);
