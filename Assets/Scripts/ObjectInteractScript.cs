@@ -34,7 +34,7 @@ public class CollectorScript : MonoBehaviour
 
     void Update()
     {
-        float radius = 0.5f;
+        float radius = 0.8f;
 
         Vector3 origin = transform.position;
         Vector3 direction = transform.forward;

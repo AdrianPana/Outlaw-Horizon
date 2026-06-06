@@ -10,6 +10,10 @@ namespace Game.Resources
         WIND_SOUTH,
         WIND_WEST,
         GRAVITY_INVERTED,
+        NORTH_EAST,
+        SOUTH_EAST,
+        SOUTH_WEST,
+        NORTH_WEST
     };
 
     public enum WindDirection
@@ -18,8 +22,19 @@ namespace Game.Resources
         NORTH,
         EAST,
         SOUTH,
-        WEST
+        WEST,
+        NORTH_EAST,
+        SOUTH_EAST,
+        SOUTH_WEST,
+        NORTH_WEST
     };
+
+    public enum UpgradeType
+    {
+        WindRune,
+        GravityRune,
+        Dash
+    }
 
     public class GravityEventSource
     {
@@ -47,6 +62,14 @@ namespace Game.Resources
                     return Modifier.WIND_SOUTH;
                 case WindDirection.WEST:
                     return Modifier.WIND_WEST;
+                case WindDirection.NORTH_EAST:
+                    return Modifier.NORTH_EAST;
+                case WindDirection.SOUTH_EAST:
+                    return Modifier.SOUTH_EAST;
+                case WindDirection.SOUTH_WEST:
+                    return Modifier.SOUTH_WEST;
+                case WindDirection.NORTH_WEST:
+                    return Modifier.NORTH_WEST;
                 default:
                     return Modifier.NONE;
             }
@@ -64,6 +87,14 @@ namespace Game.Resources
                     return WindDirection.SOUTH;
                 case Modifier.WIND_WEST:
                     return WindDirection.WEST;
+                case Modifier.NORTH_EAST:
+                    return WindDirection.NORTH_EAST;
+                case Modifier.SOUTH_EAST:
+                    return WindDirection.SOUTH_EAST;
+                case Modifier.SOUTH_WEST:
+                    return WindDirection.SOUTH_WEST;
+                case Modifier.NORTH_WEST:
+                    return WindDirection.NORTH_WEST;
                 default:
                     return WindDirection.NONE;
             }
@@ -79,6 +110,13 @@ namespace Game.Resources
             Vector2 point2D = new Vector2(point.x, point.z);
             Vector2 origin2D = new Vector2(origin.x, origin.z);
             return Vector2.Distance(point2D, origin2D) <= range;
+        }
+
+        public static float ClampAngle(float lfAngle, float lfMin, float lfMax)
+        {
+            if (lfAngle < -360f) lfAngle += 360f;
+            if (lfAngle > 360f) lfAngle -= 360f;
+            return Mathf.Clamp(lfAngle, lfMin, lfMax);
         }
     }
 }

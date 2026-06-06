@@ -174,52 +174,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Gravity"",
-                    ""type"": ""Button"",
-                    ""id"": ""5c6f4464-5b59-4051-97d9-3af873d55ee7"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""WindNorth"",
-                    ""type"": ""Button"",
-                    ""id"": ""426c15a7-1662-444f-95b7-9d0e2cc9702c"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""WindEast"",
-                    ""type"": ""Button"",
-                    ""id"": ""fda8b600-cb68-4a68-a9f0-fa1b8bacea39"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""WindSouth"",
-                    ""type"": ""Button"",
-                    ""id"": ""e8a80672-eae1-4ce5-a886-6229fb26a2ee"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""WindWest"",
-                    ""type"": ""Button"",
-                    ""id"": ""ce566839-dd0b-4ff8-928c-799f4e4c2000"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Clear"",
+                    ""name"": ""Cycle"",
                     ""type"": ""Button"",
                     ""id"": ""1b8adb51-eb60-40fb-b574-a5742af2609a"",
                     ""expectedControlType"": """",
@@ -634,67 +589,12 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""da06c72b-3c76-4dfc-9abc-df28b7af8abe"",
-                    ""path"": ""<Keyboard>/1"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Gravity"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""9c87d626-ac51-4064-adab-366f004174b9"",
-                    ""path"": ""<Keyboard>/2"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""WindNorth"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""b61b7232-37a6-4596-9191-40e1e9689573"",
-                    ""path"": ""<Keyboard>/3"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""WindEast"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""dbcef74f-0244-4e9d-82e1-299fd844d206"",
-                    ""path"": ""<Keyboard>/4"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""WindSouth"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""4c898b58-1743-47a2-a35d-28e818a37b7d"",
-                    ""path"": ""<Keyboard>/5"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""WindWest"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""0d8b46dd-b4a7-4b4b-b48e-1cd2fd755361"",
-                    ""path"": ""<Keyboard>/0"",
+                    ""path"": ""<Keyboard>/tab"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Clear"",
+                    ""action"": ""Cycle"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -1313,12 +1213,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_Player_Previous = m_Player.FindAction("Previous", throwIfNotFound: true);
         m_Player_Next = m_Player.FindAction("Next", throwIfNotFound: true);
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
-        m_Player_Gravity = m_Player.FindAction("Gravity", throwIfNotFound: true);
-        m_Player_WindNorth = m_Player.FindAction("WindNorth", throwIfNotFound: true);
-        m_Player_WindEast = m_Player.FindAction("WindEast", throwIfNotFound: true);
-        m_Player_WindSouth = m_Player.FindAction("WindSouth", throwIfNotFound: true);
-        m_Player_WindWest = m_Player.FindAction("WindWest", throwIfNotFound: true);
-        m_Player_Clear = m_Player.FindAction("Clear", throwIfNotFound: true);
+        m_Player_Cycle = m_Player.FindAction("Cycle", throwIfNotFound: true);
         m_Player_Ability = m_Player.FindAction("Ability", throwIfNotFound: true);
         m_Player_Reset = m_Player.FindAction("Reset", throwIfNotFound: true);
         // UI
@@ -1423,12 +1318,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Previous;
     private readonly InputAction m_Player_Next;
     private readonly InputAction m_Player_Sprint;
-    private readonly InputAction m_Player_Gravity;
-    private readonly InputAction m_Player_WindNorth;
-    private readonly InputAction m_Player_WindEast;
-    private readonly InputAction m_Player_WindSouth;
-    private readonly InputAction m_Player_WindWest;
-    private readonly InputAction m_Player_Clear;
+    private readonly InputAction m_Player_Cycle;
     private readonly InputAction m_Player_Ability;
     private readonly InputAction m_Player_Reset;
     /// <summary>
@@ -1479,29 +1369,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
         /// <summary>
-        /// Provides access to the underlying input action "Player/Gravity".
+        /// Provides access to the underlying input action "Player/Cycle".
         /// </summary>
-        public InputAction @Gravity => m_Wrapper.m_Player_Gravity;
-        /// <summary>
-        /// Provides access to the underlying input action "Player/WindNorth".
-        /// </summary>
-        public InputAction @WindNorth => m_Wrapper.m_Player_WindNorth;
-        /// <summary>
-        /// Provides access to the underlying input action "Player/WindEast".
-        /// </summary>
-        public InputAction @WindEast => m_Wrapper.m_Player_WindEast;
-        /// <summary>
-        /// Provides access to the underlying input action "Player/WindSouth".
-        /// </summary>
-        public InputAction @WindSouth => m_Wrapper.m_Player_WindSouth;
-        /// <summary>
-        /// Provides access to the underlying input action "Player/WindWest".
-        /// </summary>
-        public InputAction @WindWest => m_Wrapper.m_Player_WindWest;
-        /// <summary>
-        /// Provides access to the underlying input action "Player/Clear".
-        /// </summary>
-        public InputAction @Clear => m_Wrapper.m_Player_Clear;
+        public InputAction @Cycle => m_Wrapper.m_Player_Cycle;
         /// <summary>
         /// Provides access to the underlying input action "Player/Ability".
         /// </summary>
@@ -1563,24 +1433,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Sprint.started += instance.OnSprint;
             @Sprint.performed += instance.OnSprint;
             @Sprint.canceled += instance.OnSprint;
-            @Gravity.started += instance.OnGravity;
-            @Gravity.performed += instance.OnGravity;
-            @Gravity.canceled += instance.OnGravity;
-            @WindNorth.started += instance.OnWindNorth;
-            @WindNorth.performed += instance.OnWindNorth;
-            @WindNorth.canceled += instance.OnWindNorth;
-            @WindEast.started += instance.OnWindEast;
-            @WindEast.performed += instance.OnWindEast;
-            @WindEast.canceled += instance.OnWindEast;
-            @WindSouth.started += instance.OnWindSouth;
-            @WindSouth.performed += instance.OnWindSouth;
-            @WindSouth.canceled += instance.OnWindSouth;
-            @WindWest.started += instance.OnWindWest;
-            @WindWest.performed += instance.OnWindWest;
-            @WindWest.canceled += instance.OnWindWest;
-            @Clear.started += instance.OnClear;
-            @Clear.performed += instance.OnClear;
-            @Clear.canceled += instance.OnClear;
+            @Cycle.started += instance.OnCycle;
+            @Cycle.performed += instance.OnCycle;
+            @Cycle.canceled += instance.OnCycle;
             @Ability.started += instance.OnAbility;
             @Ability.performed += instance.OnAbility;
             @Ability.canceled += instance.OnAbility;
@@ -1625,24 +1480,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Sprint.started -= instance.OnSprint;
             @Sprint.performed -= instance.OnSprint;
             @Sprint.canceled -= instance.OnSprint;
-            @Gravity.started -= instance.OnGravity;
-            @Gravity.performed -= instance.OnGravity;
-            @Gravity.canceled -= instance.OnGravity;
-            @WindNorth.started -= instance.OnWindNorth;
-            @WindNorth.performed -= instance.OnWindNorth;
-            @WindNorth.canceled -= instance.OnWindNorth;
-            @WindEast.started -= instance.OnWindEast;
-            @WindEast.performed -= instance.OnWindEast;
-            @WindEast.canceled -= instance.OnWindEast;
-            @WindSouth.started -= instance.OnWindSouth;
-            @WindSouth.performed -= instance.OnWindSouth;
-            @WindSouth.canceled -= instance.OnWindSouth;
-            @WindWest.started -= instance.OnWindWest;
-            @WindWest.performed -= instance.OnWindWest;
-            @WindWest.canceled -= instance.OnWindWest;
-            @Clear.started -= instance.OnClear;
-            @Clear.performed -= instance.OnClear;
-            @Clear.canceled -= instance.OnClear;
+            @Cycle.started -= instance.OnCycle;
+            @Cycle.performed -= instance.OnCycle;
+            @Cycle.canceled -= instance.OnCycle;
             @Ability.started -= instance.OnAbility;
             @Ability.performed -= instance.OnAbility;
             @Ability.canceled -= instance.OnAbility;
@@ -2013,47 +1853,12 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSprint(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "Gravity" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "Cycle" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnGravity(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "WindNorth" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnWindNorth(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "WindEast" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnWindEast(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "WindSouth" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnWindSouth(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "WindWest" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnWindWest(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "Clear" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnClear(InputAction.CallbackContext context);
+        void OnCycle(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "Ability" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
