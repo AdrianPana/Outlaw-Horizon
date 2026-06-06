@@ -88,52 +88,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Gravity",
-                    "type": "Button",
-                    "id": "5c6f4464-5b59-4051-97d9-3af873d55ee7",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "WindNorth",
-                    "type": "Button",
-                    "id": "426c15a7-1662-444f-95b7-9d0e2cc9702c",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "WindEast",
-                    "type": "Button",
-                    "id": "fda8b600-cb68-4a68-a9f0-fa1b8bacea39",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "WindSouth",
-                    "type": "Button",
-                    "id": "e8a80672-eae1-4ce5-a886-6229fb26a2ee",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "WindWest",
-                    "type": "Button",
-                    "id": "ce566839-dd0b-4ff8-928c-799f4e4c2000",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Clear",
+                    "name": "Cycle",
                     "type": "Button",
                     "id": "1b8adb51-eb60-40fb-b574-a5742af2609a",
                     "expectedControlType": "",
@@ -548,67 +503,12 @@
                 },
                 {
                     "name": "",
-                    "id": "da06c72b-3c76-4dfc-9abc-df28b7af8abe",
-                    "path": "<Keyboard>/1",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse",
-                    "action": "Gravity",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "9c87d626-ac51-4064-adab-366f004174b9",
-                    "path": "<Keyboard>/2",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "WindNorth",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "b61b7232-37a6-4596-9191-40e1e9689573",
-                    "path": "<Keyboard>/3",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "WindEast",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "dbcef74f-0244-4e9d-82e1-299fd844d206",
-                    "path": "<Keyboard>/4",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "WindSouth",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "4c898b58-1743-47a2-a35d-28e818a37b7d",
-                    "path": "<Keyboard>/5",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "WindWest",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "0d8b46dd-b4a7-4b4b-b48e-1cd2fd755361",
-                    "path": "<Keyboard>/0",
+                    "path": "<Keyboard>/tab",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Clear",
+                    "action": "Cycle",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

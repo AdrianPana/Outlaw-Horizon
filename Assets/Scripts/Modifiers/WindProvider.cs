@@ -37,6 +37,10 @@ namespace Game.Modifiers
                 case WindDirection.EAST: return Vector3.right * windStrength;
                 case WindDirection.SOUTH: return Vector3.back * windStrength;
                 case WindDirection.WEST: return Vector3.left * windStrength;
+                case WindDirection.NORTH_EAST: return (Vector3.forward + Vector3.right).normalized * windStrength;
+                case WindDirection.SOUTH_EAST: return (Vector3.back + Vector3.right).normalized * windStrength;
+                case WindDirection.SOUTH_WEST: return (Vector3.back + Vector3.left).normalized * windStrength;
+                case WindDirection.NORTH_WEST: return (Vector3.forward + Vector3.left).normalized * windStrength;   
                 default: return Vector3.zero;
             }
         }

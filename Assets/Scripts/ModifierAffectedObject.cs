@@ -15,7 +15,7 @@ public class ModifierAffectedObject : MonoBehaviour
     public float kinematicDrag = 2f;
     public float passiveGravityStrength = 9.81f;
 
-    private Rigidbody rb;
+    protected Rigidbody rb;
     private Collider physicalCollider;
     private List<IModifierProvider> providers = new List<IModifierProvider>();
     private Vector3 momentumVelocity;
@@ -23,7 +23,7 @@ public class ModifierAffectedObject : MonoBehaviour
     private Vector3 passiveGravityVelocity;
     private bool wasInfluenced;
 
-    private void Awake()
+    public virtual void Awake()
     {
         rb = GetComponent<Rigidbody>();
         rb.interpolation = RigidbodyInterpolation.Interpolate;

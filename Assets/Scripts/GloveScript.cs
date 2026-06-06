@@ -1,32 +1,38 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Game.Resources;
-using System;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using StarterAssets;
-using UnityEngine.Windows;
 
 public class GloveScript : MonoBehaviour
 {
+    [SerializeField]
+    private GloveUI gloveUI;
+
     private StarterAssetsInputs starterInputs;
     private InputSystem_Actions playerInputActions;
+    private ThirdPersonController thirdPersonController;
     private Camera cam;
 
     public UniversalStateManagerScriptableObject universalStateManagerScriptableObject;
     public SectionManager currentSection;
+
     public GameObject windMenuUI;
+    public GameObject gravityMenuUI;
     private WindWheelController windMenuUIController;
+
     public Volume postProcessingVolume;
+    private ColorAdjustments colorAdjustments;
+
     public float menuTimeScale = 0.0f;
+    private Modifier menuSelectedModifier = Modifier.NONE;
+
     public float range = 5.0f;
     [SerializeField] GameObject rangeIndicator;
 
-    private Modifier menuSelectedModifier = Modifier.NONE;
-
-    private ThirdPersonController thirdPersonController;
-
-    private ColorAdjustments colorAdjustments;
+    [HideInInspector] public bool hasWindAbility = false;
+    [HideInInspector] public bool hasGravityAbility = false;
 
     private void Awake()
     {
@@ -51,8 +57,7 @@ public class GloveScript : MonoBehaviour
     private void OnEnable()
     {
         playerInputActions.Enable();
-        playerInputActions.Player.Gravity.started += ToggleGravity;
-        playerInputActions.Player.Clear.started += ToggleWindNone;
+        playerInputActions.Player.Cycle.started += CycleAbility;
         playerInputActions.Player.Ability.started += ShowAbilityMenu;
         playerInputActions.Player.Ability.canceled += HideAbilityMenu;
         playerInputActions.Player.Reset.started += ResetSceneCallback;
@@ -64,23 +69,12 @@ public class GloveScript : MonoBehaviour
     private void OnDisable()
     {
         playerInputActions.Disable();
-        playerInputActions.Player.Gravity.started -= ToggleGravity;
-        playerInputActions.Player.Clear.started -= ToggleWindNone;
+        playerInputActions.Player.Cycle.started -= CycleAbility;
         playerInputActions.Player.Ability.started -= ShowAbilityMenu;
         playerInputActions.Player.Ability.canceled -= HideAbilityMenu;
         playerInputActions.Player.Reset.started -= ResetSceneCallback;
 
         universalStateManagerScriptableObject.modifierButtonSelectedEvent.RemoveListener(MenuModifierSelected);
-    }
-
-    private void ToggleGravity(InputAction.CallbackContext ctx)
-    {
-        universalStateManagerScriptableObject.ToggleGravity(transform.position, range);
-    }
-
-    private void ToggleWindNone(InputAction.CallbackContext ctx) 
-    { 
-        universalStateManagerScriptableObject.ToggleWind(transform.position, range, WindDirection.NONE);
     }
 
     private void ToggleModifier(Modifier modifier)
@@ -90,25 +84,43 @@ public class GloveScript : MonoBehaviour
             case Modifier.GRAVITY_INVERTED:
                 universalStateManagerScriptableObject.ToggleGravity(transform.position, range);
                 break;
-            case Modifier.WIND_NORTH:
-                universalStateManagerScriptableObject.ToggleWind(transform.position, range, WindDirection.NORTH);
-                break;
-            case Modifier.WIND_EAST:
-                universalStateManagerScriptableObject.ToggleWind(transform.position, range, WindDirection.EAST);
-                break;
-            case Modifier.WIND_SOUTH:
-                universalStateManagerScriptableObject.ToggleWind(transform.position, range, WindDirection.SOUTH);
-                break;
-            case Modifier.WIND_WEST:
-                universalStateManagerScriptableObject.ToggleWind(transform.position, range, WindDirection.WEST);
+            case Modifier.NONE:
+                //universalStateManagerScriptableObject.ClearModifier(transform.position, range);
+                universalStateManagerScriptableObject.ToggleWind(transform.position, range, WindDirection.NONE);
                 break;
             default:
-                universalStateManagerScriptableObject.ToggleWind(transform.position, range, WindDirection.NONE);
+                universalStateManagerScriptableObject.ToggleWind(transform.position, range, ResourceHelper.ModifierToWindDirection(modifier));
                 break;
         }
     }
 
+    private void CycleAbility(InputAction.CallbackContext ctx)
+    {
+        gloveUI.CycleNext();
+    }
+
     private void ShowAbilityMenu(InputAction.CallbackContext context)
+    {
+        if (gloveUI.ActiveUpgrade == null)
+        {
+            return;
+        }
+
+        EnterMenuScreen();
+        
+        switch (gloveUI.ActiveUpgrade.Type)
+        {
+            case UpgradeType.WindRune:
+                windMenuUI.gameObject.SetActive(true);
+                windMenuUIController.Rotate(cam.transform.eulerAngles.y);
+                break;
+            default:
+                gravityMenuUI.gameObject.SetActive(true);
+                break;
+        }
+    }
+
+    private void EnterMenuScreen()
     {
         Time.timeScale = menuTimeScale; // Pause the game
         colorAdjustments.saturation.value = -100f; // Desaturate the screen to indicate ability menu is open
@@ -119,11 +131,26 @@ public class GloveScript : MonoBehaviour
         }
 
         starterInputs.SetCursorState(false); // Show the cursor for the ability menu
-        
-        windMenuUI.gameObject.SetActive(true); // Show the ability menu UI
-        windMenuUIController.Rotate(cam.transform.eulerAngles.y);
     }
+
     private void HideAbilityMenu(InputAction.CallbackContext context)
+    {
+        ExitMenuScreen();
+
+        switch (gloveUI.ActiveUpgrade.Type)
+        {
+            case UpgradeType.WindRune:
+                windMenuUI.gameObject.SetActive(false);
+                break;
+            default:
+                gravityMenuUI.gameObject.SetActive(false);
+                break;
+        }
+
+        ToggleModifier(menuSelectedModifier);
+    }
+
+    private void ExitMenuScreen()
     {
         Time.timeScale = 1f; // Resume the game
         colorAdjustments.saturation.value = 0f; // Reset saturation to normal
@@ -134,12 +161,7 @@ public class GloveScript : MonoBehaviour
         }
 
         starterInputs.SetCursorState(true); // Hide the cursor when closing the ability menu
-
-        windMenuUI.gameObject.SetActive(false); // Hide the ability menu UI
-
-        ToggleModifier(menuSelectedModifier);
     }
-
 
     private void MenuModifierSelected(Modifier modifier)
     {
