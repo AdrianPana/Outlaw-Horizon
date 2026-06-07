@@ -44,11 +44,14 @@ public class ShipMoveScript : ModifierAffectedObject
         }
     }
 
+    private GloveScript gloveScript;
+
     public override void Awake()
     {
         base.Awake();
         _input = GetComponent<StarterAssetsInputs>();
         _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
+        gloveScript = GetComponentInChildren<GloveScript>();
     }
 
     private void Update()
@@ -86,5 +89,13 @@ public class ShipMoveScript : ModifierAffectedObject
         // Cinemachine will follow this target
         CinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + CameraAngleOverride,
             _cinemachineTargetYaw, 0.0f);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (gloveScript != null)
+        {
+            gloveScript.ToggleModifier(Modifier.NONE);
+        }
     }
 }

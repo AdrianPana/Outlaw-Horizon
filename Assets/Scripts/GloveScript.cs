@@ -77,7 +77,7 @@ public class GloveScript : MonoBehaviour
         universalStateManagerScriptableObject.modifierButtonSelectedEvent.RemoveListener(MenuModifierSelected);
     }
 
-    private void ToggleModifier(Modifier modifier)
+    public void ToggleModifier(Modifier modifier)
     {
         switch (modifier)
         {
