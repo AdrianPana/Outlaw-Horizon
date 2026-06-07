@@ -175,7 +175,7 @@ public class GloveScript : MonoBehaviour
 
     public void ResetScene()
     {
-        universalStateManagerScriptableObject.ClearModifier(Vector3.zero, -int.MaxValue); // Clear all modifiers with infinite range
+        universalStateManagerScriptableObject.ClearAllModifiers(Vector3.zero, -int.MaxValue); // Clear all modifiers with infinite range
 
         // tp back to checkpoint
         if (currentSection.respawnPoint != null)

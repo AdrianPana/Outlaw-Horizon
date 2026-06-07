@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class CannonBallScript : MonoBehaviour
 {
-    [SerializeField] float speed = 20f;
-    [SerializeField] float arcAngle = 30f;
     [SerializeField] float lifetime = 5f;
 
     private Rigidbody rb;

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: UniversalStateManagerScriptableObject
   m_EditorClassIdentifier: Assembly-CSharp::UniversalStateManagerScriptableObject
   currentModifier: 0
-  modifierDurationSeconds: 2
+  modifierDurationSeconds: 4

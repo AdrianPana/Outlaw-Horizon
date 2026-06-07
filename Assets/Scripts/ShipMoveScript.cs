@@ -91,11 +91,11 @@ public class ShipMoveScript : ModifierAffectedObject
             _cinemachineTargetYaw, 0.0f);
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (gloveScript != null)
-        {
-            gloveScript.ToggleModifier(Modifier.NONE);
-        }
-    }
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    //if (gloveScript != null)
+    //    //{
+    //    //    gloveScript.ToggleModifier(Modifier.NONE);
+    //    //}
+    //}
 }
