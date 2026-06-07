@@ -70,6 +70,7 @@
     <Compile Include="Assets\Scripts\Modifiers\GravityProvider.cs" />
     <Compile Include="Assets\Scripts\CustomPlayerController.cs" />
     <Compile Include="Assets\Scripts\ModifierAffectedObject.cs" />
+    <Compile Include="Assets\Scripts\CameraSwitcher.cs" />
     <Compile Include="Assets\Scripts\DamageObject.cs" />
     <Compile Include="Assets\Scripts\ObjectInteractScript.cs" />
     <Compile Include="Assets\Scripts\ModifierTimer.cs" />
