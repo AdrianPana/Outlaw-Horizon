@@ -42,7 +42,7 @@ public class CollectorScript : MonoBehaviour
         if (Physics.SphereCast(origin, radius, direction, out RaycastHit hit, interactDistance, interactableLayer))
         {
             Debug.DrawLine(origin, hit.point, Color.green);
-            selectedInteractor = hit.transform.GetComponent<InteractorScript>();
+            selectedInteractor = hit.transform.GetComponentInChildren<InteractorScript>();
             Renderer rend = hit.collider.GetComponentInChildren<Renderer>();
 
             if (rend != null && rend != currentRenderer)

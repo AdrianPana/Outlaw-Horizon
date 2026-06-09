@@ -14,5 +14,10 @@ public class ResettableModifierObject : MonoBehaviour, IResettable
     public void Reset()
     {
         transform.position = snapshot.position;
+        if (TryGetComponent<Rigidbody>(out var rb))
+        {
+            rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        }
     }
 }

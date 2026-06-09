@@ -54,6 +54,7 @@ public class SectionManager : MonoBehaviour
 
     public void ResetSection()
     {
+        universalStateManagerScriptableObject.ClearAllModifiers(Vector3.zero, -1);
         foreach (var resettable in resettableObjects)
         {
             resettable.Reset();

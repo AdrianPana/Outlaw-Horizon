@@ -5,7 +5,7 @@ using Game.Modifiers;
 [RequireComponent(typeof(Rigidbody))]
 public class ModifierAffectedObject : MonoBehaviour
 {
-    public enum BehaviorType { Controlled, Ambient }
+    public enum BehaviorType { Controlled, Hybrid, Ambient }
 
     [Header("Settings")]
     public BehaviorType behaviorType = BehaviorType.Controlled;
@@ -23,11 +23,7 @@ public class ModifierAffectedObject : MonoBehaviour
     private List<IModifierProvider> providers = new List<IModifierProvider>();
 
     private Vector3 momentumVelocity;
-
-    // Horizontal (XZ) — driven by WindProvider
     private Vector3 currentHorizontalVelocity;
-
-    // Vertical (Y) — driven by GravityProvider or passive gravity
     private Vector3 currentVerticalVelocity;
 
     private bool wasInfluenced;
@@ -48,19 +44,28 @@ public class ModifierAffectedObject : MonoBehaviour
 
         providers.AddRange(GetComponents<IModifierProvider>());
 
-        if (behaviorType == BehaviorType.Controlled)
+        switch (behaviorType)
         {
-            rb.isKinematic = true;
-            rb.useGravity = false;
-            rb.freezeRotation = true;
-            obstacleMask = ~LayerMask.GetMask("Modifiable");
-        }
-        else
-        {
-            rb.isKinematic = false;
-            rb.useGravity = true;
-            rb.freezeRotation = false;
-            obstacleMask = ~0;
+            case BehaviorType.Controlled:
+                rb.isKinematic = true;
+                rb.useGravity = false;
+                rb.freezeRotation = true;
+                obstacleMask = ~LayerMask.GetMask("Modifiable");
+                break;
+
+            case BehaviorType.Hybrid:
+                rb.isKinematic = false;
+                rb.useGravity = true;
+                rb.freezeRotation = false;
+                obstacleMask = ~LayerMask.GetMask("Modifiable");
+                break;
+
+            case BehaviorType.Ambient:
+                rb.isKinematic = false;
+                rb.useGravity = true;
+                rb.freezeRotation = false;
+                obstacleMask = ~0;
+                break;
         }
     }
 
@@ -68,10 +73,18 @@ public class ModifierAffectedObject : MonoBehaviour
     {
         bool isInfluenced = CheckIfInfluenced();
 
-        if (behaviorType == BehaviorType.Controlled)
-            HandleControlledMovement(isInfluenced);
-        else
-            HandleAmbientMovement(isInfluenced);
+        switch (behaviorType)
+        {
+            case BehaviorType.Controlled:
+                HandleControlledMovement(isInfluenced);
+                break;
+            case BehaviorType.Hybrid:
+                HandleHybridMovement(isInfluenced);
+                break;
+            case BehaviorType.Ambient:
+                HandleAmbientMovement(isInfluenced);
+                break;
+        }
 
         wasInfluenced = isInfluenced;
     }
@@ -85,7 +98,24 @@ public class ModifierAffectedObject : MonoBehaviour
         return false;
     }
 
+    // Always kinematic — modifiers influence forces, passive gravity + ground check apply when no modifier is active
     private void HandleControlledMovement(bool isInfluenced)
+    {
+        SanitizeVelocities();
+
+        momentumVelocity = Vector3.Lerp(momentumVelocity, Vector3.zero, kinematicDrag * Time.fixedDeltaTime);
+
+        CollectForces(isInfluenced, out Vector3 windForce, out Vector3 gravityForce, out bool hasWind, out bool hasGravity);
+
+        ApplyHorizontalVelocity(windForce);
+        ApplyVerticalVelocity(gravityForce, hasWind, hasGravity);
+
+        Vector3 totalVelocity = momentumVelocity + currentHorizontalVelocity + currentVerticalVelocity;
+        MoveKinematicWithCollision(totalVelocity * Time.fixedDeltaTime);
+    }
+
+    // Physics by default — goes kinematic when a modifier is active, hands back to physics when modifiers stop
+    private void HandleHybridMovement(bool isInfluenced)
     {
         SanitizeVelocities();
 
@@ -98,7 +128,6 @@ public class ModifierAffectedObject : MonoBehaviour
         }
 
         // Transition: kinematic -> physics when all modifiers stop
-        Debug.Log($"isInfluenced: {isInfluenced}, wasInfluenced: {wasInfluenced}, rb.isKinematic: {rb.isKinematic}");
         if (!isInfluenced && wasInfluenced)
         {
             currentHorizontalVelocity = Vector3.zero;
@@ -110,58 +139,77 @@ public class ModifierAffectedObject : MonoBehaviour
             return;
         }
 
-        // If no modifier is active and we're already back in physics, nothing to do here
+        // Not influenced and already in physics — nothing to do
         if (!isInfluenced) return;
 
-        // Decay momentum regardless of influence state
         momentumVelocity = Vector3.Lerp(momentumVelocity, Vector3.zero, kinematicDrag * Time.fixedDeltaTime);
 
-        // --- Separate force collection ---
-        Vector3 windForce = Vector3.zero;
-        Vector3 gravityForce = Vector3.zero;
-        bool hasWind = false;
-        bool hasGravity = false;
+        CollectForces(isInfluenced, out Vector3 windForce, out Vector3 gravityForce, out bool hasWind, out bool hasGravity);
 
-        if (isInfluenced)
+        ApplyHorizontalVelocity(windForce);
+        ApplyVerticalVelocity(gravityForce, hasWind, hasGravity);
+
+        Vector3 totalVelocity = momentumVelocity + currentHorizontalVelocity + currentVerticalVelocity;
+        MoveKinematicWithCollision(totalVelocity * Time.fixedDeltaTime);
+    }
+
+    private void HandleAmbientMovement(bool isInfluenced)
+    {
+        if (!isInfluenced) return;
+
+        foreach (var provider in providers)
         {
-            foreach (var provider in providers)
+            rb.AddForce(provider.GetForceContribution(transform.position), ForceMode.Acceleration);
+        }
+    }
+
+    private void CollectForces(bool isInfluenced, out Vector3 windForce, out Vector3 gravityForce, out bool hasWind, out bool hasGravity)
+    {
+        windForce = Vector3.zero;
+        gravityForce = Vector3.zero;
+        hasWind = false;
+        hasGravity = false;
+
+        if (!isInfluenced) return;
+
+        foreach (var provider in providers)
+        {
+            if (!provider.IsActiveOnObject(transform.position)) continue;
+
+            Vector3 contribution = provider.GetForceContribution(transform.position);
+            if (HasNaN(contribution))
             {
-                if (!provider.IsActiveOnObject(transform.position)) continue;
+                Debug.LogError($"[NaN] provider {provider} returned NaN force on {name}", this);
+                contribution = Vector3.zero;
+            }
 
-                Vector3 contribution = provider.GetForceContribution(transform.position);
-                if (HasNaN(contribution))
-                {
-                    Debug.LogError($"[NaN] provider {provider} returned NaN force on {name}", this);
-                    contribution = Vector3.zero;
-                }
-
-                if (provider is WindProvider)
-                {
-                    // Wind only affects horizontal (XZ)
-                    windForce += new Vector3(contribution.x, 0f, contribution.z);
-                    hasWind = true;
-                }
-                else if (provider is GravityProvider)
-                {
-                    // Gravity provider supplies its own vertical force (may be upward reversal)
-                    gravityForce += new Vector3(0f, contribution.y, 0f);
-                    hasGravity = true;
-                }
+            if (provider is WindProvider)
+            {
+                windForce += new Vector3(contribution.x, 0f, contribution.z);
+                hasWind = true;
+            }
+            else if (provider is GravityProvider)
+            {
+                gravityForce += new Vector3(0f, contribution.y, 0f);
+                hasGravity = true;
             }
         }
+    }
 
-        // --- Horizontal velocity (XZ) ---
+    private void ApplyHorizontalVelocity(Vector3 windForce)
+    {
         Vector3 targetHorizontal = windForce * speed;
         currentHorizontalVelocity = Vector3.Lerp(
             currentHorizontalVelocity,
             targetHorizontal,
             acceleration * Time.fixedDeltaTime
         );
+    }
 
-        // --- Vertical velocity (Y) ---
+    private void ApplyVerticalVelocity(Vector3 gravityForce, bool hasWind, bool hasGravity)
+    {
         if (hasGravity)
         {
-            // GravityProvider is active: use its upward force, clear passive accumulation
             Vector3 targetVertical = gravityForce * speed;
             currentVerticalVelocity = Vector3.Lerp(
                 currentVerticalVelocity,
@@ -169,34 +217,22 @@ public class ModifierAffectedObject : MonoBehaviour
                 acceleration * Time.fixedDeltaTime
             );
         }
-        else if (hasWind)
+        else if (hasWind || behaviorType == BehaviorType.Controlled)
         {
-            // Wind is active but no gravity modifier — rb is kinematic, need manual gravity sim
-            // Skip gravity if something solid is directly below
             if (IsGrounded())
-            {
                 currentVerticalVelocity = Vector3.zero;
-            }
             else
-            {
                 currentVerticalVelocity += Vector3.down * passiveGravityStrength * Time.fixedDeltaTime;
-            }
         }
         else
         {
-            // No modifier at all
             currentVerticalVelocity = Vector3.zero;
         }
-
-        // --- Combine and move ---
-        Vector3 totalVelocity = momentumVelocity + currentHorizontalVelocity + currentVerticalVelocity;
-        MoveKinematicWithCollision(totalVelocity * Time.fixedDeltaTime);
     }
 
     /// <summary>
     /// Performs a downward BoxCast from the bottom of the collider's bounds.
     /// Returns true when a solid obstacle is within GroundCheckSkin distance below.
-    /// Only meaningful while the rb is kinematic (no modifier is supplying gravity).
     /// </summary>
     private bool IsGrounded()
     {
@@ -218,14 +254,12 @@ public class ModifierAffectedObject : MonoBehaviour
 
     /// <summary>
     /// Derives the BoxCast origin and half-extents from the physical collider's world bounds.
-    /// The cast origin sits just inside the bottom face so the sweep travels downward by GroundCheckSkin.
     /// TODO: Extend this for CapsuleCollider and SphereCollider if needed in the future.
     /// </summary>
     private void GetGroundCheckParams(out Vector3 center, out Vector3 halfExtents)
     {
         Bounds bounds = physicalCollider.bounds;
 
-        // Inset the origin by a tiny epsilon so we don't start the cast already intersecting the floor
         float inset = 0.001f;
         center = new Vector3(
             bounds.center.x,
@@ -235,19 +269,9 @@ public class ModifierAffectedObject : MonoBehaviour
 
         halfExtents = new Vector3(
             bounds.extents.x,
-            inset,          // near-zero Y so the cast behaves like a flat slab
+            inset,
             bounds.extents.z
         );
-    }
-
-    private void HandleAmbientMovement(bool isInfluenced)
-    {
-        if (!isInfluenced) return;
-
-        foreach (var provider in providers)
-        {
-            rb.AddForce(provider.GetForceContribution(transform.position), ForceMode.Acceleration);
-        }
     }
 
     private void MoveKinematicWithCollision(Vector3 delta)

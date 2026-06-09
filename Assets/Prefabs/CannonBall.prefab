@@ -16,7 +16,8 @@ GameObject:
   - component: {fileID: 2983863243869828566}
   - component: {fileID: 5218535072975892777}
   - component: {fileID: 8870293783282248481}
-  m_Layer: 0
+  - component: {fileID: -1494608399906100867}
+  m_Layer: 7
   m_Name: CannonBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -189,6 +190,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21e84ea9bcd559642b5ff34f473c832d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  speed: 40
-  arcAngle: 0
   lifetime: 7
+--- !u!114 &-1494608399906100867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4672944141014590648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d4a4a433c4a4f5498626c888e669864, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GloveScript
+  gloveUI: {fileID: 0}
+  universalStateManagerScriptableObject: {fileID: 11400000, guid: e84650500f9712844a17aa61d1d8358a, type: 2}
+  currentSection: {fileID: 0}
+  windMenuUI: {fileID: 0}
+  gravityMenuUI: {fileID: 0}
+  postProcessingVolume: {fileID: 0}
+  menuTimeScale: 0
+  range: 5
+  rangeIndicator: {fileID: 0}
+  hasWindAbility: 0
+  hasGravityAbility: 0
