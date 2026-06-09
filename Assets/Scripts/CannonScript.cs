@@ -14,8 +14,13 @@ public class CannonScript : MonoBehaviour
     [SerializeField] private int trajectoryPoints = 50;
     [SerializeField] private float timeStep = 0.1f;
 
+    [Header("Selective Shooting")]
+    public CameraSwitcher cameraSwitcher;
+    public CameraSwitcher.ViewMode associatedView;
+    public ShipGloveScript shipGlove;
+
     private StarterAssetsInputs starterInputs;
-    private InputSystem_Actions playerInputActions;
+private InputSystem_Actions playerInputActions;
 
     private void Awake()
     {
@@ -42,6 +47,9 @@ public class CannonScript : MonoBehaviour
 
     private void Shoot(InputAction.CallbackContext ctx)
     {
+        if (cameraSwitcher != null && cameraSwitcher.CurrentView != associatedView)
+            return;
+
         GameObject ball =
             Instantiate(cannonBallPrefab, shootOrigin.position, transform.rotation);
 
@@ -49,6 +57,11 @@ public class CannonScript : MonoBehaviour
 
         ball.GetComponent<CannonBallScript>()
             .Initialize(speed, arcAngle, shipRb.linearVelocity);
+
+        if (shipGlove != null)
+        {
+            shipGlove.latestShotCannonball = ball;
+        }
     }
 
     private void DrawTrajectory()

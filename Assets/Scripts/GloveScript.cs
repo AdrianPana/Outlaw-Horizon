@@ -7,11 +7,10 @@ using StarterAssets;
 
 public class GloveScript : MonoBehaviour
 {
-    [SerializeField]
-    private GloveUI gloveUI;
+    public GloveUI gloveUI;
 
     private StarterAssetsInputs starterInputs;
-    private InputSystem_Actions playerInputActions;
+private InputSystem_Actions playerInputActions;
     private ThirdPersonController thirdPersonController;
     private Camera cam;
 
@@ -29,10 +28,10 @@ public class GloveScript : MonoBehaviour
     private Modifier menuSelectedModifier = Modifier.NONE;
 
     public float range = 5.0f;
-    [SerializeField] GameObject rangeIndicator;
+    public GameObject rangeIndicator;
 
     [HideInInspector] public bool hasWindAbility = false;
-    [HideInInspector] public bool hasGravityAbility = false;
+[HideInInspector] public bool hasGravityAbility = false;
 
     private void Awake()
     {
@@ -77,7 +76,7 @@ public class GloveScript : MonoBehaviour
         universalStateManagerScriptableObject.modifierButtonSelectedEvent.RemoveListener(MenuModifierSelected);
     }
 
-    public void ToggleModifier(Modifier modifier)
+    public virtual void ToggleModifier(Modifier modifier)
     {
         switch (modifier)
         {

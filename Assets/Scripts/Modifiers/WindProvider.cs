@@ -21,9 +21,16 @@ namespace Game.Modifiers
                 stateManager.windChangedEvent.RemoveListener(OnWindChanged);
         }
 
-        private void OnWindChanged((Vector3 origin, float range, WindDirection direction) data)
+        private void OnWindChanged((Vector3 origin, float range, WindDirection direction, GameObject target) data)
         {
-            if (OH_Helpers.isInRangeNoHeight(transform.position, data.origin, data.range))
+            if (data.target != null)
+            {
+                if (this.gameObject == data.target)
+                {
+                    currentWind = data.direction;
+                }
+            }
+            else if (OH_Helpers.isInRangeNoHeight(transform.position, data.origin, data.range))
             {
                 currentWind = data.direction;
             }

@@ -21,9 +21,16 @@ namespace Game.Modifiers
                 stateManager.gravityInvertedEvent.RemoveListener(OnGravityChanged);
         }
 
-        private void OnGravityChanged((Vector3 origin, float range, bool inverted) data)
+        private void OnGravityChanged((Vector3 origin, float range, bool inverted, GameObject target) data)
         {
-            if (OH_Helpers.isInRangeNoHeight(transform.position, data.origin, data.range))
+            if (data.target != null)
+            {
+                if (this.gameObject == data.target)
+                {
+                    isGravityInverted = data.inverted;
+                }
+            }
+            else if (OH_Helpers.isInRangeNoHeight(transform.position, data.origin, data.range))
             {
                 isGravityInverted = data.inverted;
             }

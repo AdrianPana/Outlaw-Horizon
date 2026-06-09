@@ -4,6 +4,9 @@ using UnityEngine.InputSystem;
 
 public class CameraSwitcher : MonoBehaviour
 {
+    public enum ViewMode { Main, Cannon1, Cannon2 }
+    public ViewMode CurrentView => (ViewMode)_currentIndex;
+
     [Header("Cameras")]
     public CinemachineCamera mainCamera;
     public CinemachineCamera cannon1Camera;

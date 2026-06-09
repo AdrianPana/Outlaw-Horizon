@@ -68,10 +68,17 @@ public class WindModifier : MonoBehaviour
         universalStateManagerScriptableObject.windChangedEvent.RemoveListener(ChangeWindDirection);
     }
 
-    private void ChangeWindDirection((Vector3, float, WindDirection) data)
+    private void ChangeWindDirection((Vector3 origin, float range, WindDirection direction, GameObject target) data)
     {
-        if (OH_Helpers.isInRangeNoHeight(transform.position, data.Item1, data.Item2)) {
-            windDirection = data.Item3;
+        if (data.target != null)
+        {
+            if (this.gameObject == data.target)
+            {
+                windDirection = data.direction;
+            }
+        }
+        else if (OH_Helpers.isInRangeNoHeight(transform.position, data.origin, data.range)) {
+            windDirection = data.direction;
         }
     }
 

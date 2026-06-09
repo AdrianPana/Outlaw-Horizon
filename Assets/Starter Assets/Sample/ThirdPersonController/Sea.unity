@@ -144,8 +144,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 73388070}
-  - component: {fileID: 73388071}
   - component: {fileID: 73388072}
+  - component: {fileID: 73388073}
   m_Layer: 0
   m_Name: Controller
   m_TagString: Untagged
@@ -168,29 +168,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 595150651}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &73388071
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 73388069}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d4a4a433c4a4f5498626c888e669864, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GloveScript
-  gloveUI: {fileID: 26301552}
-  universalStateManagerScriptableObject: {fileID: 11400000, guid: e84650500f9712844a17aa61d1d8358a, type: 2}
-  currentSection: {fileID: 0}
-  windMenuUI: {fileID: 832520784}
-  gravityMenuUI: {fileID: 125286514}
-  postProcessingVolume: {fileID: 9150705468954007429, guid: 05bb2aca10e4e72489c5d5af7cd696c7, type: 3}
-  menuTimeScale: 0
-  range: 60
-  rangeIndicator: {fileID: 1798376837}
-  hasWindAbility: 0
-  hasGravityAbility: 0
 --- !u!114 &73388072
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -210,6 +187,31 @@ MonoBehaviour:
   analogMovement: 0
   cursorLocked: 1
   cursorInputForLook: 1
+--- !u!114 &73388073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 73388069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccb397896d6c5f1409fc8e912c9ba749, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShipGloveScript
+  gloveUI: {fileID: 26301552}
+  universalStateManagerScriptableObject: {fileID: 11400000, guid: e84650500f9712844a17aa61d1d8358a, type: 2}
+  currentSection: {fileID: 0}
+  windMenuUI: {fileID: 832520784}
+  gravityMenuUI: {fileID: 125286514}
+  postProcessingVolume: {fileID: 9150705468954007429, guid: 05bb2aca10e4e72489c5d5af7cd696c7, type: 3}
+  menuTimeScale: 0
+  range: 60
+  rangeIndicator: {fileID: 1798376837}
+  hasWindAbility: 0
+  hasGravityAbility: 0
+  latestShotCannonball: {fileID: 0}
+  cameraSwitcher: {fileID: 1954601260}
 --- !u!114 &73704157 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1452276407414980623, guid: 0ffb935ad0a4dc14a821755543c7d585, type: 3}
@@ -597,6 +599,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ModifierTimer
   universalStateManager: {fileID: 11400000, guid: e84650500f9712844a17aa61d1d8358a, type: 2}
+  oceanScene: 1
 --- !u!4 &288821224
 Transform:
   m_ObjectHideFlags: 0
@@ -2557,6 +2560,22 @@ PrefabInstance:
       propertyPath: arcAngle
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6276449909175246335, guid: 0ffb935ad0a4dc14a821755543c7d585, type: 3}
+      propertyPath: shipGlove
+      value: 
+      objectReference: {fileID: 73388073}
+    - target: {fileID: 6276449909175246335, guid: 0ffb935ad0a4dc14a821755543c7d585, type: 3}
+      propertyPath: stateManager
+      value: 
+      objectReference: {fileID: 11400000, guid: e84650500f9712844a17aa61d1d8358a, type: 2}
+    - target: {fileID: 6276449909175246335, guid: 0ffb935ad0a4dc14a821755543c7d585, type: 3}
+      propertyPath: associatedView
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6276449909175246335, guid: 0ffb935ad0a4dc14a821755543c7d585, type: 3}
+      propertyPath: cameraSwitcher
+      value: 
+      objectReference: {fileID: 1954601260}
     - target: {fileID: 6276449909175246335, guid: 0ffb935ad0a4dc14a821755543c7d585, type: 3}
       propertyPath: trajectoryLine
       value: 
@@ -4681,6 +4700,22 @@ PrefabInstance:
       propertyPath: arcAngle
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6276449909175246335, guid: 0ffb935ad0a4dc14a821755543c7d585, type: 3}
+      propertyPath: shipGlove
+      value: 
+      objectReference: {fileID: 73388073}
+    - target: {fileID: 6276449909175246335, guid: 0ffb935ad0a4dc14a821755543c7d585, type: 3}
+      propertyPath: stateManager
+      value: 
+      objectReference: {fileID: 11400000, guid: e84650500f9712844a17aa61d1d8358a, type: 2}
+    - target: {fileID: 6276449909175246335, guid: 0ffb935ad0a4dc14a821755543c7d585, type: 3}
+      propertyPath: associatedView
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6276449909175246335, guid: 0ffb935ad0a4dc14a821755543c7d585, type: 3}
+      propertyPath: cameraSwitcher
+      value: 
+      objectReference: {fileID: 1954601260}
     - target: {fileID: 6276449909175246335, guid: 0ffb935ad0a4dc14a821755543c7d585, type: 3}
       propertyPath: trajectoryLine
       value: 

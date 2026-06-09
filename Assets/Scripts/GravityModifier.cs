@@ -34,11 +34,18 @@ public class GravityModifier : MonoBehaviour
         universalStateManagerScriptableObject.gravityInvertedEvent.RemoveListener(ToggleObjectGravity);
     }
 
-    private void ToggleObjectGravity((Vector3, float, bool) data)
+    private void ToggleObjectGravity((Vector3 origin, float range, bool inverted, GameObject target) data)
     {
-        if (OH_Helpers.isInRangeNoHeight(transform.position, data.Item1, data.Item2))
+        if (data.target != null)
         {
-            gravityInverted = data.Item3;
+            if (this.gameObject == data.target)
+            {
+                gravityInverted = data.inverted;
+            }
+        }
+        else if (OH_Helpers.isInRangeNoHeight(transform.position, data.origin, data.range))
+        {
+            gravityInverted = data.inverted;
         }
     }
 

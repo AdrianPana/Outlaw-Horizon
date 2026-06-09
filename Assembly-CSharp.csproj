@@ -67,6 +67,7 @@
     <Compile Include="Assets\Scripts\UI\SavingUIController.cs" />
     <Compile Include="Assets\Scripts\WindModifier.cs" />
     <Compile Include="Assets\Scripts\GloveScript.cs" />
+    <Compile Include="Assets\Scripts\ShipGloveScript.cs" />
     <Compile Include="Assets\Scripts\Modifiers\GravityProvider.cs" />
     <Compile Include="Assets\Scripts\CustomPlayerController.cs" />
     <Compile Include="Assets\Scripts\ModifierAffectedObject.cs" />
