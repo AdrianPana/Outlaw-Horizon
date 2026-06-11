@@ -83,6 +83,7 @@
     <Compile Include="Assets\Scripts\ShipMoveScript.cs" />
     <Compile Include="Assets\Scripts\UI\GloveUI.cs" />
     <Compile Include="Assets\Scripts\SectionManager.cs" />
+    <Compile Include="Assets\Scripts\SceneChangerScript.cs" />
     <Compile Include="Assets\Scripts\Upgrades\IModifierUpgrade.cs" />
     <Compile Include="Assets\InputSystem_Actions.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
