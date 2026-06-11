@@ -65,6 +65,7 @@
     <Compile Include="Assets\Scripts\Snapshot.cs" />
     <Compile Include="Assets\Scripts\ResettableModifierObject.cs" />
     <Compile Include="Assets\Scripts\UI\SavingUIController.cs" />
+    <Compile Include="Assets\BrokenVector\LowPolyDungeon\Demo Scenes\MouseCamLook.cs" />
     <Compile Include="Assets\Scripts\WindModifier.cs" />
     <Compile Include="Assets\Scripts\GloveScript.cs" />
     <Compile Include="Assets\Scripts\ShipGloveScript.cs" />
@@ -91,8 +92,10 @@
     <Compile Include="Assets\Scripts\Modifiers\WindProvider.cs" />
     <Compile Include="Assets\Scripts\GravityModifier.cs" />
     <Compile Include="Assets\Helpers\EditorMeshCombiner.cs" />
+    <Compile Include="Assets\BrokenVector\LowPolyDungeon\Demo Scenes\ScreenshotMaker.cs" />
     <Compile Include="Assets\Scripts\Upgrades\Upgrade.cs" />
     <Compile Include="Assets\Scripts\Upgrades\WindUpgrade.cs" />
+    <Compile Include="Assets\BrokenVector\LowPolyDungeon\Demo Scenes\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Modifiers\IModifierProvider.cs" />
     <Compile Include="Assets\Scripts\InteractorScript.cs" />
     <Compile Include="Assets\Scripts\Upgrades\GravityUpgrade.cs" />

@@ -23,6 +23,12 @@ public class SectionManager : MonoBehaviour
         respawnRotation = transform.eulerAngles;
     }
 
+    private void OnValidate()
+    {
+        var collider = GetComponent<Collider>();
+        collider.isTrigger = true;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player") && SetSectionAsCurrent(other.gameObject.GetComponent<GloveScript>()))
