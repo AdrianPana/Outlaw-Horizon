@@ -92,7 +92,6 @@
     <Compile Include="Assets\Scripts\Upgrades\UpgradePickup.cs" />
     <Compile Include="Assets\Scripts\Modifiers\WindProvider.cs" />
     <Compile Include="Assets\Scripts\GravityModifier.cs" />
-    <Compile Include="Assets\Helpers\EditorMeshCombiner.cs" />
     <Compile Include="Assets\BrokenVector\LowPolyDungeon\Demo Scenes\ScreenshotMaker.cs" />
     <Compile Include="Assets\Scripts\Upgrades\Upgrade.cs" />
     <Compile Include="Assets\Scripts\Upgrades\WindUpgrade.cs" />

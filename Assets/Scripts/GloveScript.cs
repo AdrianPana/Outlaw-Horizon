@@ -31,7 +31,7 @@ private InputSystem_Actions playerInputActions;
     public GameObject rangeIndicator;
 
     [HideInInspector] public bool hasWindAbility = false;
-[HideInInspector] public bool hasGravityAbility = false;
+    [HideInInspector] public bool hasGravityAbility = false;
 
     private void Awake()
     {
@@ -42,6 +42,7 @@ private InputSystem_Actions playerInputActions;
     private void Start()
     {
         rangeIndicator.transform.localScale = new Vector3(range, 0.025f, range);
+        rangeIndicator.SetActive(hasWindAbility || hasGravityAbility);
 
         postProcessingVolume.profile.TryGet<ColorAdjustments>(out colorAdjustments);
 
@@ -51,6 +52,11 @@ private InputSystem_Actions playerInputActions;
 
         windMenuUIController = windMenuUI.GetComponent<WindWheelController>();
 
+    }
+
+    private void Update()
+    {
+        rangeIndicator.SetActive(hasWindAbility || hasGravityAbility);
     }
 
     private void OnEnable()
@@ -84,8 +90,8 @@ private InputSystem_Actions playerInputActions;
                 universalStateManagerScriptableObject.ToggleGravity(transform.position, range);
                 break;
             case Modifier.NONE:
-                //universalStateManagerScriptableObject.ClearModifier(transform.position, range);
-                universalStateManagerScriptableObject.ToggleWind(transform.position, range, WindDirection.NONE);
+                universalStateManagerScriptableObject.ClearAllModifiers(transform.position, range);
+                //universalStateManagerScriptableObject.ToggleWind(transform.position, range, WindDirection.NONE);
                 break;
             default:
                 universalStateManagerScriptableObject.ToggleWind(transform.position, range, ResourceHelper.ModifierToWindDirection(modifier));
