@@ -1,8 +1,6 @@
 using Game.Resources;
-using StarterAssets;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Windows;
 
 public class ShipMoveScript : ModifierAffectedObject
 {
@@ -24,10 +22,7 @@ public class ShipMoveScript : ModifierAffectedObject
     private float _cinemachineTargetYaw;
     private float _cinemachineTargetPitch;
 
-#if ENABLE_INPUT_SYSTEM
-    private PlayerInput _playerInput;
-#endif
-    private StarterAssetsInputs _input;
+    private InputSystem_Actions _inputSystemActions;
     private const float _threshold = 0.01f;
 
     private bool IsCurrentDeviceMouse
@@ -35,11 +30,6 @@ public class ShipMoveScript : ModifierAffectedObject
 
         get
         {
-            //#if ENABLE_INPUT_SYSTEM
-            //            return _playerInput.currentControlScheme == "KeyboardMouse";
-            //#else
-            //				return false;
-            //#endif
             return true;
         }
     }
@@ -49,9 +39,19 @@ public class ShipMoveScript : ModifierAffectedObject
     public override void Awake()
     {
         base.Awake();
-        _input = GetComponent<StarterAssetsInputs>();
+        _inputSystemActions = new InputSystem_Actions();
         _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
         gloveScript = GetComponentInChildren<GloveScript>();
+    }
+
+    private void OnEnable()
+    {
+        _inputSystemActions.Enable();
+    }
+
+    private void OnDisable()
+    {
+        _inputSystemActions.Disable();
     }
 
     private void Update()
@@ -72,14 +72,16 @@ public class ShipMoveScript : ModifierAffectedObject
 
     private void CameraRotation()
     {
+        Vector2 look = _inputSystemActions.Player.Look.ReadValue<Vector2>();
+
         // if there is an input and camera position is not fixed
-        if (_input.look.sqrMagnitude >= _threshold)
+        if (look.sqrMagnitude >= _threshold)
         {
             //Don't multiply mouse input by Time.deltaTime;
             float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;
 
-            _cinemachineTargetYaw += _input.look.x * deltaTimeMultiplier;
-            _cinemachineTargetPitch += _input.look.y * deltaTimeMultiplier;
+            _cinemachineTargetYaw += look.x * deltaTimeMultiplier;
+            _cinemachineTargetPitch += look.y * deltaTimeMultiplier;
         }
 
         // clamp our rotations so our values are limited 360 degrees
@@ -90,12 +92,4 @@ public class ShipMoveScript : ModifierAffectedObject
         CinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + CameraAngleOverride,
             _cinemachineTargetYaw, 0.0f);
     }
-
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    //if (gloveScript != null)
-    //    //{
-    //    //    gloveScript.ToggleModifier(Modifier.NONE);
-    //    //}
-    //}
 }

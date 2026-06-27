@@ -9,8 +9,7 @@ public class GloveScript : MonoBehaviour
 {
     public GloveUI gloveUI;
 
-    private StarterAssetsInputs starterInputs;
-private InputSystem_Actions playerInputActions;
+    private InputSystem_Actions playerInputActions;
     private ThirdPersonController thirdPersonController;
     private Camera cam;
 
@@ -36,7 +35,6 @@ private InputSystem_Actions playerInputActions;
     private void Awake()
     {
         playerInputActions = new InputSystem_Actions();
-        starterInputs = GetComponent<StarterAssetsInputs>();
     }
 
     private void Start()
@@ -135,7 +133,8 @@ private InputSystem_Actions playerInputActions;
             thirdPersonController.enabled = false; // Disable player movement
         }
 
-        starterInputs.SetCursorState(false); // Show the cursor for the ability menu
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     private void HideAbilityMenu(InputAction.CallbackContext context)
@@ -165,7 +164,8 @@ private InputSystem_Actions playerInputActions;
             thirdPersonController.enabled = true; // Enable player movement
         }
 
-        starterInputs.SetCursorState(true); // Hide the cursor when closing the ability menu
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     private void MenuModifierSelected(Modifier modifier)

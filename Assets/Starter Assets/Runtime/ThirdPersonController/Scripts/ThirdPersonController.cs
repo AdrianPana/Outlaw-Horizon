@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
 #endif
@@ -88,6 +88,12 @@ namespace StarterAssets
         public float lowerDist = 0.1f;
         public float upperDist = 0.2f;
 
+        [Header("Mouse Cursor Settings")]
+        public bool cursorLocked = true;
+        public bool cursorInputForLook = true;
+        public bool analogMovement = true;
+        public float LookSensitivity = 0.5f;
+
         [Header("Cinemachine")]
         [Tooltip("The follow target set in the Cinemachine Virtual Camera that the camera will follow")]
         public GameObject CinemachineCameraTarget;
@@ -145,7 +151,7 @@ namespace StarterAssets
 #endif
         private Rigidbody rb;
         private Animator _animator;
-        private StarterAssetsInputs _input;
+        private InputSystem_Actions _inputActions;
         private GameObject _mainCamera;
 
         private const float _threshold = 0.01f;
@@ -181,7 +187,6 @@ namespace StarterAssets
             _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
 
             _hasAnimator = TryGetComponent(out _animator);
-            _input = GetComponent<StarterAssetsInputs>();
             rb = GetComponent<Rigidbody>();
             _capsuleCollider = GetComponent<CapsuleCollider>();
 #if ENABLE_INPUT_SYSTEM
@@ -195,6 +200,29 @@ namespace StarterAssets
             // reset our timeouts on start
             _jumpTimeoutDelta = JumpTimeout;
             _fallTimeoutDelta = FallTimeout;
+        }
+
+        private void OnEnable()
+        {
+            if (_inputActions == null)
+                _inputActions = new InputSystem_Actions();
+            _inputActions.Enable();
+        }
+
+        private void OnDisable()
+        {
+            if (_inputActions != null)
+            {
+                _inputActions.Disable();
+            }
+        }
+
+        private void OnApplicationFocus(bool hasFocus)
+        {
+            if (hasFocus)
+            {
+                Cursor.lockState = cursorLocked ? CursorLockMode.Locked : CursorLockMode.None;
+            }
         }
 
         private void FixedUpdate()
@@ -255,14 +283,15 @@ namespace StarterAssets
 
         private void CameraRotation()
         {
+            Vector2 lookInput = _inputActions.Player.Look.ReadValue<Vector2>();
             // if there is an input and camera position is not fixed
-            if (_input.look.sqrMagnitude >= _threshold && !LockCameraPosition)
+            if (lookInput.sqrMagnitude >= _threshold && !LockCameraPosition)
             {
                 //Don't multiply mouse input by Time.deltaTime;
                 float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;
 
-                _cinemachineTargetYaw += _input.look.x * deltaTimeMultiplier;
-                _cinemachineTargetPitch += _input.look.y * deltaTimeMultiplier;
+                _cinemachineTargetYaw += lookInput.x * LookSensitivity * deltaTimeMultiplier;
+                _cinemachineTargetPitch += -lookInput.y * LookSensitivity * deltaTimeMultiplier;
             }
 
             // clamp our rotations so our values are limited 360 degrees
@@ -276,6 +305,7 @@ namespace StarterAssets
 
         private void Move()
         {
+            Vector2 moveInput = _inputActions.Player.Move.ReadValue<Vector2>();
             // (REMOVED) set target speed based on move speed, sprint speed and if sprint is pressed
             //float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
             float targetSpeed = MoveSpeed;
@@ -284,14 +314,14 @@ namespace StarterAssets
 
             // note: Vector2's == operator uses approximation so is not floating point error prone, and is cheaper than magnitude
             // if there is no input, set the target speed to 0
-            if (_input.move == Vector2.zero) targetSpeed = 0.0f;
+            if (moveInput == Vector2.zero) targetSpeed = 0.0f;
 
             // a reference to the players current horizontal velocity
             //float currentHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
             float currentHorizontalSpeed = new Vector3(rb.linearVelocity.x, 0.0f, rb.linearVelocity.z).magnitude;
 
             float speedOffset = 0.1f;
-            float inputMagnitude = _input.analogMovement ? _input.move.magnitude : 1f;
+            float inputMagnitude = analogMovement ? moveInput.magnitude : 1f;
 
             // accelerate or decelerate to target speed
             if (currentHorizontalSpeed < targetSpeed - speedOffset ||
@@ -314,12 +344,12 @@ namespace StarterAssets
             if (_animationBlend < 0.01f) _animationBlend = 0f;
 
             // normalise input direction
-            Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
+            Vector3 inputDirection = new Vector3(moveInput.x, 0.0f, moveInput.y).normalized;
             Debug.Log("OnLedge: " + OnLedge);
 
             // note: Vector2's != operator uses approximation so is not floating point error prone, and is cheaper than magnitude
             // if there is a move input rotate player when the player is moving
-            if (_input.move != Vector2.zero && !OnLedge)
+            if (moveInput != Vector2.zero && !OnLedge)
             {
                 _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg +
                                   _mainCamera.transform.eulerAngles.y;
@@ -335,7 +365,7 @@ namespace StarterAssets
             Debug.DrawRay(transform.position + new Vector3(0, 0.1f, 0), transform.forward * lowerDist, Color.cyan, 0.1f);
             Debug.DrawRay(transform.position + new Vector3(0, stepHeight + 0.1f, 0), transform.forward * upperDist, Color.green, 0.1f);
 
-            if (_input.move != Vector2.zero && !OnLedge)
+            if (moveInput != Vector2.zero && !OnLedge)
             {
                 Vector3 moveDirection = transform.forward * _speed;
 
@@ -447,17 +477,19 @@ namespace StarterAssets
 
         private void JumpAndGravity()
         {
+            bool jumpPressed = _inputActions.Player.Jump.IsPressed();
             // If on the ground or recently left it, perform jump
             if (Grounded || _coyoteTimeDelta >= 0 || OnLedge)
             {
                 // Jump
-                if ((_input.jump || bufferedJump) && _jumpTimeoutDelta <= 0.0f)
+                if ((jumpPressed || bufferedJump) && _jumpTimeoutDelta <= 0.0f)
                 {
                     // the square root of H * -2 * G = how much velocity needed to reach desired height
                     _verticalVelocity = Mathf.Sqrt(JumpHeight * (OnLedge ? 2f : 1f) * -2f * Gravity);
 
                     OnLedge = false;
                     _ridable = null;
+                    bufferedJump = false;
 
                     // update animator if using character
                     if (_hasAnimator)
@@ -498,7 +530,7 @@ namespace StarterAssets
             {
                 // If we press jump while not on the ground, start a timer.
                 // If we hit the ground again while the timer is running, jump.
-                if (_input.jump)
+                if (jumpPressed)
                 {
                     bufferedJump = true;
                     _jumpBufferingDelta = JumpBufferTime;
@@ -533,8 +565,6 @@ namespace StarterAssets
                 {
                     _coyoteTimeDelta -= Time.deltaTime;
                 }
-                // if we are not grounded and not in coyote time, do not jump      
-                _input.jump = false;
             }
 
             if (OnLedge)
