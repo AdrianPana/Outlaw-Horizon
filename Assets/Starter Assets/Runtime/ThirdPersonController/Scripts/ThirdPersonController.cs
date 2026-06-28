@@ -159,6 +159,14 @@ namespace StarterAssets
         private bool _hasAnimator;
 
         RaycastHit forwardHit;
+        private Transform _currentPlatform;
+
+        private void SetPlatform(Transform newPlatform)
+        {
+            if (_currentPlatform == newPlatform) return;
+            _currentPlatform = newPlatform;
+            transform.SetParent(_currentPlatform, true);
+        }
 
         private bool IsCurrentDeviceMouse
         {
@@ -188,6 +196,7 @@ namespace StarterAssets
 
             _hasAnimator = TryGetComponent(out _animator);
             rb = GetComponent<Rigidbody>();
+            rb.isKinematic = true;
             _capsuleCollider = GetComponent<CapsuleCollider>();
 #if ENABLE_INPUT_SYSTEM
             _playerInput = GetComponent<PlayerInput>();
@@ -229,9 +238,6 @@ namespace StarterAssets
         {
             _hasAnimator = TryGetComponent(out _animator);
 
-            rb.linearVelocity = Vector3.zero; 
-            rb.angularVelocity = Vector3.zero;
-
             GroundedCheck();
             LedgeCheck();
             JumpAndGravity();
@@ -266,12 +272,23 @@ namespace StarterAssets
                 GroundedOffset + GroundedCastDistance, GroundLayers, QueryTriggerInteraction.Ignore))
             {
                 Grounded = true;
+                OnLedge = false;
                 _ridable = _groundHit.collider.GetComponent<Rideable>();
+
+                if (_ridable != null)
+                {
+                    SetPlatform(_groundHit.transform);
+                }
+                else
+                {
+                    SetPlatform(null);
+                }
             }
             else
             {
                 Grounded = false;
                 _ridable = null;
+                SetPlatform(null);
             }
 
             // update animator if using character
@@ -318,7 +335,7 @@ namespace StarterAssets
 
             // a reference to the players current horizontal velocity
             //float currentHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
-            float currentHorizontalSpeed = new Vector3(rb.linearVelocity.x, 0.0f, rb.linearVelocity.z).magnitude;
+            float currentHorizontalSpeed = _speed;
 
             float speedOffset = 0.1f;
             float inputMagnitude = analogMovement ? moveInput.magnitude : 1f;
@@ -406,18 +423,7 @@ namespace StarterAssets
                 inputMove +
                 new Vector3(0, _verticalVelocity, 0);
 
-            // Movement of the platform the player is riding, if any
-            Vector3 platformVelocity = Vector3.zero;
-
-            if (_ridable != null)
-            {
-                platformVelocity = _ridable.Velocity;
-                Debug.Log("Platform velocity: " + platformVelocity);
-            }
-
-            Vector3 finalVelocity = playerVelocity + platformVelocity;
-
-            rb.MovePosition(rb.position + finalVelocity * Time.fixedDeltaTime);
+            rb.MovePosition(rb.position + playerVelocity * Time.fixedDeltaTime);
 
             // update animator if using character
             if (_hasAnimator)
@@ -431,6 +437,7 @@ namespace StarterAssets
         {
             if (Grounded)
             {
+                OnLedge = false;
                 _animator.SetBool(_animIDOnLedge, false);
                 return;
             }
@@ -445,6 +452,7 @@ namespace StarterAssets
             {
                 OnLedge = true;
                 _ridable = forwardHit.collider.GetComponent<Rideable>();
+                SetPlatform(forwardHit.transform);
 
                 _verticalVelocity = 0;
                 _animator.SetBool(_animIDJump, false);
@@ -455,10 +463,6 @@ namespace StarterAssets
                     transform.position.x,
                     forwardHit.point.y - 1.0f - HangOffset,
                     transform.position.z);
-
-                // add platform movement if hanging on a moving platform
-                if (_ridable != null)
-                    hangPosition += _ridable.Velocity * Time.fixedDeltaTime;
 
                 transform.position = hangPosition;
 
@@ -489,6 +493,7 @@ namespace StarterAssets
 
                     OnLedge = false;
                     _ridable = null;
+                    SetPlatform(null);
                     bufferedJump = false;
 
                     // update animator if using character

@@ -56,20 +56,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
-    <Analyzer Include="C:\Unity Projects\Outlaw Horizon\Library\PackageCache\com.unity.ai.assistant@6fee27370e6a\Plugins\Tokenizer\Microsoft.ML.Tokenizers_AIA.dll" />
-    <Analyzer Include="C:\Unity Projects\Outlaw Horizon\Library\PackageCache\com.unity.ai.assistant@6fee27370e6a\Plugins\Shared\Microsoft.Bcl.Memory_AIA.dll" />
-    <Analyzer Include="C:\Unity Projects\Outlaw Horizon\Library\PackageCache\com.unity.ai.assistant@6fee27370e6a\Plugins\Shared\System.Collections.Immutable_AIA.dll" />
-    <Analyzer Include="C:\Unity Projects\Outlaw Horizon\Library\PackageCache\com.unity.ai.assistant@6fee27370e6a\Plugins\Shared\Microsoft.Bcl.HashCode_AIA.dll" />
-    <Analyzer Include="C:\Unity Projects\Outlaw Horizon\Library\PackageCache\com.unity.ai.assistant@6fee27370e6a\Plugins\Shared\System.Runtime.CompilerServices.Unsafe_AIA.dll" />
-    <Analyzer Include="C:\Unity Projects\Outlaw Horizon\Library\PackageCache\com.unity.ai.assistant@6fee27370e6a\Plugins\CodeAnalysis\6_4\Microsoft.CodeAnalysis_AIA.dll" />
-    <Analyzer Include="C:\Unity Projects\Outlaw Horizon\Library\PackageCache\com.unity.ai.assistant@6fee27370e6a\Plugins\Shared\System.Text.Encodings.Web_AIA.dll" />
-    <Analyzer Include="C:\Unity Projects\Outlaw Horizon\Library\PackageCache\com.unity.ai.assistant@6fee27370e6a\Plugins\Shared\Microsoft.Bcl.AsyncInterfaces_AIA.dll" />
-    <Analyzer Include="C:\Unity Projects\Outlaw Horizon\Library\PackageCache\com.unity.ai.assistant@6fee27370e6a\Plugins\Shared\System.Threading.Tasks.Extensions_AIA.dll" />
-    <Analyzer Include="C:\Unity Projects\Outlaw Horizon\Library\PackageCache\com.unity.ai.assistant@6fee27370e6a\Plugins\CodeAnalysis\6_4\Microsoft.CodeAnalysis.CSharp_AIA.dll" />
-    <Analyzer Include="C:\Unity Projects\Outlaw Horizon\Library\PackageCache\com.unity.ai.assistant@6fee27370e6a\Plugins\Shared\Google.Protobuf_AIA.dll" />
-    <Analyzer Include="C:\Unity Projects\Outlaw Horizon\Library\PackageCache\com.unity.ai.assistant@6fee27370e6a\Plugins\Markdig\Markdig_AIA.dll" />
-    <Analyzer Include="C:\Unity Projects\Outlaw Horizon\Library\PackageCache\com.unity.ai.assistant@6fee27370e6a\Plugins\Shared\System.Text.Json_AIA.dll" />
-    <Analyzer Include="C:\Unity Projects\Outlaw Horizon\Library\PackageCache\com.unity.ai.assistant@6fee27370e6a\Plugins\Shared\System.Reflection.Metadata_AIA.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.3.5f2\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.3.5f2\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.3.5f2\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
@@ -83,8 +69,12 @@
     <Compile Include="Assets\Scripts\WindModifier.cs" />
     <Compile Include="Assets\Scripts\GloveScript.cs" />
     <Compile Include="Assets\Scripts\ShipGloveScript.cs" />
+    <Compile Include="Assets\Scripts\PlayerFSM\AirborneState.cs" />
     <Compile Include="Assets\Scripts\Modifiers\GravityProvider.cs" />
+    <Compile Include="Assets\Scripts\PlayerFSM\PlayerContext.cs" />
     <Compile Include="Assets\Scripts\CustomPlayerController.cs" />
+    <Compile Include="Assets\Scripts\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\PlayerFSM\PhysicsChecker.cs" />
     <Compile Include="Assets\Scripts\ModifierAffectedObject.cs" />
     <Compile Include="Assets\Scripts\CameraSwitcher.cs" />
     <Compile Include="Assets\Scripts\DamageObject.cs" />
@@ -98,13 +88,16 @@
     <Compile Include="Assets\Scripts\UI\GloveUI.cs" />
     <Compile Include="Assets\Scripts\SectionManager.cs" />
     <Compile Include="Assets\Scripts\SceneChangerScript.cs" />
+    <Compile Include="Assets\Scripts\PlayerFSM\PlayerStateMachine.cs" />
     <Compile Include="Assets\Scripts\Upgrades\IModifierUpgrade.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\Scripts\Resources.cs" />
     <Compile Include="Assets\Scripts\UI\WindWheelController.cs" />
     <Compile Include="Assets\Scripts\Upgrades\UpgradePickup.cs" />
+    <Compile Include="Assets\Scripts\PlayerFSM\GroundedState.cs" />
     <Compile Include="Assets\Scripts\Modifiers\WindProvider.cs" />
     <Compile Include="Assets\Scripts\GravityModifier.cs" />
+    <Compile Include="Assets\Scripts\PlayerFSM\BaseState.cs" />
     <Compile Include="Assets\BrokenVector\LowPolyDungeon\Demo Scenes\ScreenshotMaker.cs" />
     <Compile Include="Assets\Scripts\Upgrades\Upgrade.cs" />
     <Compile Include="Assets\Scripts\Upgrades\WindUpgrade.cs" />
@@ -695,16 +688,16 @@
       <HintPath>Library\PackageCache\com.unity.visualscripting@191c0d7e3b69\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="System.Runtime.CompilerServices.Unsafe">
-      <HintPath>Library\PackageCache\com.unity.collections@aea9d3bd5e19\Unity.Collections.Tests\System.Runtime.CompilerServices.Unsafe\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@4dfd81071c64\Runtime\Newtonsoft.Json.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Mono.Cecil">
       <HintPath>Library\PackageCache\com.unity.nuget.mono-cecil@ecb9724e46ff\Mono.Cecil.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe">
+      <HintPath>Library\PackageCache\com.unity.collections@aea9d3bd5e19\Unity.Collections.Tests\System.Runtime.CompilerServices.Unsafe\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="netstandard">
