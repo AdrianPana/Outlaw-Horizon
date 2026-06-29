@@ -21,17 +21,17 @@ public class AirborneState : BaseState
     public override void Tick(float dt)
     {
         // Transitions first
-        if (ctx.isGrounded)
+        if (ctx.isGrounded && ctx.rb.linearVelocity.y <= 0.05f)
         {
             sm.TransitionTo(new GroundedState(ctx, sm));
             return;
         }
 
-        //if (ctx.onLedge)
-        //{
-        //    sm.TransitionTo(new LedgeGrabState(ctx, sm));
-        //    return;
-        //}
+        if (ctx.onLedge)
+        {
+            sm.TransitionTo(new LedgeGrabState(ctx, sm));
+            return;
+        }
 
         HandleJump();
         ApplyGravity(dt);
@@ -47,7 +47,7 @@ public class AirborneState : BaseState
 
         if (jumpPressed)
         {
-            // Coyote jump — just left the ground, still counts as a ground jump
+            // Coyote jump ï¿½ just left the ground, still counts as a ground jump
             if (ctx.coyoteTimeDelta > 0f)
             {
                 PerformJump(ctx.jumpHeight);
@@ -62,7 +62,7 @@ public class AirborneState : BaseState
                 return;
             }
 
-            // No jump available — buffer it in case we land soon
+            // No jump available ï¿½ buffer it in case we land soon
             ctx.bufferedJump = true;
             ctx.jumpBufferDelta = ctx.jumpBufferTime;
         }
@@ -93,8 +93,8 @@ public class AirborneState : BaseState
                 ctx.animator.SetBool(ctx.animIDFreeFall, true);
         }
 
-        // Move vertically
-        ctx.rb.MovePosition(ctx.rb.position + new Vector3(0f, ctx.verticalVelocity * dt, 0f));
+        // Apply vertical velocity to Rigidbody
+        ctx.rb.linearVelocity = new Vector3(ctx.rb.linearVelocity.x, ctx.verticalVelocity, ctx.rb.linearVelocity.z);
     }
 
     private void HandleMovement(float dt)

@@ -21,16 +21,19 @@ public class GroundedState : BaseState
         // while grounded (e.g. walking down a slope)
         if (ctx.verticalVelocity < 0f)
             ctx.verticalVelocity = -0.5f;
+
+        // Synchronize Rigidbody velocity
+        ctx.rb.linearVelocity = new Vector3(ctx.rb.linearVelocity.x, ctx.verticalVelocity, ctx.rb.linearVelocity.z);
     }
 
     public override void Tick(float dt)
     {
-        // Check transitions first — if we're no longer grounded, leave immediately
-        //if (ctx.onLedge)
-        //{
-        //    sm.TransitionTo(new LedgeGrabState(ctx, sm));
-        //    return;
-        //}
+        //Check transitions first ï¿½ if we're no longer grounded, leave immediately
+        if (ctx.onLedge)
+        {
+            sm.TransitionTo(new LedgeGrabState(ctx, sm));
+            return;
+        }
 
         if (!ctx.isGrounded)
         {
@@ -38,49 +41,55 @@ public class GroundedState : BaseState
             return;
         }
 
-        HandleJump();
+        if (HandleJump()) return;
 
         // If jump was triggered this frame, HandleJump already
-        // set verticalVelocity and transitioned — don't move
+        // set verticalVelocity and transitioned ï¿½ don't move
         if (!ctx.isGrounded) return;
 
+
         HandleMovement(dt);
-        SnapToGround();
+        ApplyHoverForce(dt);
         UpdateAnimator(dt);
+
+        // Keep verticalVelocity in sync for transitions
+        ctx.verticalVelocity = ctx.rb.linearVelocity.y;
     }
 
     public override void Exit()
     {
         // coyoteTimeDelta was already set to CoyoteTime by PhysicsChecker
-        // while grounded — it will now count down in AirborneState,
+        // while grounded ï¿½ it will now count down in AirborneState,
         // giving the player the coyote time window
     }
 
     // -------------------------------------------------------------------------
 
-    private void HandleJump()
+    private bool HandleJump()
     {
-        bool jumpPressed = ctx.inputActions.Player.Jump.IsPressed();
-
-        if (jumpPressed || ctx.bufferedJump)
+        if (ctx.input.jumpPressed || ctx.bufferedJump)
         {
             if (ctx.jumpTimeoutDelta <= 0f)
             {
                 ctx.verticalVelocity = Mathf.Sqrt(ctx.jumpHeight * -2f * ctx.gravity);
                 ctx.bufferedJump = false;
+                ctx.rb.linearVelocity = new Vector3(ctx.rb.linearVelocity.x, ctx.verticalVelocity, ctx.rb.linearVelocity.z);
 
                 if (ctx.animator)
                     ctx.animator.SetBool(ctx.animIDJump, true);
 
-                // Transition immediately — we are now airborne
+                // Transition immediately we are now airborne
                 sm.TransitionTo(new AirborneState(ctx, sm));
+                return true;
             }
         }
+
+        return false;
     }
 
     private void HandleMovement(float dt)
     {
-        Vector2 moveInput = ctx.inputActions.Player.Move.ReadValue<Vector2>();
+        Vector2 moveInput = ctx.input.move;
         float targetSpeed = moveInput == Vector2.zero ? 0f : ctx.moveSpeed;
 
         // Smooth speed
@@ -126,12 +135,10 @@ public class GroundedState : BaseState
         Vector3 moveDir = ctx.rb.transform.forward * ctx.horizontalSpeed;
 
         float groundAngle = Vector3.Angle(Vector3.up, ctx.groundHit.normal);
-        Debug.Log($"groundAngle: {groundAngle} | normal: {ctx.groundHit.normal} | grounded: {ctx.isGrounded}");
-
 
         if (groundAngle <= ctx.maxSlopeAngle)
         {
-            // Project onto the slope — this tilts the movement vector
+            // Project onto the slope ï¿½ this tilts the movement vector
             // to follow the surface rather than cut through it
             moveDir = Vector3.ProjectOnPlane(moveDir, ctx.groundHit.normal).normalized
                       * ctx.horizontalSpeed;
@@ -142,15 +149,20 @@ public class GroundedState : BaseState
         }
         else if (groundAngle > ctx.maxSlopeAngle)
         {
-            // Too steep — slide down instead of climbing
+            // Too steep ï¿½ slide down instead of climbing
             moveDir += new Vector3(ctx.groundHit.normal.x, -ctx.groundHit.normal.y, ctx.groundHit.normal.z)
                        * ctx.horizontalSpeed;
         }
 
         //TryStepUp();
 
-        Vector3 velocity = moveDir + new Vector3(0f, ctx.verticalVelocity, 0f);
-        ctx.rb.MovePosition(ctx.rb.position + velocity * dt);
+        // Move horizontally via MovePosition, but vertically we let physics simulate.
+        // This is done by integrating the Rigidbody's velocity.y.
+        Vector3 horizontalMove = new Vector3(moveDir.x, 0f, moveDir.z) * dt;
+        Vector3 nextPosition = ctx.rb.position + horizontalMove;
+        nextPosition.y = ctx.rb.position.y + ctx.rb.linearVelocity.y * dt;
+
+        ctx.rb.MovePosition(nextPosition);
     }
 
     private void TryStepUp()
@@ -184,27 +196,18 @@ public class GroundedState : BaseState
         }
     }
 
-    private void SnapToGround()
+    private void ApplyHoverForce(float dt)
     {
-        if (ctx.isSteppingUp)
-        {
-            ctx.isSteppingUp = false;
-            return;
-        }
+        float targetDistance = ctx.capsuleCollider.center.y; // cast origin is center.y above rb.position, ground should be center.y below cast origin
+        float currentDistance = ctx.distanceToGround;
 
-        // Don't snap while jumping
-        if (ctx.verticalVelocity > 0f) return;
+        float displacement = targetDistance - currentDistance;
+        float springForce = displacement * ctx.springStiffness;
+        float dampingForce = ctx.rb.linearVelocity.y * ctx.springDamping;
+        float hoverForceY = springForce - dampingForce;
+        float gravityForceY = ctx.gravity * ctx.rb.mass;
 
-        // Only snap if very close to ground (avoids snapping on ledge edges)
-        if (ctx.groundHit.distance > ctx.stepHeight) return;
-
-        float capsuleBottom = ctx.capsuleCollider.center.y
-                              - ctx.capsuleCollider.height / 2f
-                              + ctx.capsuleCollider.radius;
-
-        Vector3 target = ctx.rb.position;
-        target.y = ctx.groundHit.point.y;
-        ctx.rb.MovePosition(target);
+        ctx.rb.AddForce(Vector3.up * (hoverForceY + gravityForceY), ForceMode.Acceleration);
     }
 
     private void UpdateAnimator(float dt)

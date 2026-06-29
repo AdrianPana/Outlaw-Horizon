@@ -14,6 +14,10 @@ public class PlayerStateMachine : MonoBehaviour
     public float FallTimeout = 0.15f;
     public float TerminalVelocity = 10f;
 
+    [Header("Hover Spring")]
+    public float SpringStiffness = 200f;
+    public float SpringDamping = 20f;
+
     [Header("Ground Check")]
     public float GroundedOffset = -0.14f;
     public float GroundedRadius = 0.28f;
@@ -47,7 +51,7 @@ public class PlayerStateMachine : MonoBehaviour
     private PhysicsChecker physicsChecker;
     private BaseState currentState;
 
-    private void Start()
+    private void Awake()
     {
         ctx = new PlayerContext();
 
@@ -62,6 +66,8 @@ public class PlayerStateMachine : MonoBehaviour
         ctx.coyoteTime = CoyoteTime;
         ctx.fallTimeout = FallTimeout;
         ctx.terminalVelocity = TerminalVelocity;
+        ctx.springStiffness = SpringStiffness;
+        ctx.springDamping = SpringDamping;
         ctx.groundedOffset = GroundedOffset;
         ctx.groundedRadius = GroundedRadius;
         ctx.groundedCastDistance = GroundedCastDistance;
@@ -101,10 +107,28 @@ public class PlayerStateMachine : MonoBehaviour
         TransitionTo(new GroundedState(ctx, this));
     }
 
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
     private void FixedUpdate()
     {
+        if (physicsChecker == null || currentState == null) return;
+        ctx.input = GatherInput();
         physicsChecker.Tick(Time.fixedDeltaTime);
         currentState.Tick(Time.fixedDeltaTime);
+    }
+
+    private InputSnapshot GatherInput()
+    {
+        var player = ctx.inputActions.Player;
+        return new InputSnapshot
+        {
+            move = player.Move.ReadValue<Vector2>(),
+            jumpPressed = player.Jump.IsPressed(),
+        };
     }
 
     public void TransitionTo(BaseState next)
@@ -117,11 +141,13 @@ public class PlayerStateMachine : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (ctx == null || ctx.cinemachineCameraTarget == null) return;
         CameraRotation();
     }
 
     private void CameraRotation()
     {
+        if (Cursor.lockState != CursorLockMode.Locked) return;
         Vector2 lookInput = ctx.inputActions.Player.Look.ReadValue<Vector2>();
 
         if (lookInput.sqrMagnitude >= _threshold && !LockCameraPosition)

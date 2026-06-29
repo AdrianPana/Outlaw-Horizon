@@ -3,9 +3,12 @@ using UnityEngine;
 
 public class PlayerContext
 {
+    public InputSnapshot input;
+
     // Ground
     public bool isGrounded;
     public RaycastHit groundHit;
+    public float distanceToGround;
     public Vector3 groundNormal => groundHit.normal;
     public Rideable rideable;
     public Transform currentPlatform;
@@ -27,7 +30,7 @@ public class PlayerContext
     public float jumpBufferDelta;
     public bool bufferedJump;
 
-    // Tuning — set from inspector via PlayerStateMachine
+    // Tuning ï¿½ set from inspector via PlayerStateMachine
     public float jumpHeight;
     public float gravity;
     public float moveSpeed;
@@ -38,6 +41,8 @@ public class PlayerContext
     public float coyoteTime;
     public float fallTimeout;
     public float terminalVelocity;
+    public float springStiffness;
+    public float springDamping;
     public float groundedOffset;
     public float groundedRadius;
     public float groundedCastDistance;
@@ -64,4 +69,11 @@ public class PlayerContext
     public int animIDFreeFall;
     public int animIDMotionSpeed;
     public int animIDOnLedge;
+}
+public struct InputSnapshot
+{
+    public Vector2 move;
+    public bool jumpPressed;      // true only on the frame the button was pressed
+    public bool dashPressed;
+    public bool grabPressed;
 }

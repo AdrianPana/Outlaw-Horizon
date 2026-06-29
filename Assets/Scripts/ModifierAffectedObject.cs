@@ -89,7 +89,7 @@ public class ModifierAffectedObject : MonoBehaviour
         wasInfluenced = isInfluenced;
     }
 
-    private bool CheckIfInfluenced()
+    public bool CheckIfInfluenced()
     {
         foreach (var provider in providers)
         {

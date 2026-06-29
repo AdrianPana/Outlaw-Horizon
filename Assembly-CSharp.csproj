@@ -76,7 +76,9 @@
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\PlayerFSM\PhysicsChecker.cs" />
     <Compile Include="Assets\Scripts\ModifierAffectedObject.cs" />
+    <Compile Include="Assets\Scripts\Modifiers\ModifierShader.cs" />
     <Compile Include="Assets\Scripts\CameraSwitcher.cs" />
+    <Compile Include="Assets\Scripts\PlayerFSM\LedgeGrabState.cs" />
     <Compile Include="Assets\Scripts\DamageObject.cs" />
     <Compile Include="Assets\Scripts\ObjectInteractScript.cs" />
     <Compile Include="Assets\Scripts\ModifierTimer.cs" />

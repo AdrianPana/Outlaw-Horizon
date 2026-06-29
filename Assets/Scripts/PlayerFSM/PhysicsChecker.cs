@@ -19,18 +19,21 @@ public class PhysicsChecker
 
     private void CheckGround()
     {
-        Vector3 spherePos = new Vector3(
-            ctx.rb.position.x,
-            ctx.rb.position.y - ctx.groundedOffset,
-            ctx.rb.position.z);
+        // Cast from capsule center
+        Vector3 spherePos = ctx.rb.position + Vector3.up * ctx.capsuleCollider.center.y;
 
-        if (Physics.SphereCast(spherePos, ctx.groundedRadius, Vector3.down,
-            out RaycastHit hit, ctx.groundedOffset + ctx.groundedCastDistance,
+        // Distance from center to bottom of capsule, plus detection buffer
+        float halfHeight = ctx.capsuleCollider.height / 2f;
+        float castDistance = halfHeight + ctx.groundedCastDistance;
+
+        if (Physics.SphereCast(spherePos, ctx.capsuleCollider.radius, Vector3.down,
+            out RaycastHit hit, castDistance,
             ctx.groundLayers, QueryTriggerInteraction.Ignore))
         {
             ctx.isGrounded = true;
             ctx.onLedge = false;
             ctx.groundHit = hit;
+            ctx.distanceToGround = spherePos.y - hit.point.y;
             ctx.rideable = hit.collider.GetComponent<Rideable>();
         }
         else
@@ -52,7 +55,7 @@ public class PhysicsChecker
             return;
         }
 
-        if (ctx.verticalVelocity > 1.0f)
+        if (ctx.verticalVelocity > 1.0f || ctx.onLedge)
             return;
 
         Vector3 origin = ctx.rb.position
@@ -65,6 +68,8 @@ public class PhysicsChecker
         {
             ctx.onLedge = true;
             ctx.ledgeHit = hit;
+            Debug.Log($"Ledge detected at {hit.point}, normal: {hit.normal}");
+            Debug.DrawRay(hit.point, hit.normal, Color.red, 1.0f);
         }
 
         if (ctx.animator)
