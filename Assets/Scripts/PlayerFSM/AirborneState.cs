@@ -93,8 +93,9 @@ public class AirborneState : BaseState
                 ctx.animator.SetBool(ctx.animIDFreeFall, true);
         }
 
+        ctx.rb.MovePosition(ctx.rb.position + new Vector3(0f, ctx.verticalVelocity * dt, 0f));
         // Apply vertical velocity to Rigidbody
-        ctx.rb.linearVelocity = new Vector3(ctx.rb.linearVelocity.x, ctx.verticalVelocity, ctx.rb.linearVelocity.z);
+        //ctx.rb.linearVelocity = new Vector3(ctx.rb.linearVelocity.x, ctx.verticalVelocity, ctx.rb.linearVelocity.z);
     }
 
     private void HandleMovement(float dt)

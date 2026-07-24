@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using Game.Modifiers;
+using System;
 
 [RequireComponent(typeof(Rigidbody))]
 public class ModifierAffectedObject : MonoBehaviour
@@ -8,6 +9,7 @@ public class ModifierAffectedObject : MonoBehaviour
     public enum BehaviorType { Controlled, Hybrid, Ambient }
 
     [Header("Settings")]
+    [SerializeField] private UniversalStateManagerScriptableObject stateManager;
     public BehaviorType behaviorType = BehaviorType.Controlled;
     public LayerMask obstacleMask;
     public float speed = 3f;
@@ -67,6 +69,27 @@ public class ModifierAffectedObject : MonoBehaviour
                 obstacleMask = ~0;
                 break;
         }
+    }
+
+    private void OnEnable()
+    {
+        if (stateManager != null)
+        {
+            stateManager.highlightInRangeEvent.AddListener(OnGravityChanged);
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (stateManager != null)
+        {
+            stateManager.highlightInRangeEvent.RemoveListener(OnGravityChanged);
+        }
+    }
+
+    private void OnGravityChanged((Vector3 origin, float range, GameObject target) data)
+    {
+        throw new NotImplementedException();
     }
 
     private void FixedUpdate()
