@@ -19,13 +19,11 @@ public class CannonScript : MonoBehaviour
     public CameraSwitcher.ViewMode associatedView;
     public ShipGloveScript shipGlove;
 
-    private StarterAssetsInputs starterInputs;
 private InputSystem_Actions playerInputActions;
 
     private void Awake()
     {
         playerInputActions = new InputSystem_Actions();
-        starterInputs = GetComponent<StarterAssetsInputs>();
     }
 
     private void OnEnable()

@@ -9,9 +9,7 @@ public class GloveScript : MonoBehaviour
 {
     public GloveUI gloveUI;
 
-    private StarterAssetsInputs starterInputs;
-private InputSystem_Actions playerInputActions;
-    private ThirdPersonController thirdPersonController;
+    private InputSystem_Actions playerInputActions;
     private Camera cam;
 
     public UniversalStateManagerScriptableObject universalStateManagerScriptableObject;
@@ -36,7 +34,6 @@ private InputSystem_Actions playerInputActions;
     private void Awake()
     {
         playerInputActions = new InputSystem_Actions();
-        starterInputs = GetComponent<StarterAssetsInputs>();
     }
 
     private void Start()
@@ -45,8 +42,6 @@ private InputSystem_Actions playerInputActions;
         rangeIndicator.SetActive(hasWindAbility || hasGravityAbility);
 
         postProcessingVolume.profile.TryGet<ColorAdjustments>(out colorAdjustments);
-
-        thirdPersonController = GetComponent<ThirdPersonController>();
 
         cam = Camera.main;
 
@@ -130,12 +125,8 @@ private InputSystem_Actions playerInputActions;
         Time.timeScale = menuTimeScale; // Pause the game
         colorAdjustments.saturation.value = -100f; // Desaturate the screen to indicate ability menu is open
 
-        if (thirdPersonController != null)
-        {
-            thirdPersonController.enabled = false; // Disable player movement
-        }
-
-        starterInputs.SetCursorState(false); // Show the cursor for the ability menu
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     private void HideAbilityMenu(InputAction.CallbackContext context)
@@ -160,12 +151,8 @@ private InputSystem_Actions playerInputActions;
         Time.timeScale = 1f; // Resume the game
         colorAdjustments.saturation.value = 0f; // Reset saturation to normal
 
-        if (thirdPersonController != null)
-        {
-            thirdPersonController.enabled = true; // Enable player movement
-        }
-
-        starterInputs.SetCursorState(true); // Hide the cursor when closing the ability menu
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     private void MenuModifierSelected(Modifier modifier)

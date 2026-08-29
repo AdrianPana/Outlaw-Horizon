@@ -144,7 +144,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 73388070}
-  - component: {fileID: 73388072}
   - component: {fileID: 73388073}
   m_Layer: 0
   m_Name: Controller
@@ -168,25 +167,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 595150651}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &73388072
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 73388069}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e087ecce43ebbff45a1b360637807d93, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.StarterAssets::StarterAssets.StarterAssetsInputs
-  move: {x: 0, y: 0}
-  look: {x: 0, y: 0}
-  jump: 0
-  sprint: 0
-  analogMovement: 0
-  cursorLocked: 1
-  cursorInputForLook: 1
 --- !u!114 &73388073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1320,9 +1300,6 @@ PrefabInstance:
       addedObject: {fileID: 684211967}
     - targetCorrespondingSourceObject: {fileID: 8515472688152868816, guid: a1dcd447bfbb3bc45821f8b436c031d2, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 684211969}
-    - targetCorrespondingSourceObject: {fileID: 8515472688152868816, guid: a1dcd447bfbb3bc45821f8b436c031d2, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 684211970}
   m_SourcePrefab: {fileID: 100100000, guid: a1dcd447bfbb3bc45821f8b436c031d2, type: 3}
 --- !u!4 &595150651 stripped
@@ -1737,25 +1714,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Game.Modifiers.GravityProvider
   stateManager: {fileID: 11400000, guid: e84650500f9712844a17aa61d1d8358a, type: 2}
   gravityStrength: 2
---- !u!114 &684211969
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 684211958}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e087ecce43ebbff45a1b360637807d93, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.StarterAssets::StarterAssets.StarterAssetsInputs
-  move: {x: 0, y: 0}
-  look: {x: 0, y: 0}
-  jump: 0
-  sprint: 0
-  analogMovement: 0
-  cursorLocked: 1
-  cursorInputForLook: 1
 --- !u!114 &684211970
 MonoBehaviour:
   m_ObjectHideFlags: 0

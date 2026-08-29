@@ -1,0 +1,83 @@
+using StarterAssets;
+using UnityEngine;
+
+public class PlayerContext
+{
+    public InputSnapshot input;
+
+    // Ground
+    public bool isGrounded;
+    public RaycastHit groundHit;
+    public float distanceToGround;
+    public Vector3 groundNormal => groundHit.normal;
+    public Rideable rideable;
+    public Transform currentPlatform;
+
+    // Ledge
+    public bool onLedge;
+    public RaycastHit ledgeHit;
+
+    // Movement
+    public float verticalVelocity;
+    public float horizontalSpeed;
+    public bool isSteppingUp;
+    public bool isJumping;
+    public Vector3 platformMovement = Vector3.zero;
+    public Vector3 externalVelocity = Vector3.zero;
+    public float externalVelocityDecayRate;
+
+    // Timers (ticked by PhysicsChecker)
+    public float jumpTimeoutDelta;
+    public float fallTimeoutDelta;
+    public float coyoteTimeDelta;
+    public float jumpBufferDelta;
+    public bool bufferedJump;
+
+    // Tuning set from inspector via PlayerStateMachine
+    public float jumpHeight;
+    public float ledgeJumpModifier;
+    public float gravity;
+    public float moveSpeed;
+    public float rotationSmoothTime;
+    public float speedChangeRate;
+    public float jumpTimeout;
+    public float jumpBufferTime;
+    public float coyoteTime;
+    public float fallTimeout;
+    public float terminalVelocity;
+    public float springStiffness;
+    public float springDamping;
+    public float groundedOffset;
+    public float groundedRadius;
+    public float groundedCastDistance;
+    public float ledgeCheckDistance;
+    public float hangOffset;
+    public float maxSlopeAngle;
+    public float stepHeight;
+    public float lowerStepCastDist;
+    public float upperStepCastDist;
+    public LayerMask groundLayers;
+
+    // Component references
+    public Rigidbody rb;
+    public CapsuleCollider capsuleCollider;
+    public Animator animator;
+    public InputSystem_Actions inputActions;
+    public Transform mainCamera;
+    public Transform cinemachineCameraTarget;
+
+    // Animation IDs (assigned once at start)
+    public int animIDSpeed;
+    public int animIDGrounded;
+    public int animIDJump;
+    public int animIDFreeFall;
+    public int animIDMotionSpeed;
+    public int animIDOnLedge;
+}
+public struct InputSnapshot
+{
+    public Vector2 move;
+    public bool jumpPressed;      // true only on the frame the button was pressed
+    public bool dashPressed;
+    public bool grabPressed;
+}

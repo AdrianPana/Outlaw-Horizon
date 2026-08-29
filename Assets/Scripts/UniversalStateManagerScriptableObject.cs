@@ -15,6 +15,7 @@ public class UniversalStateManagerScriptableObject : ScriptableObject
     
     [System.NonSerialized] public UnityEvent<(Vector3 origin, float range, bool inverted, GameObject target)> gravityInvertedEvent;
     [System.NonSerialized] public UnityEvent<(Vector3 origin, float range, WindDirection direction, GameObject target)> windChangedEvent;
+    [System.NonSerialized] public UnityEvent<(Vector3 origin, float range, GameObject target)> highlightInRangeEvent;
     [System.NonSerialized] public UnityEvent<Modifier> modifierButtonSelectedEvent;
     [System.NonSerialized] public UnityEvent<bool> savingStateEvent;
 
@@ -27,6 +28,8 @@ public class UniversalStateManagerScriptableObject : ScriptableObject
             gravityInvertedEvent = new UnityEvent<(Vector3, float, bool, GameObject)>();
         if (windChangedEvent == null)
             windChangedEvent = new UnityEvent<(Vector3, float, WindDirection, GameObject)>();
+        if (highlightInRangeEvent == null)
+            highlightInRangeEvent = new UnityEvent<(Vector3, float, GameObject)>();
         if (modifierButtonSelectedEvent == null)
             modifierButtonSelectedEvent = new UnityEvent<Modifier>();
         if (savingStateEvent == null)
@@ -69,6 +72,11 @@ public class UniversalStateManagerScriptableObject : ScriptableObject
     {
         ClearGravityModifier(originPosition, range, target);
         ClearWindModifier(originPosition, range, target);
+    }
+
+    public void ToggleHighlightInRange(Vector3 originPosition, float range, GameObject target = null)
+    {
+        highlightInRangeEvent.Invoke((originPosition, range, target));
     }
 
     public void SelectModifier(Modifier modifier)
