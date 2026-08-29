@@ -39,7 +39,8 @@ public class PhysicsChecker
         else
         {
             ctx.isGrounded = false;
-            ctx.rideable = null;
+            if (!(ctx.onLedge && ctx.rideable != null))
+                ctx.rideable = null;
         }
 
         if (ctx.animator)

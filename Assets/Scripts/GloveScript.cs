@@ -10,7 +10,6 @@ public class GloveScript : MonoBehaviour
     public GloveUI gloveUI;
 
     private InputSystem_Actions playerInputActions;
-    private ThirdPersonController thirdPersonController;
     private Camera cam;
 
     public UniversalStateManagerScriptableObject universalStateManagerScriptableObject;
@@ -43,8 +42,6 @@ public class GloveScript : MonoBehaviour
         rangeIndicator.SetActive(hasWindAbility || hasGravityAbility);
 
         postProcessingVolume.profile.TryGet<ColorAdjustments>(out colorAdjustments);
-
-        thirdPersonController = GetComponent<ThirdPersonController>();
 
         cam = Camera.main;
 
@@ -128,11 +125,6 @@ public class GloveScript : MonoBehaviour
         Time.timeScale = menuTimeScale; // Pause the game
         colorAdjustments.saturation.value = -100f; // Desaturate the screen to indicate ability menu is open
 
-        if (thirdPersonController != null)
-        {
-            thirdPersonController.enabled = false; // Disable player movement
-        }
-
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
@@ -158,11 +150,6 @@ public class GloveScript : MonoBehaviour
     {
         Time.timeScale = 1f; // Resume the game
         colorAdjustments.saturation.value = 0f; // Reset saturation to normal
-
-        if (thirdPersonController != null)
-        {
-            thirdPersonController.enabled = true; // Enable player movement
-        }
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;

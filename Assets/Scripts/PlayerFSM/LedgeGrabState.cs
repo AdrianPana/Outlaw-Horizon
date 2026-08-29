@@ -15,12 +15,10 @@ public class LedgeGrabState : BaseState
         ctx.verticalVelocity = 0f;
         ctx.horizontalSpeed = 0f;
         ctx.rb.linearVelocity = Vector3.zero;
+        ctx.externalVelocity = Vector3.zero;
 
         // Snap to hang position
-        Vector3 hangPosition = new Vector3(
-            ctx.rb.position.x,
-            _ledgeHit.point.y,// - ctx.hangOffset,
-            ctx.rb.position.z);
+        Vector3 hangPosition = getCurrentHangPosition();
         ctx.rb.position = hangPosition;
 
         // Face the ledge
@@ -31,7 +29,7 @@ public class LedgeGrabState : BaseState
 
         // Set platform if ledge is rideable
         ctx.rideable = _ledgeHit.collider.GetComponent<Rideable>();
-        SetPlatform(_ledgeHit.transform);
+        ctx.rideable?.RegisterPassenger(ctx.capsuleCollider);
 
         if (ctx.animator)
         {
@@ -48,14 +46,15 @@ public class LedgeGrabState : BaseState
         ctx.rb.linearVelocity = Vector3.zero;
         ctx.verticalVelocity = 0f;
 
+        Debug.Log("FAAAH " + ctx.rideable + " " + ctx.onLedge);
         // Re-snap in case platform is moving
         if (ctx.rideable != null)
         {
-            Vector3 hangPosition = new Vector3(
-                ctx.rb.position.x,
-                _ledgeHit.point.y,
-                ctx.rb.position.z);
-            ctx.rb.position = hangPosition;
+            Debug.Log("RIDEABLE2: " + ctx.rideable.name);
+            Vector3 hangPosition = getCurrentHangPosition();
+            Vector3 platformMovement = GetPlatformMovement(dt);
+            Debug.Log("Platform Movement: " + platformMovement);
+            ctx.rb.position = hangPosition + platformMovement;
         }
 
         HandleJump();
@@ -64,7 +63,7 @@ public class LedgeGrabState : BaseState
 
     public override void Exit()
     {
-        SetPlatform(null);
+        ctx.rideable?.UnregisterPassenger(ctx.capsuleCollider);
         ctx.rideable = null;
         ctx.onLedge = false;
 
@@ -78,8 +77,16 @@ public class LedgeGrabState : BaseState
     {
         if (ctx.input.jumpPressed)
         {
+            if (ctx.rideable != null)
+            {
+                ctx.externalVelocity = new Vector3(
+                    ctx.rideable.Velocity.x,
+                    0,
+                    ctx.rideable.Velocity.z);
+            }
+
             // Jump off ledge with extra height
-            ctx.verticalVelocity = Mathf.Sqrt(ctx.jumpHeight * 2f * -2f * ctx.gravity);
+            ctx.verticalVelocity = Mathf.Sqrt(ctx.jumpHeight * ctx.ledgeJumpModifier * -2f * ctx.gravity);
             ctx.rb.linearVelocity = new Vector3(
                 ctx.rb.linearVelocity.x,
                 ctx.verticalVelocity,
@@ -106,9 +113,18 @@ public class LedgeGrabState : BaseState
         //}
     }
 
-    private void SetPlatform(Transform platform)
+    private Vector3 getCurrentHangPosition()
     {
-        ctx.currentPlatform = platform;
-        ctx.rb.transform.SetParent(platform, true);
+        return new Vector3(
+            ctx.rb.position.x,
+            _ledgeHit.point.y - ctx.hangOffset,
+            ctx.rb.position.z);
+    }
+
+    private Vector3 GetPlatformMovement(float dt)
+    {
+        Debug.Log("Platform" + ctx.rideable);
+        if (ctx.rideable == null) return Vector3.zero;
+        return ctx.rideable.Velocity * dt;
     }
 }

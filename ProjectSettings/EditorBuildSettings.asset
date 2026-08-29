@@ -8,6 +8,9 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/New Playground.unity
+    guid: e57dba2358ac321438f06ce0b093f16f
   - enabled: 0
     path: Assets/Starter Assets/Sample/ThirdPersonController/Sea.unity
     guid: 5d2bd28e136639d4083fde293b821d2e

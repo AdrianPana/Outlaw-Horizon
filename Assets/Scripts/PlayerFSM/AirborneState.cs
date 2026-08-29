@@ -12,7 +12,17 @@ public class AirborneState : BaseState
     {
         // If we walked off an edge (not from a jump), jumpsRemaining
         // starts at max so the player can still double jump
-        _jumpsRemaining = 1;
+        if (ctx.input.jumpPressed)
+            _jumpsRemaining = 0;
+        else
+        {
+            _jumpsRemaining = 1;
+            if (ctx.rb.linearVelocity.y > 0.1)
+            {
+                ctx.rb.linearVelocity = new Vector3(ctx.rb.linearVelocity.x, 0f, ctx.rb.linearVelocity.z);
+                ctx.verticalVelocity = 0f;
+            }
+        }
 
         if (ctx.animator)
             ctx.animator.SetBool(ctx.animIDJump, ctx.verticalVelocity > 0f);
@@ -93,19 +103,23 @@ public class AirborneState : BaseState
                 ctx.animator.SetBool(ctx.animIDFreeFall, true);
         }
 
-        ctx.rb.MovePosition(ctx.rb.position + new Vector3(0f, ctx.verticalVelocity * dt, 0f));
         // Apply vertical velocity to Rigidbody
-        //ctx.rb.linearVelocity = new Vector3(ctx.rb.linearVelocity.x, ctx.verticalVelocity, ctx.rb.linearVelocity.z);
+        ctx.rb.linearVelocity = new Vector3(ctx.rb.linearVelocity.x, ctx.verticalVelocity, ctx.rb.linearVelocity.z);
     }
 
     private void HandleMovement(float dt)
     {
         Vector2 moveInput = ctx.inputActions.Player.Move.ReadValue<Vector2>();
 
+        Vector3 externalMovement = ctx.externalVelocity * dt;
+        ctx.externalVelocity = Vector3.Lerp(ctx.externalVelocity, Vector3.zero, dt * ctx.externalVelocityDecayRate);
+
         if (moveInput == Vector2.zero)
         {
             // Bleed off horizontal speed while in air
             ctx.horizontalSpeed = Mathf.Lerp(ctx.horizontalSpeed, 0f, dt * ctx.speedChangeRate * 0.3f);
+            if (externalMovement != Vector3.zero)
+                ctx.rb.MovePosition(ctx.rb.position + externalMovement);
             return;
         }
 
@@ -131,7 +145,7 @@ public class AirborneState : BaseState
 
         // No slope projection, no step detection
         Vector3 move = ctx.rb.transform.forward * ctx.horizontalSpeed;
-        ctx.rb.MovePosition(ctx.rb.position + new Vector3(move.x, 0f, move.z) * dt);
+        ctx.rb.MovePosition(ctx.rb.position + new Vector3(move.x, 0f, move.z) * dt + externalMovement);
     }
 
     private void UpdateAnimator(float dt)

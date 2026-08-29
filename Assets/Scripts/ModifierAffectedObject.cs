@@ -6,7 +6,7 @@ using System;
 [RequireComponent(typeof(Rigidbody))]
 public class ModifierAffectedObject : MonoBehaviour
 {
-    public enum BehaviorType { Controlled, Hybrid, Ambient }
+    public enum BehaviorType { Controlled, Hybrid, Ambient, Rotating }
 
     [Header("Settings")]
     [SerializeField] private UniversalStateManagerScriptableObject stateManager;
@@ -24,6 +24,7 @@ public class ModifierAffectedObject : MonoBehaviour
     private Collider physicalCollider;
     private List<IModifierProvider> providers = new List<IModifierProvider>();
 
+    public Vector3 CurrentVelocity { get; private set; }
     private Vector3 momentumVelocity;
     private Vector3 currentHorizontalVelocity;
     private Vector3 currentVerticalVelocity;
@@ -68,6 +69,13 @@ public class ModifierAffectedObject : MonoBehaviour
                 rb.freezeRotation = false;
                 obstacleMask = ~0;
                 break;
+
+            case BehaviorType.Rotating:
+                rb.isKinematic = true;
+                rb.useGravity = false;
+                rb.freezeRotation = false;
+                obstacleMask = ~0;
+                break;
         }
     }
 
@@ -106,6 +114,9 @@ public class ModifierAffectedObject : MonoBehaviour
                 break;
             case BehaviorType.Ambient:
                 HandleAmbientMovement(isInfluenced);
+                break;
+            case BehaviorType.Rotating:
+                HandleRotation(isInfluenced);
                 break;
         }
 
@@ -183,6 +194,17 @@ public class ModifierAffectedObject : MonoBehaviour
         foreach (var provider in providers)
         {
             rb.AddForce(provider.GetForceContribution(transform.position), ForceMode.Acceleration);
+        }
+    }
+
+    private void HandleRotation(bool isInfluenced)
+    {
+        if (!isInfluenced) return;
+        foreach (var provider in providers)
+        {
+            var forceContribution = provider.GetForceContribution(transform.position);
+            Debug.Log($"Applying torque from provider {provider}: {forceContribution}");
+            transform.Rotate(new Vector3(0, forceContribution.magnitude * Time.fixedDeltaTime * 20, 0), Space.World);
         }
     }
 
@@ -302,6 +324,7 @@ public class ModifierAffectedObject : MonoBehaviour
         if (delta.sqrMagnitude < 0.00001f || physicalCollider == null)
         {
             if (delta.sqrMagnitude >= 0.00001f) rb.MovePosition(rb.position + delta);
+            CurrentVelocity = delta / Time.fixedDeltaTime;
             return;
         }
 
@@ -310,7 +333,9 @@ public class ModifierAffectedObject : MonoBehaviour
             if (((1 << hit.collider.gameObject.layer) & obstacleMask) != 0)
             {
                 float safeDist = Mathf.Max(0, hit.distance - 0.01f);
-                rb.MovePosition(rb.position + delta.normalized * safeDist);
+                Vector3 safeDelta = delta.normalized * safeDist;
+                rb.MovePosition(rb.position + safeDelta);
+                CurrentVelocity = safeDelta / Time.fixedDeltaTime;
 
                 Vector3 normal = hit.normal;
                 currentHorizontalVelocity = Vector3.ProjectOnPlane(currentHorizontalVelocity, normal);
@@ -328,6 +353,19 @@ public class ModifierAffectedObject : MonoBehaviour
         }
 
         rb.MovePosition(rb.position + delta);
+        CurrentVelocity = delta / Time.fixedDeltaTime;
+    }
+
+    public void RegisterPassenger(Collider passengerCollider)
+    {
+        if (physicalCollider != null && passengerCollider != null)
+            Physics.IgnoreCollision(physicalCollider, passengerCollider, true);
+    }
+
+    public void UnregisterPassenger(Collider passengerCollider)
+    {
+        if (physicalCollider != null && passengerCollider != null)
+            Physics.IgnoreCollision(physicalCollider, passengerCollider, false);
     }
 
     private void SanitizeVelocities()

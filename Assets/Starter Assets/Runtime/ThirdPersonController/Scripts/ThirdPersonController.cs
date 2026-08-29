@@ -112,7 +112,7 @@ namespace StarterAssets
 
         [Tooltip("Added when player sits on moving platform")]
         public Vector3 PlatformMovement = Vector3.zero;
-        public Rideable _ridable;
+        //public Rideable _ridable;
 
         private RaycastHit _groundHit;
         private CapsuleCollider _capsuleCollider;
@@ -273,21 +273,21 @@ namespace StarterAssets
             {
                 Grounded = true;
                 OnLedge = false;
-                _ridable = _groundHit.collider.GetComponent<Rideable>();
+                //_ridable = _groundHit.collider.GetComponent<Rideable>();
 
-                if (_ridable != null)
-                {
-                    SetPlatform(_groundHit.transform);
-                }
-                else
-                {
-                    SetPlatform(null);
-                }
+                //if (_ridable != null)
+                //{
+                //    SetPlatform(_groundHit.transform);
+                //}
+                //else
+                //{
+                //    SetPlatform(null);
+                //}
             }
             else
             {
                 Grounded = false;
-                _ridable = null;
+                //_ridable = null;
                 SetPlatform(null);
             }
 
@@ -451,7 +451,7 @@ namespace StarterAssets
                 LedgeCheckDistance, GroundLayers, QueryTriggerInteraction.Ignore))
             {
                 OnLedge = true;
-                _ridable = forwardHit.collider.GetComponent<Rideable>();
+                //_ridable = forwardHit.collider.GetComponent<Rideable>();
                 SetPlatform(forwardHit.transform);
 
                 _verticalVelocity = 0;
@@ -492,7 +492,7 @@ namespace StarterAssets
                     _verticalVelocity = Mathf.Sqrt(JumpHeight * (OnLedge ? 2f : 1f) * -2f * Gravity);
 
                     OnLedge = false;
-                    _ridable = null;
+                    //_ridable = null;
                     SetPlatform(null);
                     bufferedJump = false;
 

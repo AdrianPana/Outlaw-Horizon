@@ -13,6 +13,7 @@ public class PlayerStateMachine : MonoBehaviour
     public float CoyoteTime = 0.1f;
     public float FallTimeout = 0.15f;
     public float TerminalVelocity = 10f;
+    public float ExternalMomentumDecayRate = 2f;
 
     [Header("Hover Spring")]
     public float SpringStiffness = 200f;
@@ -27,6 +28,7 @@ public class PlayerStateMachine : MonoBehaviour
     [Header("Ledge")]
     public float LedgeCheckDistance = 0.5f;
     public float HangOffset = 1.0f;
+    public float LedgeJumpModifier = 1.5f;
 
     [Header("Slope / Step")]
     public float MaxSlopeAngle = 45f;
@@ -66,6 +68,7 @@ public class PlayerStateMachine : MonoBehaviour
         ctx.coyoteTime = CoyoteTime;
         ctx.fallTimeout = FallTimeout;
         ctx.terminalVelocity = TerminalVelocity;
+        ctx.externalVelocityDecayRate = ExternalMomentumDecayRate;
         ctx.springStiffness = SpringStiffness;
         ctx.springDamping = SpringDamping;
         ctx.groundedOffset = GroundedOffset;
@@ -74,10 +77,11 @@ public class PlayerStateMachine : MonoBehaviour
         ctx.groundLayers = GroundLayers;
         ctx.ledgeCheckDistance = LedgeCheckDistance;
         ctx.hangOffset = HangOffset;
+        ctx.ledgeJumpModifier = LedgeJumpModifier;
         ctx.maxSlopeAngle = MaxSlopeAngle;
         ctx.stepHeight = StepHeight;
-        ctx.lowerDist = LowerDist;
-        ctx.upperDist = UpperDist;
+        ctx.lowerStepCastDist = LowerDist;
+        ctx.upperStepCastDist = UpperDist;
 
         // Grab components
         ctx.rb = GetComponent<Rigidbody>();

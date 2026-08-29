@@ -21,7 +21,10 @@ public class PlayerContext
     public float verticalVelocity;
     public float horizontalSpeed;
     public bool isSteppingUp;
+    public bool isJumping;
     public Vector3 platformMovement = Vector3.zero;
+    public Vector3 externalVelocity = Vector3.zero;
+    public float externalVelocityDecayRate;
 
     // Timers (ticked by PhysicsChecker)
     public float jumpTimeoutDelta;
@@ -30,8 +33,9 @@ public class PlayerContext
     public float jumpBufferDelta;
     public bool bufferedJump;
 
-    // Tuning � set from inspector via PlayerStateMachine
+    // Tuning set from inspector via PlayerStateMachine
     public float jumpHeight;
+    public float ledgeJumpModifier;
     public float gravity;
     public float moveSpeed;
     public float rotationSmoothTime;
@@ -50,8 +54,8 @@ public class PlayerContext
     public float hangOffset;
     public float maxSlopeAngle;
     public float stepHeight;
-    public float lowerDist;
-    public float upperDist;
+    public float lowerStepCastDist;
+    public float upperStepCastDist;
     public LayerMask groundLayers;
 
     // Component references

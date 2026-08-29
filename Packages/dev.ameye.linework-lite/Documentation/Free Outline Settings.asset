@@ -49,6 +49,6 @@ MonoBehaviour:
   m_Name: Free Outline Settings
   m_EditorClassIdentifier: 
   injectionPoint: 600
-  showInSceneView: 1
+  showInSceneView: 0
   outlines:
   - {fileID: -457195830448363934}
