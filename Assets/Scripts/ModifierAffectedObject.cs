@@ -53,14 +53,14 @@ public class ModifierAffectedObject : MonoBehaviour
                 rb.isKinematic = true;
                 rb.useGravity = false;
                 rb.freezeRotation = true;
-                obstacleMask = ~LayerMask.GetMask("Modifiable");
+                obstacleMask = ~0;
                 break;
 
             case BehaviorType.Hybrid:
                 rb.isKinematic = false;
                 rb.useGravity = true;
                 rb.freezeRotation = false;
-                obstacleMask = ~LayerMask.GetMask("Modifiable");
+                obstacleMask = ~0;
                 break;
 
             case BehaviorType.Ambient:

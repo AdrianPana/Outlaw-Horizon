@@ -7847,7 +7847,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 653d142755e05a74081240af6dfdaa48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ModifierAffectedObject
-  stateManager: {fileID: 0}
+  stateManager: {fileID: 11400000, guid: e84650500f9712844a17aa61d1d8358a, type: 2}
   behaviorType: 0
   obstacleMask:
     serializedVersion: 2
