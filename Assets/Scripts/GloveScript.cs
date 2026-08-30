@@ -47,6 +47,8 @@ public class GloveScript : MonoBehaviour
 
         windMenuUIController = windMenuUI.GetComponent<WindWheelController>();
 
+        GetComponent<SphereCollider>().radius = range;
+
     }
 
     private void Update()
@@ -188,5 +190,21 @@ public class GloveScript : MonoBehaviour
 
         currentSection = section;
         return true;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.TryGetComponent<ModifierShader> (out var modifierObject))
+        {
+            modifierObject.MarkSourceInRange();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.TryGetComponent<ModifierShader> (out var modifierObject))
+        {
+            modifierObject.MarkSourceOutOfRange();
+        }
     }
 }

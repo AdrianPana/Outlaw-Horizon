@@ -4,12 +4,14 @@ using UnityEngine;
 public class LedgeGrabState : BaseState
 {
     private RaycastHit _ledgeHit;
+    private Vector3 _currentLedgePoint;
 
     public LedgeGrabState(PlayerContext ctx, PlayerStateMachine sm) : base(ctx, sm) { }
 
     public override void Enter()
     {
         _ledgeHit = ctx.ledgeHit;
+        _currentLedgePoint = _ledgeHit.point;
 
         // Zero out all velocity — we're hanging
         ctx.verticalVelocity = 0f;
@@ -41,20 +43,13 @@ public class LedgeGrabState : BaseState
 
     public override void Tick(float dt)
     {
-        // Hard lock position every frame — no physics drift
-        //TODO CHECK IF REMOVAL IS BETTER
         ctx.rb.linearVelocity = Vector3.zero;
         ctx.verticalVelocity = 0f;
 
-        Debug.Log("FAAAH " + ctx.rideable + " " + ctx.onLedge);
         // Re-snap in case platform is moving
         if (ctx.rideable != null)
         {
-            Debug.Log("RIDEABLE2: " + ctx.rideable.name);
-            Vector3 hangPosition = getCurrentHangPosition();
-            Vector3 platformMovement = GetPlatformMovement(dt);
-            Debug.Log("Platform Movement: " + platformMovement);
-            ctx.rb.position = hangPosition + platformMovement;
+            SnapToPlatform(dt);
         }
 
         HandleJump();
@@ -72,6 +67,42 @@ public class LedgeGrabState : BaseState
     }
 
     // -------------------------------------------------------------------------
+    private void SnapToPlatform(float dt)
+    {
+        Vector3 pivot = ctx.rideable.transform.position;
+        Quaternion rotDelta = ctx.rideable.RotationDelta;
+        Vector3 linearDelta = ctx.rideable.Velocity * dt;
+
+        // Rotate the ledge anchor point around the pivot, then apply translation
+        Vector3 pivotToLedge = _currentLedgePoint - pivot;
+        _currentLedgePoint = pivot + rotDelta * pivotToLedge + linearDelta;
+
+        // Re-derive hang position from the updated ledge point
+        Vector3 oldPos = ctx.rb.position;
+        Vector3 newPos = new Vector3(
+            _currentLedgePoint.x,
+            _currentLedgePoint.y - ctx.hangOffset,
+            _currentLedgePoint.z);
+
+        // Preserve any lateral offset the player had along the ledge, rotated with it
+        Vector3 offsetFromLedge = oldPos - pivot;
+        Vector3 rotatedOffset = rotDelta * offsetFromLedge;
+        newPos = pivot + rotatedOffset + linearDelta;
+        newPos.y = _currentLedgePoint.y - ctx.hangOffset;
+
+        ctx.platformMovement = newPos - oldPos;
+        ctx.rb.position = newPos;
+
+        FaceLedge();
+    }
+
+    private void FaceLedge()
+    {
+        Vector3 ledgeFacing = _currentLedgePoint - ctx.rb.position;
+        ledgeFacing.y = 0f;
+        if (ledgeFacing != Vector3.zero)
+            ctx.rb.transform.rotation = Quaternion.LookRotation(ledgeFacing.normalized);
+    }
 
     private void HandleJump()
     {

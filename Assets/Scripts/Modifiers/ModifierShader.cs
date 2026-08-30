@@ -18,6 +18,9 @@ public class ModifierShader : MonoBehaviour
     private static readonly int MainTextureID = Shader.PropertyToID("_Main_Texture");
 
     [SerializeField] private Material _modifiableMaterial;
+    [SerializeField] private static float _idleIntensity = 0.3f;
+    [SerializeField] private static float _inRangeIntensity = 0.8f;
+    [SerializeField] private static float _influencedIntensity = 1.7f;
     private Material _material;
 
     private ModifierAffectedObject modifierObject => GetComponent<ModifierAffectedObject>();
@@ -26,6 +29,22 @@ public class ModifierShader : MonoBehaviour
     {
         get => _intensity;
         set { _intensity = Mathf.Max(0f, value); ApplyIntensity(); }
+    }
+
+    private int modifierSourcesInRange;
+
+    public void MarkSourceInRange()
+    {
+        modifierSourcesInRange++;
+    }
+
+    public void MarkSourceOutOfRange()
+    {
+        modifierSourcesInRange--;
+        if (modifierSourcesInRange < 0)
+        {
+            modifierSourcesInRange = 0;
+        }
     }
 
     private void Awake()
@@ -37,11 +56,13 @@ public class ModifierShader : MonoBehaviour
     {
         ApplyIntensity();
         CheckForModifiers();
+        modifierSourcesInRange = 0;
     }
 
     private void Update()
     {
-        _intensity = modifierObject.CheckIfInfluenced() ? 1.2f : 0.6f;
+        _intensity = modifierObject.CheckIfInfluenced() ? _influencedIntensity :
+            (modifierSourcesInRange > 0 ? _inRangeIntensity : _idleIntensity);
 
         ApplyIntensity();
     }

@@ -123,9 +123,8 @@ public class GroundedState : BaseState
         Vector2 moveInput = ctx.input.move;
         float targetSpeed = moveInput == Vector2.zero ? 0f : ctx.moveSpeed;
 
-        // Smooth speed
         float speedOffset = 0.1f;
-        float inputMagnitude = moveInput.magnitude; // analogMovement assumed true
+        float inputMagnitude = moveInput.magnitude;
         if (Mathf.Abs(ctx.horizontalSpeed - targetSpeed) > speedOffset)
         {
             ctx.horizontalSpeed = Mathf.Round(
@@ -140,10 +139,22 @@ public class GroundedState : BaseState
         _animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, dt * ctx.speedChangeRate);
         if (_animationBlend < 0.01f) _animationBlend = 0f;
 
-        if (moveInput == Vector2.zero) return Vector3.zero;
+        if (moveInput == Vector2.zero)
+        {
+            ApplyPlatformFacing();
+            return Vector3.zero;
+        }
 
         RotateTowardInput(moveInput);
         return GetHorizontalMoveDelta(dt);
+    }
+    
+    private void ApplyPlatformFacing()
+    {
+        if (ctx.rideable == null) return;
+        Quaternion rotDelta = ctx.rideable.RotationDelta;
+        if (rotDelta != Quaternion.identity)
+            ctx.rb.transform.rotation = rotDelta * ctx.rb.transform.rotation;
     }
 
     private void RotateTowardInput(Vector2 moveInput)
@@ -200,10 +211,18 @@ public class GroundedState : BaseState
 
     private Vector3 GetPlatformMovement(float dt)
     {
-        Debug.Log(ctx.rideable);
         if (ctx.rideable == null) return Vector3.zero;
 
-        return ctx.rideable.Velocity * dt;
+        Vector3 pivot = ctx.rideable.transform.position;
+        Quaternion rotDelta = ctx.rideable.RotationDelta;
+        Vector3 linearDelta = ctx.rideable.Velocity * dt;
+
+        Vector3 offsetFromPivot = ctx.rb.position - pivot;
+        Vector3 rotatedOffset = rotDelta * offsetFromPivot;
+        Vector3 rotationDelta = rotatedOffset - offsetFromPivot;
+
+        ctx.platformMovement = rotationDelta + linearDelta;
+        return ctx.platformMovement;
     }
 
     private void TryStepUp()
