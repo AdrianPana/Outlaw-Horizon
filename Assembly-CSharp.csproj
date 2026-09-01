@@ -74,6 +74,7 @@
     <Compile Include="Assets\Scripts\PlayerFSM\PlayerContext.cs" />
     <Compile Include="Assets\Scripts\CustomPlayerController.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\Particles\ModifierParticleProperties.cs" />
     <Compile Include="Assets\Scripts\PlayerFSM\PhysicsChecker.cs" />
     <Compile Include="Assets\Scripts\ModifierAffectedObject.cs" />
     <Compile Include="Assets\Scripts\Modifiers\ModifierShader.cs" />
@@ -86,6 +87,8 @@
     <Compile Include="Assets\Scripts\CannonBallScript.cs" />
     <Compile Include="Assets\Scripts\UniversalStateManagerScriptableObject.cs" />
     <Compile Include="Assets\Scripts\UI\WheelButtonController.cs" />
+    <Compile Include="Assets\Scripts\ModifierParticlesController.cs" />
+    <Compile Include="Assets\Scripts\ModifierAnimatedObject.cs" />
     <Compile Include="Assets\Scripts\ShipMoveScript.cs" />
     <Compile Include="Assets\Scripts\UI\GloveUI.cs" />
     <Compile Include="Assets\Scripts\SectionManager.cs" />
