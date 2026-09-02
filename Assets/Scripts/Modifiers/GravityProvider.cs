@@ -49,5 +49,10 @@ namespace Game.Modifiers
         {
             return isGravityInverted;
         }
+
+        public Modifier GetModifier()
+        {
+            return isGravityInverted ? Modifier.GRAVITY_INVERTED : Modifier.NONE;
+        }
     }
 }

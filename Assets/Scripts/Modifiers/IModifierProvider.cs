@@ -1,3 +1,4 @@
+using Game.Resources;
 using UnityEngine;
 
 namespace Game.Modifiers
@@ -6,5 +7,6 @@ namespace Game.Modifiers
     {
         Vector3 GetForceContribution(Vector3 currentPos);
         bool IsActiveOnObject(Vector3 currentPos);
+        Modifier GetModifier();
     }
 }

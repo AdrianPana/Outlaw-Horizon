@@ -1,28 +1,23 @@
 using System.Collections.Generic;
 using Game.Modifiers;
+using Game.Resources;
 using UnityEngine;
 using static ModifierAffectedObject;
 
 public class ModifierAnimatedObject : MonoBehaviour
 {
+    // Can be extended with multiple modifiers/states
     public Animator animator;
+    public Modifier requiredModifier = Modifier.NONE;
     public float gaugeSeconds;
     private float _influencedSeconds;
     private bool _hasAnimated;
 
-    //protected Rigidbody rb;
     private List<IModifierProvider> providers = new List<IModifierProvider>();
 
     public virtual void Awake()
     {
-        //rb = GetComponent<Rigidbody>();
-        //rb.interpolation = RigidbodyInterpolation.Interpolate;
-
         providers.AddRange(GetComponents<IModifierProvider>());
-
-        //rb.isKinematic = true;
-        //rb.useGravity = false;
-        //rb.freezeRotation = true;
     }
 
     void Start()
@@ -52,7 +47,8 @@ public class ModifierAnimatedObject : MonoBehaviour
     {
         foreach (var provider in providers)
         {
-            if (provider.IsActiveOnObject(transform.position)) return true;
+            if (provider.IsActiveOnObject(transform.position) &&
+                provider.GetModifier() == requiredModifier) return true;
         }
         return false;
     }
@@ -60,5 +56,6 @@ public class ModifierAnimatedObject : MonoBehaviour
     private void Animate()
     {
         _hasAnimated = true;
+        animator.SetTrigger("Modify");
     }
 }

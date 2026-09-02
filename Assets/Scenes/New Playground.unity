@@ -793,7 +793,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ModifierAffectedObject
   stateManager: {fileID: 11400000, guid: e84650500f9712844a17aa61d1d8358a, type: 2}
-  behaviorType: 3
+  behaviorType: 0
   obstacleMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -2989,8 +2989,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0e16145f1749154f843cedbf2825bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ModifierAnimatedObject
-  animator: {fileID: 0}
-  gaugeSeconds: 0
+  animator: {fileID: 577916996}
+  requiredModifier: 5
+  gaugeSeconds: 2
+--- !u!114 &577916998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 577916991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f40066e5d090824e97fe4cee8eb3076, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Modifiers.WindProvider
+  stateManager: {fileID: 11400000, guid: e84650500f9712844a17aa61d1d8358a, type: 2}
+  windStrength: 10
+--- !u!114 &577916999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 577916991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc567f5912df89b4ba38be33d6100b2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Modifiers.GravityProvider
+  stateManager: {fileID: 11400000, guid: e84650500f9712844a17aa61d1d8358a, type: 2}
+  gravityStrength: 4.905
 --- !u!1 &579047992
 GameObject:
   m_ObjectHideFlags: 0
@@ -7383,6 +7412,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 589572867028395327, guid: dd4e9aade3ece1746b7ccd5e11c27d9f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 577916996}
+    - targetCorrespondingSourceObject: {fileID: 589572867028395327, guid: dd4e9aade3ece1746b7ccd5e11c27d9f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 577916998}
+    - targetCorrespondingSourceObject: {fileID: 589572867028395327, guid: dd4e9aade3ece1746b7ccd5e11c27d9f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 577916999}
   m_SourcePrefab: {fileID: 100100000, guid: dd4e9aade3ece1746b7ccd5e11c27d9f, type: 3}
 --- !u!1 &1677773025
 GameObject:

@@ -56,5 +56,10 @@ namespace Game.Modifiers
         {
             return currentWind != WindDirection.NONE;
         }
+
+        public Modifier GetModifier() 
+        {
+            return ResourceHelper.WindDirectionToModifier(currentWind);
+        }
     }
 }
