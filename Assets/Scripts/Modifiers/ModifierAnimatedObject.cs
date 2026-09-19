@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using Game.Modifiers;
 using Game.Resources;
 using UnityEngine;
-using static ModifierAffectedObject;
 
-public class ModifierAnimatedObject : MonoBehaviour
+[RequireComponent(typeof(Animator))]
+public class ModifierAnimatedObject : AbstractModifierObject
 {
     // Can be extended with multiple modifiers/states
     public Animator animator;
@@ -12,13 +12,6 @@ public class ModifierAnimatedObject : MonoBehaviour
     public float gaugeSeconds;
     private float _influencedSeconds;
     private bool _hasAnimated;
-
-    private List<IModifierProvider> providers = new List<IModifierProvider>();
-
-    public virtual void Awake()
-    {
-        providers.AddRange(GetComponents<IModifierProvider>());
-    }
 
     void Start()
     {
@@ -43,7 +36,7 @@ public class ModifierAnimatedObject : MonoBehaviour
         }
     }
 
-    public bool CheckIfInfluenced()
+    public override bool CheckIfInfluenced()
     {
         foreach (var provider in providers)
         {

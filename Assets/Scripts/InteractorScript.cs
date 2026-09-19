@@ -10,11 +10,6 @@ public class InteractorScript : MonoBehaviour
     public float range = 3.0f;
     [SerializeField] Material[] materials = new Material[2];
 
-    private void Start()
-    {
-
-    }
-
     private void OnValidate()
     {
         if (rangeIndicator != null)
@@ -48,6 +43,22 @@ public class InteractorScript : MonoBehaviour
             default:
                 universalStateManagerScriptableObject.ToggleGravity(transform.position, range);
                 break;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.TryGetComponent<ModifierShader>(out var modifierObject))
+        {
+            modifierObject.MarkSourceInRange();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.TryGetComponent<ModifierShader>(out var modifierObject))
+        {
+            modifierObject.MarkSourceOutOfRange();
         }
     }
 }

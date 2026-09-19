@@ -3,7 +3,6 @@ using UnityEngine;
 using Game.Modifiers;
 
 [RequireComponent(typeof(Renderer))]
-[RequireComponent(typeof(ModifierAffectedObject))]
 public class ModifierShader : MonoBehaviour
 {
     private Color windColor = new Color32(0, 193, 255, 255);
@@ -21,7 +20,7 @@ public class ModifierShader : MonoBehaviour
     [SerializeField] private static float _idleIntensity = 0.3f;
     [SerializeField] private static float _inRangeIntensity = 0.8f;
     [SerializeField] private static float _influencedIntensity = 1.7f;
-    private Material _material;
+    private Material[] _materials;
 
     private ModifierAffectedObject modifierObject => GetComponent<ModifierAffectedObject>();
 
@@ -70,30 +69,33 @@ public class ModifierShader : MonoBehaviour
     private void SwapToModifiableMaterial()
     {
         var renderer = GetComponent<Renderer>();
-
-        // Grab the texture from the current material before we replace it.
-        Texture originalTexture = renderer.sharedMaterial != null
-            ? renderer.sharedMaterial.mainTexture
-            : null;
+        Material[] sharedMaterials = renderer.sharedMaterials;
 
         if (_modifiableMaterial == null)
         {
             Debug.LogError("[ShaderController] No Modifiable Material assigned! " +
                            "Drag your material asset into the 'Modifiable Material' field.", this);
-            _material = renderer.material; // fall back to whatever is there
             return;
         }
 
         // Instantiate so we don't modify the shared asset.
-        _material = Instantiate(_modifiableMaterial);
-        renderer.material = _material;
+        _materials = new Material[sharedMaterials.Length];
 
-        // Push the original texture into the shader's _Main_Texture slot.
-        if (originalTexture != null)
-            _material.SetTexture(MainTextureID, originalTexture);
-        else
-            Debug.LogWarning("[ShaderController] Original material had no mainTexture — " +
-                             "_Main_Texture will be empty.", this);
+        for (int i = 0; i < sharedMaterials.Length; i++)
+        {
+            Texture originalMatTexture = sharedMaterials[i] != null ? sharedMaterials[i].mainTexture : null;
+            Material instance = Instantiate(_modifiableMaterial);
+
+            if (originalMatTexture != null)
+                instance.SetTexture(MainTextureID, originalMatTexture);
+            else
+                Debug.LogWarning("[ShaderController] Original material had no mainTexture — " +
+                                 "_Main_Texture will be empty.", this);
+
+            _materials[i] = instance;
+        }
+
+        renderer.materials = _materials;
     }
 
     private void CheckForModifiers()
@@ -122,7 +124,7 @@ public class ModifierShader : MonoBehaviour
     private void OnValidate()
     {
         // Keep the Inspector preview live in Play Mode.
-        if (_material == null) return;
+        if (_materials == null || _materials.Length == 0) return;
         ApplyIntensity();
         CheckForModifiers();
     }
@@ -130,19 +132,34 @@ public class ModifierShader : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (_material != null)
-            Destroy(_material);
+        if (_materials == null) return;
+
+        foreach (var mat in _materials)
+        {
+            if (mat != null)
+                Destroy(mat);
+        }
     }
 
     private void ApplyColor(Color color)
     {
-        if (_material != null)
-            _material.SetColor(ColorID, color);
+        if (_materials == null) return;
+
+        foreach (var mat in _materials)
+        {
+            if (mat != null)
+                mat.SetColor(ColorID, color);
+        }
     }
 
     private void ApplyIntensity()
     {
-        if (_material != null)
-            _material.SetFloat(IntensityID, _intensity);
+        if (_materials == null) return;
+
+        foreach (var mat in _materials)
+        {
+            if (mat != null)
+                mat.SetFloat(IntensityID, _intensity);
+        }
     }
 }

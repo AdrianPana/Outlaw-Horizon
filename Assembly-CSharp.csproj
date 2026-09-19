@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\IResettable.cs" />
+    <Compile Include="Assets\Scripts\Modifiers\AbstractModifierObject.cs" />
     <Compile Include="Assets\Scripts\Snapshot.cs" />
     <Compile Include="Assets\Scripts\ResettableModifierObject.cs" />
     <Compile Include="Assets\Scripts\UI\SavingUIController.cs" />
@@ -74,22 +75,26 @@
     <Compile Include="Assets\Scripts\PlayerFSM\PlayerContext.cs" />
     <Compile Include="Assets\Scripts\CustomPlayerController.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\Modifiers\ModifierAffectedObject.cs" />
     <Compile Include="Assets\Scripts\Particles\ModifierParticleProperties.cs" />
+    <Compile Include="Assets\Scripts\Modifiers\ModifierHybridObject.cs" />
     <Compile Include="Assets\Scripts\PlayerFSM\PhysicsChecker.cs" />
-    <Compile Include="Assets\Scripts\ModifierAffectedObject.cs" />
     <Compile Include="Assets\Scripts\Modifiers\ModifierShader.cs" />
     <Compile Include="Assets\Scripts\CameraSwitcher.cs" />
+    <Compile Include="Assets\Scripts\Modifiers\ModifierAnimatedObject.cs" />
     <Compile Include="Assets\Scripts\PlayerFSM\LedgeGrabState.cs" />
     <Compile Include="Assets\Scripts\DamageObject.cs" />
     <Compile Include="Assets\Scripts\ObjectInteractScript.cs" />
+    <Compile Include="Assets\Scripts\Modifiers\ModifierAmbientObject.cs" />
     <Compile Include="Assets\Scripts\ModifierTimer.cs" />
     <Compile Include="Assets\Scripts\Upgrades\UpgradeManager.cs" />
     <Compile Include="Assets\Scripts\CannonBallScript.cs" />
     <Compile Include="Assets\Scripts\UniversalStateManagerScriptableObject.cs" />
     <Compile Include="Assets\Scripts\UI\WheelButtonController.cs" />
+    <Compile Include="Assets\Scripts\Modifiers\ModifierControlledObject.cs" />
     <Compile Include="Assets\Scripts\ModifierParticlesController.cs" />
-    <Compile Include="Assets\Scripts\ModifierAnimatedObject.cs" />
     <Compile Include="Assets\Scripts\ShipMoveScript.cs" />
+    <Compile Include="Assets\Scripts\Modifiers\AbstractPhysicsModifierObject.cs" />
     <Compile Include="Assets\Scripts\UI\GloveUI.cs" />
     <Compile Include="Assets\Scripts\SectionManager.cs" />
     <Compile Include="Assets\Scripts\SceneChangerScript.cs" />
@@ -104,6 +109,7 @@
     <Compile Include="Assets\Scripts\GravityModifier.cs" />
     <Compile Include="Assets\Scripts\PlayerFSM\BaseState.cs" />
     <Compile Include="Assets\Scripts\Modifiers\Rideable.cs" />
+    <Compile Include="Assets\Scripts\Modifiers\ModifierRotateObject.cs" />
     <Compile Include="Assets\BrokenVector\LowPolyDungeon\Demo Scenes\ScreenshotMaker.cs" />
     <Compile Include="Assets\Scripts\Upgrades\Upgrade.cs" />
     <Compile Include="Assets\Scripts\Upgrades\WindUpgrade.cs" />
@@ -118,8 +124,10 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile-2-Pass.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
+    <None Include="Assets\Slavic Village\Slavic World Free\Plugin\Grass.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
+    <None Include="Assets\Slavic Village\Slavic World Free\URP_Support\URP Info.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\SDFFunctions.hlsl" />
     <None Include="Assets\Starter Assets\Sample\Environment\Shaders\Built-in_RP\Triplanar.shader" />
@@ -132,6 +140,7 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
+    <None Include="Assets\Slavic Village\Slavic World Free\Thanks and checkout this\Info.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
     <None Include="Assets\Starter Assets\Sample\Environment\Shaders\Built-in_RP\ArmatureShader.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
