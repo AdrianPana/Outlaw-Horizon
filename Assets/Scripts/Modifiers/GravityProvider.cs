@@ -1,14 +1,23 @@
 using UnityEngine;
 using Game.Resources;
+using UnityEditor;
 
 namespace Game.Modifiers
 {
     public class GravityProvider : MonoBehaviour, IModifierProvider
     {
         [SerializeField] private UniversalStateManagerScriptableObject stateManager;
-        public float gravityStrength = 9.81f / 2f;
         private bool isGravityInverted;
 
+        private void Reset()
+        {
+#if UNITY_EDITOR
+            if (stateManager == null)
+            {
+                stateManager = AssetDatabase.LoadAssetAtPath<UniversalStateManagerScriptableObject>("Assets/Scripts/UniversalStateManagerScriptableObject.asset");
+            }
+#endif
+        }
         private void OnEnable()
         {
             if (stateManager != null)
@@ -42,7 +51,7 @@ namespace Game.Modifiers
             // When inverted, we want to fly UP. 
             // Standard gravity is down, so we return an upward force that overrides or negates it.
             // Since we are overriding gravity in the controller, we just return the desired direction.
-            return Vector3.up * gravityStrength;
+            return Vector3.up;
         }
 
         public bool IsActiveOnObject(Vector3 currentPos)

@@ -194,6 +194,7 @@ public class GloveScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log($"GloveScript: OnTriggerEnter with {other.name}");
         if (other.TryGetComponent<ModifierShader> (out var modifierObject))
         {
             modifierObject.MarkSourceInRange();

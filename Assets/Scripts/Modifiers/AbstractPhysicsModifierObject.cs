@@ -125,6 +125,7 @@ public abstract class AbstractPhysicsModifierObject : AbstractModifierObject
 
         if (rb.SweepTest(delta.normalized, out RaycastHit hit, delta.magnitude, QueryTriggerInteraction.Ignore))
         {
+            Debug.Log($"[SweepTest] hit {hit.collider.name} at distance {hit.distance} with delta {delta}", this);
             if (((1 << hit.collider.gameObject.layer) & obstacleMask) != 0)
             {
                 float safeDist = Mathf.Max(0, hit.distance - 0.01f);

@@ -18,6 +18,13 @@ public class ModifierHybridObject : AbstractPhysicsModifierObject
     {
         bool isInfluenced = CheckIfInfluenced();
 
+        HybridMovement(isInfluenced);
+
+        wasInfluenced = isInfluenced;
+    }
+
+    void HybridMovement(bool isInfluenced)
+    {
         SanitizeVelocities();
 
         // Transition: physics -> kinematic when a modifier first touches the object
@@ -52,8 +59,6 @@ public class ModifierHybridObject : AbstractPhysicsModifierObject
 
         Vector3 totalVelocity = momentumVelocity + currentHorizontalVelocity + currentVerticalVelocity;
         MoveKinematicWithCollision(totalVelocity * Time.fixedDeltaTime);
-
-        wasInfluenced = isInfluenced;
     }
 
     public override void ApplyVerticalVelocity(Vector3 gravityForce, bool hasWind, bool hasGravity)

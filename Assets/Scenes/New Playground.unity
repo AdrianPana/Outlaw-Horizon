@@ -678,7 +678,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Modifiers.WindProvider
   stateManager: {fileID: 11400000, guid: e84650500f9712844a17aa61d1d8358a, type: 2}
-  windStrength: 10
 --- !u!114 &130664697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -755,7 +754,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3432820129750868867, guid: c2c10e2a4c981ca4c91f1891a0bb355a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 34.02542
+      value: 105.605736
       objectReference: {fileID: 0}
     - target: {fileID: 3432820129750868867, guid: c2c10e2a4c981ca4c91f1891a0bb355a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -763,7 +762,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3432820129750868867, guid: c2c10e2a4c981ca4c91f1891a0bb355a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 52.812057
+      value: 95.74534
       objectReference: {fileID: 0}
     - target: {fileID: 3432820129750868867, guid: c2c10e2a4c981ca4c91f1891a0bb355a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -831,7 +830,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Modifiers.WindProvider
   stateManager: {fileID: 11400000, guid: e84650500f9712844a17aa61d1d8358a, type: 2}
-  windStrength: 10
 --- !u!114 &205075517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -973,6 +971,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 5648790319418487231, guid: 30c495d3c0a972346ab5cdff9b3d65fe, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6153171280917237866, guid: 30c495d3c0a972346ab5cdff9b3d65fe, type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
@@ -1100,7 +1102,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Modifiers.WindProvider
   stateManager: {fileID: 11400000, guid: e84650500f9712844a17aa61d1d8358a, type: 2}
-  windStrength: 3
 --- !u!114 &237668494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1463,7 +1464,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4985300556842724101, guid: 30c495d3c0a972346ab5cdff9b3d65fe, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 42.529686
+      value: 114.11
       objectReference: {fileID: 0}
     - target: {fileID: 4985300556842724101, guid: 30c495d3c0a972346ab5cdff9b3d65fe, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1471,7 +1472,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4985300556842724101, guid: 30c495d3c0a972346ab5cdff9b3d65fe, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 52.386715
+      value: 95.32
       objectReference: {fileID: 0}
     - target: {fileID: 4985300556842724101, guid: 30c495d3c0a972346ab5cdff9b3d65fe, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1505,6 +1506,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Crate_Large (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 5648790319418487231, guid: 30c495d3c0a972346ab5cdff9b3d65fe, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1526,27 +1531,13 @@ PrefabInstance:
       addedObject: {fileID: 357541469}
     - targetCorrespondingSourceObject: {fileID: 5648790319418487231, guid: 30c495d3c0a972346ab5cdff9b3d65fe, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 357541468}
+      addedObject: {fileID: 357541478}
   m_SourcePrefab: {fileID: 100100000, guid: 30c495d3c0a972346ab5cdff9b3d65fe, type: 3}
 --- !u!1 &357541467 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5648790319418487231, guid: 30c495d3c0a972346ab5cdff9b3d65fe, type: 3}
   m_PrefabInstance: {fileID: 357541466}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &357541468
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 357541467}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc567f5912df89b4ba38be33d6100b2d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Modifiers.GravityProvider
-  stateManager: {fileID: 11400000, guid: e84650500f9712844a17aa61d1d8358a, type: 2}
-  gravityStrength: 4.905
 --- !u!114 &357541469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1628,6 +1619,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &357541478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 357541467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc567f5912df89b4ba38be33d6100b2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Modifiers.GravityProvider
+  stateManager: {fileID: 11400000, guid: e84650500f9712844a17aa61d1d8358a, type: 2}
 --- !u!43 &365498670
 Mesh:
   m_ObjectHideFlags: 0
@@ -1839,7 +1843,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Modifiers.WindProvider
   stateManager: {fileID: 11400000, guid: e84650500f9712844a17aa61d1d8358a, type: 2}
-  windStrength: 10
 --- !u!114 &372073383
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3392,7 +3395,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0e16145f1749154f843cedbf2825bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ModifierAnimatedObject
-  animator: {fileID: 577916996}
   requiredModifier: 5
   gaugeSeconds: 2
 --- !u!114 &577916998
@@ -3408,7 +3410,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Modifiers.WindProvider
   stateManager: {fileID: 11400000, guid: e84650500f9712844a17aa61d1d8358a, type: 2}
-  windStrength: 10
 --- !u!114 &577916999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3422,7 +3423,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Modifiers.GravityProvider
   stateManager: {fileID: 11400000, guid: e84650500f9712844a17aa61d1d8358a, type: 2}
-  gravityStrength: 4.905
 --- !u!114 &577917004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6538,7 +6538,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7022392982531949931, guid: e04fb88661450dc4a982932c30f7df25, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 28.605133
+      value: 100.18545
       objectReference: {fileID: 0}
     - target: {fileID: 7022392982531949931, guid: e04fb88661450dc4a982932c30f7df25, type: 3}
       propertyPath: m_LocalPosition.y
@@ -6546,7 +6546,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7022392982531949931, guid: e04fb88661450dc4a982932c30f7df25, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 53.262535
+      value: 96.19582
       objectReference: {fileID: 0}
     - target: {fileID: 7022392982531949931, guid: e04fb88661450dc4a982932c30f7df25, type: 3}
       propertyPath: m_LocalRotation.w
@@ -6596,6 +6596,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7655940809836142545, guid: e04fb88661450dc4a982932c30f7df25, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1520756779}
+    - targetCorrespondingSourceObject: {fileID: 7655940809836142545, guid: e04fb88661450dc4a982932c30f7df25, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1520756788}
+    - targetCorrespondingSourceObject: {fileID: 7655940809836142545, guid: e04fb88661450dc4a982932c30f7df25, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1520756787}
   m_SourcePrefab: {fileID: 100100000, guid: e04fb88661450dc4a982932c30f7df25, type: 3}
 --- !u!1 &1520756778 stripped
 GameObject:
@@ -6615,7 +6621,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Modifiers.WindProvider
   stateManager: {fileID: 11400000, guid: e84650500f9712844a17aa61d1d8358a, type: 2}
-  windStrength: 10
 --- !u!114 &1520756780
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6654,6 +6659,45 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ModifierShader
   _intensity: 1
   _modifiableMaterial: {fileID: 2100000, guid: d4ba8e094984c8343bddfb42788b29d1, type: 2}
+--- !u!114 &1520756787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1520756778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed82230c155fc894087474f418bdab81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Rideable
+--- !u!54 &1520756788
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1520756778}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1532510317
 GameObject:
   m_ObjectHideFlags: 0
@@ -7202,15 +7246,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1817256431214282455, guid: eaf57c5c25402614986dd79b638bb964, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 37.835117
+      value: 109.415436
       objectReference: {fileID: 0}
     - target: {fileID: 1817256431214282455, guid: eaf57c5c25402614986dd79b638bb964, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.07501209
+      value: 0.11
       objectReference: {fileID: 0}
     - target: {fileID: 1817256431214282455, guid: eaf57c5c25402614986dd79b638bb964, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 52.59211
+      value: 95.5254
       objectReference: {fileID: 0}
     - target: {fileID: 1817256431214282455, guid: eaf57c5c25402614986dd79b638bb964, type: 3}
       propertyPath: m_LocalRotation.w
@@ -7281,7 +7325,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Modifiers.GravityProvider
   stateManager: {fileID: 11400000, guid: e84650500f9712844a17aa61d1d8358a, type: 2}
-  gravityStrength: 4.905
 --- !u!114 &1607854418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7295,7 +7338,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Modifiers.WindProvider
   stateManager: {fileID: 11400000, guid: e84650500f9712844a17aa61d1d8358a, type: 2}
-  windStrength: 10
 --- !u!114 &1607854419
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7308,10 +7350,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 294d7aadc0bf83e4c8418a67e624b52e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ModifierHybridObject
-  speed: 3
-  acceleration: 6
+  speed: 2
+  acceleration: 3
   kinematicDrag: 2
-  passiveGravityStrength: 9.81
+  passiveGravityStrength: 2.45
 --- !u!114 &1607854420
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7967,6 +8009,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Barrel
       objectReference: {fileID: 0}
+    - target: {fileID: 589572867028395327, guid: dd4e9aade3ece1746b7ccd5e11c27d9f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8418,6 +8464,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 5648790319418487231, guid: 30c495d3c0a972346ab5cdff9b3d65fe, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6153171280917237866, guid: 30c495d3c0a972346ab5cdff9b3d65fe, type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
@@ -8468,7 +8518,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Modifiers.GravityProvider
   stateManager: {fileID: 11400000, guid: e84650500f9712844a17aa61d1d8358a, type: 2}
-  gravityStrength: 1
 --- !u!114 &1736147605
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9112,6 +9161,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 5648790319418487231, guid: 30c495d3c0a972346ab5cdff9b3d65fe, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6153171280917237866, guid: 30c495d3c0a972346ab5cdff9b3d65fe, type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
@@ -9165,7 +9218,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Modifiers.WindProvider
   stateManager: {fileID: 11400000, guid: e84650500f9712844a17aa61d1d8358a, type: 2}
-  windStrength: 3
 --- !u!114 &1880277147
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9179,7 +9231,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Modifiers.GravityProvider
   stateManager: {fileID: 11400000, guid: e84650500f9712844a17aa61d1d8358a, type: 2}
-  gravityStrength: 1
 --- !u!114 &1880277148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9804,6 +9855,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Crate_Small
       objectReference: {fileID: 0}
+    - target: {fileID: 1329654478397381741, guid: eaf57c5c25402614986dd79b638bb964, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1817256431214282455, guid: eaf57c5c25402614986dd79b638bb964, type: 3}
       propertyPath: m_LocalPosition.x
       value: 83.51625
@@ -9871,7 +9926,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 244678490910097285, guid: dd4e9aade3ece1746b7ccd5e11c27d9f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 21.654226
+      value: 93.23454
       objectReference: {fileID: 0}
     - target: {fileID: 244678490910097285, guid: dd4e9aade3ece1746b7ccd5e11c27d9f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -9879,7 +9934,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 244678490910097285, guid: dd4e9aade3ece1746b7ccd5e11c27d9f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 53.29694
+      value: 96.230225
       objectReference: {fileID: 0}
     - target: {fileID: 244678490910097285, guid: dd4e9aade3ece1746b7ccd5e11c27d9f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -9951,7 +10006,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Modifiers.GravityProvider
   stateManager: {fileID: 11400000, guid: e84650500f9712844a17aa61d1d8358a, type: 2}
-  gravityStrength: 4.905
 --- !u!114 &1949814014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9964,9 +10018,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0e16145f1749154f843cedbf2825bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ModifierAnimatedObject
-  animator: {fileID: 577916996}
   requiredModifier: 5
-  gaugeSeconds: 2
+  gaugeSeconds: 1
 --- !u!114 &1949814015
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10003,7 +10056,7 @@ Animator:
   m_GameObject: {fileID: 1949814012}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0c291e64707b5f1419d6f8ae649c28f7, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

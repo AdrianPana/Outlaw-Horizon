@@ -1,13 +1,26 @@
 using UnityEngine;
 using Game.Resources;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 
 namespace Game.Modifiers
 {
     public class WindProvider : MonoBehaviour, IModifierProvider
     {
         [SerializeField] private UniversalStateManagerScriptableObject stateManager;
-        public float windStrength = 10f;
         private WindDirection currentWind = WindDirection.NONE;
+
+        private void Reset()
+        {
+#if UNITY_EDITOR
+            if (stateManager == null)
+            {
+                stateManager = AssetDatabase.LoadAssetAtPath<UniversalStateManagerScriptableObject>("Assets/Scripts/UniversalStateManagerScriptableObject.asset");
+            }
+#endif
+        }
 
         private void OnEnable()
         {
@@ -40,14 +53,14 @@ namespace Game.Modifiers
         {
             switch (currentWind)
             {
-                case WindDirection.NORTH: return Vector3.forward * windStrength;
-                case WindDirection.EAST: return Vector3.right * windStrength;
-                case WindDirection.SOUTH: return Vector3.back * windStrength;
-                case WindDirection.WEST: return Vector3.left * windStrength;
-                case WindDirection.NORTH_EAST: return (Vector3.forward + Vector3.right).normalized * windStrength;
-                case WindDirection.SOUTH_EAST: return (Vector3.back + Vector3.right).normalized * windStrength;
-                case WindDirection.SOUTH_WEST: return (Vector3.back + Vector3.left).normalized * windStrength;
-                case WindDirection.NORTH_WEST: return (Vector3.forward + Vector3.left).normalized * windStrength;   
+                case WindDirection.NORTH: return Vector3.forward;
+                case WindDirection.EAST: return Vector3.right;
+                case WindDirection.SOUTH: return Vector3.back;
+                case WindDirection.WEST: return Vector3.left;
+                case WindDirection.NORTH_EAST: return (Vector3.forward + Vector3.right).normalized;
+                case WindDirection.SOUTH_EAST: return (Vector3.back + Vector3.right).normalized;
+                case WindDirection.SOUTH_WEST: return (Vector3.back + Vector3.left).normalized;
+                case WindDirection.NORTH_WEST: return (Vector3.forward + Vector3.left).normalized;   
                 default: return Vector3.zero;
             }
         }

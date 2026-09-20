@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Rideable))]
 public class ModifierRotateObject : AbstractModifierObject
 {
     public override void Awake()
@@ -15,7 +16,6 @@ public class ModifierRotateObject : AbstractModifierObject
         foreach (var provider in providers)
         {
             var forceContribution = provider.GetForceContribution(transform.position);
-            Debug.Log($"Applying torque from provider {provider}: {forceContribution}");
             transform.Rotate(new Vector3(0, forceContribution.magnitude * Time.fixedDeltaTime * 20, 0), Space.World);
         }
     }

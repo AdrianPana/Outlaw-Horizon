@@ -25,7 +25,6 @@ public class GloveUI : MonoBehaviour
 
     void AddAbility(Upgrade upgrade)
     {
-        Debug.Log($"GloveUI received upgrade: {upgrade.name}");
         if (upgrade is not IModifierUpgrade) return;
         _unlockedUpgrades.Add(upgrade);
         RefreshIcon();
@@ -40,7 +39,6 @@ public class GloveUI : MonoBehaviour
 
     void RefreshIcon()
     {
-        Debug.Log($"Refreshing GloveUI icon for active upgrade: {ActiveUpgrade?.name ?? "None"}");
         if (ActiveUpgrade is IModifierUpgrade active)
         {
             abilityIcon.sprite = active.Icon;

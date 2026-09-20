@@ -7,7 +7,7 @@ using UnityEngine;
 public class ModifierAnimatedObject : AbstractModifierObject
 {
     // Can be extended with multiple modifiers/states
-    public Animator animator;
+    private Animator animator;
     public Modifier requiredModifier = Modifier.NONE;
     public float gaugeSeconds;
     private float _influencedSeconds;
@@ -15,6 +15,7 @@ public class ModifierAnimatedObject : AbstractModifierObject
 
     void Start()
     {
+        animator = GetComponent<Animator>();
         _hasAnimated = false;
     }
 
@@ -25,6 +26,7 @@ public class ModifierAnimatedObject : AbstractModifierObject
 
         if (CheckIfInfluenced()) 
         {
+            Debug.Log("Influenced by " + requiredModifier.ToString());
             _influencedSeconds += Time.deltaTime;
             if (_influencedSeconds >= gaugeSeconds) {
                 Animate();

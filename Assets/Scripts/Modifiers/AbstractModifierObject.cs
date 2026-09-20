@@ -12,6 +12,7 @@ public class AbstractModifierObject : MonoBehaviour
     public virtual void Awake()
     {
         providers.AddRange(GetComponents<IModifierProvider>());
+        gameObject.layer = LayerMask.NameToLayer("Modifiable");
     }
 
     public virtual bool CheckIfInfluenced()

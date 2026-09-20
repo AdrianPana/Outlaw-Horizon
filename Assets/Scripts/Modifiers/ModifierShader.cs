@@ -6,7 +6,7 @@ using Game.Modifiers;
 public class ModifierShader : MonoBehaviour
 {
     private Color windColor = new Color32(0, 193, 255, 255);
-    private Color gravityColor = new Color32(253, 42, 0, 255);
+    private Color gravityColor = new Color32(252, 110, 81, 255);
     private Color thirdColor = new Color32(150, 0, 180, 255);
     private Color _fallbackColor = Color.black;
 
@@ -19,10 +19,10 @@ public class ModifierShader : MonoBehaviour
     [SerializeField] private Material _modifiableMaterial;
     [SerializeField] private static float _idleIntensity = 0.3f;
     [SerializeField] private static float _inRangeIntensity = 0.8f;
-    [SerializeField] private static float _influencedIntensity = 1.7f;
+    [SerializeField] private static float _influencedIntensity = 1.5f;
     private Material[] _materials;
 
-    private ModifierAffectedObject modifierObject => GetComponent<ModifierAffectedObject>();
+    private AbstractModifierObject modifierObject => GetComponent<AbstractModifierObject>();
 
     public float Intensity
     {

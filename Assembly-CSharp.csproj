@@ -67,7 +67,6 @@
     <Compile Include="Assets\Scripts\ResettableModifierObject.cs" />
     <Compile Include="Assets\Scripts\UI\SavingUIController.cs" />
     <Compile Include="Assets\BrokenVector\LowPolyDungeon\Demo Scenes\MouseCamLook.cs" />
-    <Compile Include="Assets\Scripts\WindModifier.cs" />
     <Compile Include="Assets\Scripts\GloveScript.cs" />
     <Compile Include="Assets\Scripts\ShipGloveScript.cs" />
     <Compile Include="Assets\Scripts\PlayerFSM\AirborneState.cs" />
@@ -106,7 +105,6 @@
     <Compile Include="Assets\Scripts\Upgrades\UpgradePickup.cs" />
     <Compile Include="Assets\Scripts\PlayerFSM\GroundedState.cs" />
     <Compile Include="Assets\Scripts\Modifiers\WindProvider.cs" />
-    <Compile Include="Assets\Scripts\GravityModifier.cs" />
     <Compile Include="Assets\Scripts\PlayerFSM\BaseState.cs" />
     <Compile Include="Assets\Scripts\Modifiers\Rideable.cs" />
     <Compile Include="Assets\Scripts\Modifiers\ModifierRotateObject.cs" />
