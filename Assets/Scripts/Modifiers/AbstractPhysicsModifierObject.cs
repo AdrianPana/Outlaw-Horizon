@@ -123,9 +123,37 @@ public abstract class AbstractPhysicsModifierObject : AbstractModifierObject
             return;
         }
 
-        if (rb.SweepTest(delta.normalized, out RaycastHit hit, delta.magnitude, QueryTriggerInteraction.Ignore))
+        //if (rb.SweepTest(delta.normalized, out RaycastHit hit, delta.magnitude, QueryTriggerInteraction.Ignore))
+        //{
+        //    Debug.Log($"[SweepTest] hit {hit.collider.name} at distance {hit.distance} with delta {delta}", this);
+        //    if (((1 << hit.collider.gameObject.layer) & obstacleMask) != 0)
+        //    {
+        //        float safeDist = Mathf.Max(0, hit.distance - 0.01f);
+        //        Vector3 safeDelta = delta.normalized * safeDist;
+        //        rb.MovePosition(rb.position + safeDelta);
+        //        CurrentVelocity = safeDelta / Time.fixedDeltaTime;
+
+        //        Vector3 normal = hit.normal;
+        //        currentHorizontalVelocity = Vector3.ProjectOnPlane(currentHorizontalVelocity, normal);
+        //        currentVerticalVelocity = Vector3.ProjectOnPlane(currentVerticalVelocity, normal);
+        //        momentumVelocity = Vector3.ProjectOnPlane(momentumVelocity, normal);
+        //        return;
+        //    }
+
+        Bounds bounds = physicalCollider.bounds;
+        bool hitSomething = Physics.BoxCast(
+            bounds.center,
+            bounds.extents,
+            delta.normalized,
+            out RaycastHit hit,
+            transform.rotation,
+            delta.magnitude,
+            obstacleMask,
+            QueryTriggerInteraction.Ignore
+        );
+
+        if (hitSomething)
         {
-            Debug.Log($"[SweepTest] hit {hit.collider.name} at distance {hit.distance} with delta {delta}", this);
             if (((1 << hit.collider.gameObject.layer) & obstacleMask) != 0)
             {
                 float safeDist = Mathf.Max(0, hit.distance - 0.01f);

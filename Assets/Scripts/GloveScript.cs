@@ -15,8 +15,7 @@ public class GloveScript : MonoBehaviour
     public UniversalStateManagerScriptableObject universalStateManagerScriptableObject;
     public SectionManager currentSection;
 
-    public GameObject windMenuUI;
-    public GameObject gravityMenuUI;
+    public GameObject abilityMenuUI;
     private WindWheelController windMenuUIController;
 
     public Volume postProcessingVolume;
@@ -42,10 +41,11 @@ public class GloveScript : MonoBehaviour
         rangeIndicator.SetActive(hasWindAbility || hasGravityAbility);
 
         postProcessingVolume.profile.TryGet<ColorAdjustments>(out colorAdjustments);
+        abilityMenuUI.SetActive(false);
 
         cam = Camera.main;
 
-        windMenuUIController = windMenuUI.GetComponent<WindWheelController>();
+        windMenuUIController = abilityMenuUI.GetComponentInChildren<WindWheelController>();
 
         GetComponent<SphereCollider>().radius = range;
 
@@ -59,7 +59,6 @@ public class GloveScript : MonoBehaviour
     private void OnEnable()
     {
         playerInputActions.Enable();
-        playerInputActions.Player.Cycle.started += CycleAbility;
         playerInputActions.Player.Ability.started += ShowAbilityMenu;
         playerInputActions.Player.Ability.canceled += HideAbilityMenu;
         playerInputActions.Player.Reset.started += ResetSceneCallback;
@@ -71,7 +70,6 @@ public class GloveScript : MonoBehaviour
     private void OnDisable()
     {
         playerInputActions.Disable();
-        playerInputActions.Player.Cycle.started -= CycleAbility;
         playerInputActions.Player.Ability.started -= ShowAbilityMenu;
         playerInputActions.Player.Ability.canceled -= HideAbilityMenu;
         playerInputActions.Player.Reset.started -= ResetSceneCallback;
@@ -96,11 +94,6 @@ public class GloveScript : MonoBehaviour
         }
     }
 
-    private void CycleAbility(InputAction.CallbackContext ctx)
-    {
-        gloveUI.CycleNext();
-    }
-
     private void ShowAbilityMenu(InputAction.CallbackContext context)
     {
         if (gloveUI.ActiveUpgrade == null)
@@ -110,16 +103,9 @@ public class GloveScript : MonoBehaviour
 
         EnterMenuScreen();
         
-        switch (gloveUI.ActiveUpgrade.Type)
-        {
-            case UpgradeType.WindRune:
-                windMenuUI.gameObject.SetActive(true);
-                windMenuUIController.Rotate(cam.transform.eulerAngles.y);
-                break;
-            default:
-                gravityMenuUI.gameObject.SetActive(true);
-                break;
-        }
+        abilityMenuUI.SetActive(true);
+        if (windMenuUIController != null)
+            windMenuUIController.Rotate(cam.transform.eulerAngles.y);
     }
 
     private void EnterMenuScreen()
@@ -135,15 +121,7 @@ public class GloveScript : MonoBehaviour
     {
         ExitMenuScreen();
 
-        switch (gloveUI.ActiveUpgrade.Type)
-        {
-            case UpgradeType.WindRune:
-                windMenuUI.gameObject.SetActive(false);
-                break;
-            default:
-                gravityMenuUI.gameObject.SetActive(false);
-                break;
-        }
+        abilityMenuUI.SetActive(false);
 
         ToggleModifier(menuSelectedModifier);
     }
@@ -207,5 +185,25 @@ public class GloveScript : MonoBehaviour
         {
             modifierObject.MarkSourceOutOfRange();
         }
+    }
+
+    public void ToggleUpgrade(Upgrade upgrade, bool isActive)
+    {
+        if (upgrade is WindUpgrade)
+        {
+            Debug.Log("WE got wind upgrade");
+            hasWindAbility = isActive;
+            abilityMenuUI.transform.GetChild(0).gameObject.SetActive(isActive);
+            windMenuUIController = abilityMenuUI.GetComponentInChildren<WindWheelController>();
+            return;
+        }
+        if (upgrade is GravityUpgrade)
+        {
+            hasGravityAbility = isActive;
+            abilityMenuUI.transform.GetChild(1).gameObject.SetActive(isActive);
+            return;
+        }
+
+        Debug.Log("Unknown upgrade type: " + upgrade.GetType().Name);
     }
 }

@@ -10,7 +10,7 @@ public class WindUpgrade : Upgrade, IModifierUpgrade
     {
         if (player.TryGetComponent<GloveScript>(out var gloveScript))
         {
-            gloveScript.hasWindAbility = true;
+            gloveScript.ToggleUpgrade(this, true);
         }
     }
 
@@ -18,7 +18,7 @@ public class WindUpgrade : Upgrade, IModifierUpgrade
     {
         if (player.TryGetComponent<GloveScript>(out var gloveScript))
         {
-            gloveScript.hasWindAbility = false;
+            gloveScript.ToggleUpgrade(this, false);
         }
     }
 }

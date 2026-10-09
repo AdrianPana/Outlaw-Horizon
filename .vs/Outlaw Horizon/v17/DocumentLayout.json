@@ -3,32 +3,40 @@
   "WorkspaceRootPath": "C:\\Unity Projects\\Outlaw Horizon\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{8CFA13B8-71E0-FDA1-EAFA-B7B43B0D0CE9}|Assembly-CSharp.csproj|C:\\Unity Projects\\Outlaw Horizon\\assets\\scripts\\gravitymodifier.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8CFA13B8-71E0-FDA1-EAFA-B7B43B0D0CE9}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\gravitymodifier.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8CFA13B8-71E0-FDA1-EAFA-B7B43B0D0CE9}|Assembly-CSharp.csproj|C:\\Unity Projects\\Outlaw Horizon\\assets\\scripts\\modifiers\\abstractphysicsmodifierobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8CFA13B8-71E0-FDA1-EAFA-B7B43B0D0CE9}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\modifiers\\abstractphysicsmodifierobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CFA13B8-71E0-FDA1-EAFA-B7B43B0D0CE9}|Assembly-CSharp.csproj|C:\\Unity Projects\\Outlaw Horizon\\assets\\scripts\\modifiers\\modifiercontrolledobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8CFA13B8-71E0-FDA1-EAFA-B7B43B0D0CE9}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\modifiers\\modifiercontrolledobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8CFA13B8-71E0-FDA1-EAFA-B7B43B0D0CE9}|Assembly-CSharp.csproj|C:\\Unity Projects\\Outlaw Horizon\\assets\\scripts\\modifiers\\modifierhybridobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8CFA13B8-71E0-FDA1-EAFA-B7B43B0D0CE9}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\modifiers\\modifierhybridobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8CFA13B8-71E0-FDA1-EAFA-B7B43B0D0CE9}|Assembly-CSharp.csproj|c:\\unity projects\\outlaw horizon\\assets\\scripts\\modifiers\\windprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8CFA13B8-71E0-FDA1-EAFA-B7B43B0D0CE9}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\modifiers\\windprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8CFA13B8-71E0-FDA1-EAFA-B7B43B0D0CE9}|Assembly-CSharp.csproj|C:\\Unity Projects\\Outlaw Horizon\\assets\\scripts\\modifiers\\modifieraffectedobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8CFA13B8-71E0-FDA1-EAFA-B7B43B0D0CE9}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\modifiers\\modifieraffectedobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8CFA13B8-71E0-FDA1-EAFA-B7B43B0D0CE9}|Assembly-CSharp.csproj|C:\\Unity Projects\\Outlaw Horizon\\assets\\scripts\\modifiers\\gravityprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8CFA13B8-71E0-FDA1-EAFA-B7B43B0D0CE9}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\modifiers\\gravityprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{8CFA13B8-71E0-FDA1-EAFA-B7B43B0D0CE9}|Assembly-CSharp.csproj|C:\\Unity Projects\\Outlaw Horizon\\assets\\scripts\\modifiers\\abstractmodifierobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8CFA13B8-71E0-FDA1-EAFA-B7B43B0D0CE9}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\modifiers\\abstractmodifierobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CFA13B8-71E0-FDA1-EAFA-B7B43B0D0CE9}|Assembly-CSharp.csproj|c:\\unity projects\\outlaw horizon\\assets\\scripts\\modifiers\\windprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8CFA13B8-71E0-FDA1-EAFA-B7B43B0D0CE9}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\modifiers\\windprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CFA13B8-71E0-FDA1-EAFA-B7B43B0D0CE9}|Assembly-CSharp.csproj|C:\\Unity Projects\\Outlaw Horizon\\assets\\scripts\\modifiers\\modifierrotateobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8CFA13B8-71E0-FDA1-EAFA-B7B43B0D0CE9}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\modifiers\\modifierrotateobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{8CFA13B8-71E0-FDA1-EAFA-B7B43B0D0CE9}|Assembly-CSharp.csproj|C:\\Unity Projects\\Outlaw Horizon\\assets\\scripts\\modifiers\\imodifierprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8CFA13B8-71E0-FDA1-EAFA-B7B43B0D0CE9}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\modifiers\\imodifierprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8CFA13B8-71E0-FDA1-EAFA-B7B43B0D0CE9}|Assembly-CSharp.csproj|C:\\Unity Projects\\Outlaw Horizon\\assets\\scripts\\modifiers\\abstractphysicsmodifierobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8CFA13B8-71E0-FDA1-EAFA-B7B43B0D0CE9}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\modifiers\\abstractphysicsmodifierobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8CFA13B8-71E0-FDA1-EAFA-B7B43B0D0CE9}|Assembly-CSharp.csproj|C:\\Unity Projects\\Outlaw Horizon\\assets\\scripts\\modifiers\\modifieraffectedobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8CFA13B8-71E0-FDA1-EAFA-B7B43B0D0CE9}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\modifiers\\modifieraffectedobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8CFA13B8-71E0-FDA1-EAFA-B7B43B0D0CE9}|Assembly-CSharp.csproj|C:\\Unity Projects\\Outlaw Horizon\\assets\\scripts\\modifiers\\modifiershader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -43,20 +51,12 @@
       "RelativeMoniker": "D:0:0:{8CFA13B8-71E0-FDA1-EAFA-B7B43B0D0CE9}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\modifiers\\modifieranimatedobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8CFA13B8-71E0-FDA1-EAFA-B7B43B0D0CE9}|Assembly-CSharp.csproj|C:\\Unity Projects\\Outlaw Horizon\\assets\\scripts\\modifiers\\abstractmodifierobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8CFA13B8-71E0-FDA1-EAFA-B7B43B0D0CE9}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\modifiers\\abstractmodifierobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{8CFA13B8-71E0-FDA1-EAFA-B7B43B0D0CE9}|Assembly-CSharp.csproj|C:\\Unity Projects\\Outlaw Horizon\\assets\\scripts\\ui\\gloveui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8CFA13B8-71E0-FDA1-EAFA-B7B43B0D0CE9}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\ui\\gloveui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8CFA13B8-71E0-FDA1-EAFA-B7B43B0D0CE9}|Assembly-CSharp.csproj|C:\\Unity Projects\\Outlaw Horizon\\assets\\scripts\\glovescript.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8CFA13B8-71E0-FDA1-EAFA-B7B43B0D0CE9}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\glovescript.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8CFA13B8-71E0-FDA1-EAFA-B7B43B0D0CE9}|Assembly-CSharp.csproj|C:\\Unity Projects\\Outlaw Horizon\\assets\\scripts\\modifiers\\modifierrotateobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8CFA13B8-71E0-FDA1-EAFA-B7B43B0D0CE9}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\modifiers\\modifierrotateobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C16CBF66-4E3A-D632-5C53-3D25EBE96193}|Unity.StarterAssets.csproj|C:\\Unity Projects\\Outlaw Horizon\\assets\\starter assets\\runtime\\thirdpersoncontroller\\scripts\\thirdpersoncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -73,10 +73,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{8CFA13B8-71E0-FDA1-EAFA-B7B43B0D0CE9}|Assembly-CSharp.csproj|C:\\Unity Projects\\Outlaw Horizon\\assets\\scripts\\modifiers\\modifierambientobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8CFA13B8-71E0-FDA1-EAFA-B7B43B0D0CE9}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\modifiers\\modifierambientobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8CFA13B8-71E0-FDA1-EAFA-B7B43B0D0CE9}|Assembly-CSharp.csproj|C:\\Unity Projects\\Outlaw Horizon\\assets\\scripts\\modifiers\\modifiercontrolledobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8CFA13B8-71E0-FDA1-EAFA-B7B43B0D0CE9}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\modifiers\\modifiercontrolledobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8CFA13B8-71E0-FDA1-EAFA-B7B43B0D0CE9}|Assembly-CSharp.csproj|C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\Modifiers\\Rideable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -249,69 +245,59 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 176,
+          "DockedWidth": 210,
           "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 15,
+              "Title": "StarterAssetsDeployMenu.cs",
+              "DocumentMoniker": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Starter Assets\\Editor\\StarterAssetsDeployMenu.cs",
+              "RelativeDocumentMoniker": "Assets\\Starter Assets\\Editor\\StarterAssetsDeployMenu.cs",
+              "ToolTip": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Starter Assets\\Editor\\StarterAssetsDeployMenu.cs",
+              "RelativeToolTip": "Assets\\Starter Assets\\Editor\\StarterAssetsDeployMenu.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAoAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-20T07:31:50.06Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AbstractModifierObject.cs",
+              "DocumentMoniker": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\Modifiers\\AbstractModifierObject.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Modifiers\\AbstractModifierObject.cs",
+              "ToolTip": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\Modifiers\\AbstractModifierObject.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Modifiers\\AbstractModifierObject.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-19T19:35:27.51Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "ModifierHybridObject.cs",
               "DocumentMoniker": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\Modifiers\\ModifierHybridObject.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Modifiers\\ModifierHybridObject.cs",
               "ToolTip": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\Modifiers\\ModifierHybridObject.cs",
               "RelativeToolTip": "Assets\\Scripts\\Modifiers\\ModifierHybridObject.cs",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAvwDEAAAAfAAAAAAAAAA==",
+              "ViewState": "AgIAADoAAAAAAAAAAAAcwCkAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-09-19T20:15:44.642Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "IModifierProvider.cs",
-              "DocumentMoniker": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\Modifiers\\IModifierProvider.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Modifiers\\IModifierProvider.cs",
-              "ToolTip": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\Modifiers\\IModifierProvider.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Modifiers\\IModifierProvider.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-01T17:35:02.229Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "AbstractModifierObject.cs",
-              "DocumentMoniker": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\Modifiers\\AbstractModifierObject.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Modifiers\\AbstractModifierObject.cs",
-              "ToolTip": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\Modifiers\\AbstractModifierObject.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Modifiers\\AbstractModifierObject.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAA8AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-19T19:35:27.51Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "GloveUI.cs",
-              "DocumentMoniker": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\UI\\GloveUI.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\UI\\GloveUI.cs",
-              "ToolTip": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\UI\\GloveUI.cs",
-              "RelativeToolTip": "Assets\\Scripts\\UI\\GloveUI.cs",
-              "ViewState": "AgIAABUAAAAAAAAAAAAYwBsAAAA0AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-06T12:31:27.008Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 7,
               "Title": "ModifierRotateObject.cs",
               "DocumentMoniker": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\Modifiers\\ModifierRotateObject.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Modifiers\\ModifierRotateObject.cs",
               "ToolTip": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\Modifiers\\ModifierRotateObject.cs",
               "RelativeToolTip": "Assets\\Scripts\\Modifiers\\ModifierRotateObject.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAiAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-19T20:43:11.812Z"
+              "WhenOpened": "2026-09-19T20:43:11.812Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -327,56 +313,57 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "StarterAssetsDeployMenu.cs",
-              "DocumentMoniker": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Starter Assets\\Editor\\StarterAssetsDeployMenu.cs",
-              "RelativeDocumentMoniker": "Assets\\Starter Assets\\Editor\\StarterAssetsDeployMenu.cs",
-              "ToolTip": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Starter Assets\\Editor\\StarterAssetsDeployMenu.cs",
-              "RelativeToolTip": "Assets\\Starter Assets\\Editor\\StarterAssetsDeployMenu.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAoAAAAEAAAAAAAAAA==",
+              "DocumentIndex": 12,
+              "Title": "GloveUI.cs",
+              "DocumentMoniker": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\UI\\GloveUI.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\UI\\GloveUI.cs",
+              "ToolTip": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\UI\\GloveUI.cs",
+              "RelativeToolTip": "Assets\\Scripts\\UI\\GloveUI.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAAYwBsAAAA0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-20T07:31:50.06Z"
+              "WhenOpened": "2026-06-06T12:31:27.008Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "IModifierProvider.cs",
+              "DocumentMoniker": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\Modifiers\\IModifierProvider.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Modifiers\\IModifierProvider.cs",
+              "ToolTip": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\Modifiers\\IModifierProvider.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Modifiers\\IModifierProvider.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-01T17:35:02.229Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "GravityModifier.cs",
-              "DocumentMoniker": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\GravityModifier.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\GravityModifier.cs",
-              "ToolTip": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\GravityModifier.cs",
-              "RelativeToolTip": "Assets\\Scripts\\GravityModifier.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAcAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-02T14:07:22.142Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
               "Title": "AbstractPhysicsModifierObject.cs",
               "DocumentMoniker": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\Modifiers\\AbstractPhysicsModifierObject.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Modifiers\\AbstractPhysicsModifierObject.cs",
               "ToolTip": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\Modifiers\\AbstractPhysicsModifierObject.cs",
               "RelativeToolTip": "Assets\\Scripts\\Modifiers\\AbstractPhysicsModifierObject.cs",
-              "ViewState": "AgIAADUAAAAAAAAAAAAIwEYAAAA0AAAAAAAAAA==",
+              "ViewState": "AgIAAKUAAAAAAAAAAAAswMwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-19T20:06:26.206Z"
+              "WhenOpened": "2026-09-19T20:06:26.206Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 1,
               "Title": "ModifierControlledObject.cs",
               "DocumentMoniker": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\Modifiers\\ModifierControlledObject.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Modifiers\\ModifierControlledObject.cs",
               "ToolTip": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\Modifiers\\ModifierControlledObject.cs",
               "RelativeToolTip": "Assets\\Scripts\\Modifiers\\ModifierControlledObject.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAkAAAAAAAAAA==",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAqwCEAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-19T20:15:56.67Z"
+              "WhenOpened": "2026-09-19T20:15:56.67Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 18,
               "Title": "Rideable.cs",
               "DocumentMoniker": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\Modifiers\\Rideable.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Modifiers\\Rideable.cs",
@@ -412,7 +399,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 20,
               "Title": "DamageObject.cs",
               "DocumentMoniker": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\DamageObject.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\DamageObject.cs",
@@ -424,7 +411,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 19,
               "Title": "ResettableModifierObject.cs",
               "DocumentMoniker": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\ResettableModifierObject.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\ResettableModifierObject.cs",
@@ -436,7 +423,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 21,
               "Title": "DelegateHelpers.cs",
               "DocumentMoniker": "C:\\Unity Projects\\Outlaw Horizon\\Library\\PackageCache\\com.unity.inputsystem@02433b2481ab\\InputSystem\\Utilities\\DelegateHelpers.cs",
               "RelativeDocumentMoniker": "Library\\PackageCache\\com.unity.inputsystem@02433b2481ab\\InputSystem\\Utilities\\DelegateHelpers.cs",
@@ -449,7 +436,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 22,
               "Title": "UniversalStateManagerScriptableObject.cs",
               "DocumentMoniker": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\UniversalStateManagerScriptableObject.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\UniversalStateManagerScriptableObject.cs",
@@ -461,7 +448,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 25,
               "Title": "ModifierParticlesController.cs",
               "DocumentMoniker": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\ModifierParticlesController.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\ModifierParticlesController.cs",
@@ -473,7 +460,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 23,
               "Title": "PlayerContext.cs",
               "DocumentMoniker": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\PlayerFSM\\PlayerContext.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\PlayerFSM\\PlayerContext.cs",
@@ -485,7 +472,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 27,
               "Title": "PhysicsChecker.cs",
               "DocumentMoniker": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\PlayerFSM\\PhysicsChecker.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\PlayerFSM\\PhysicsChecker.cs",
@@ -497,7 +484,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 24,
               "Title": "GroundedState.cs",
               "DocumentMoniker": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\PlayerFSM\\GroundedState.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\PlayerFSM\\GroundedState.cs",
@@ -509,7 +496,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 29,
               "Title": "UpgradePickup.cs",
               "DocumentMoniker": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\Upgrades\\UpgradePickup.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Upgrades\\UpgradePickup.cs",
@@ -521,7 +508,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 28,
               "Title": "WheelButtonController.cs",
               "DocumentMoniker": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\UI\\WheelButtonController.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\UI\\WheelButtonController.cs",
@@ -533,7 +520,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 31,
               "Title": "Rideable.cs",
               "DocumentMoniker": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Starter Assets\\Runtime\\ThirdPersonController\\Scripts\\Rideable.cs",
               "RelativeDocumentMoniker": "Assets\\Starter Assets\\Runtime\\ThirdPersonController\\Scripts\\Rideable.cs",
@@ -544,7 +531,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 32,
               "Title": "Compiled-Shader Graphs-Modifiable.shader",
               "DocumentMoniker": "C:\\Unity Projects\\Outlaw Horizon\\Temp\\Compiled-Shader Graphs-Modifiable.shader",
               "RelativeDocumentMoniker": "Temp\\Compiled-Shader Graphs-Modifiable.shader",
@@ -556,7 +543,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 43,
+              "DocumentIndex": 42,
               "Title": "ShipMoveScript.cs",
               "DocumentMoniker": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\ShipMoveScript.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\ShipMoveScript.cs",
@@ -568,7 +555,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 51,
+              "DocumentIndex": 50,
               "Title": "Unity.ProBuilder.Editor.asmdef",
               "DocumentMoniker": "C:\\Unity Projects\\Outlaw Horizon\\Library\\PackageCache\\com.unity.probuilder@1f279ab829b7\\Editor\\Unity.ProBuilder.Editor.asmdef",
               "RelativeDocumentMoniker": "Library\\PackageCache\\com.unity.probuilder@1f279ab829b7\\Editor\\Unity.ProBuilder.Editor.asmdef",
@@ -581,7 +568,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 38,
+              "DocumentIndex": 37,
               "Title": "CannonScript.cs",
               "DocumentMoniker": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\CannonScript.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\CannonScript.cs",
@@ -593,7 +580,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 39,
+              "DocumentIndex": 38,
               "Title": "CameraSwitcher.cs",
               "DocumentMoniker": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\CameraSwitcher.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\CameraSwitcher.cs",
@@ -605,7 +592,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 33,
               "Title": "SceneChangerScript.cs",
               "DocumentMoniker": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\SceneChangerScript.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\SceneChangerScript.cs",
@@ -617,7 +604,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 34,
               "Title": "EditorMeshCombiner.cs",
               "DocumentMoniker": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Helpers\\EditorMeshCombiner.cs",
               "RelativeDocumentMoniker": "Assets\\Helpers\\EditorMeshCombiner.cs",
@@ -629,7 +616,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 40,
+              "DocumentIndex": 39,
               "Title": "IResettable.cs",
               "DocumentMoniker": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\IResettable.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\IResettable.cs",
@@ -641,7 +628,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 35,
               "Title": "SectionManager.cs",
               "DocumentMoniker": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\SectionManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\SectionManager.cs",
@@ -653,7 +640,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 42,
+              "DocumentIndex": 41,
               "Title": "UpgradeManager.cs",
               "DocumentMoniker": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\Upgrades\\UpgradeManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Upgrades\\UpgradeManager.cs",
@@ -665,7 +652,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 36,
               "Title": "ModifierTimer.cs",
               "DocumentMoniker": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\ModifierTimer.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\ModifierTimer.cs",
@@ -677,7 +664,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 41,
+              "DocumentIndex": 40,
               "Title": "ObjectInteractScript.cs",
               "DocumentMoniker": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\ObjectInteractScript.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\ObjectInteractScript.cs",
@@ -689,7 +676,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 44,
+              "DocumentIndex": 43,
               "Title": "CannonBallScript.cs",
               "DocumentMoniker": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\CannonBallScript.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\CannonBallScript.cs",
@@ -701,7 +688,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 46,
+              "DocumentIndex": 45,
               "Title": "WindWheelController.cs",
               "DocumentMoniker": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\UI\\WindWheelController.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\UI\\WindWheelController.cs",
@@ -713,7 +700,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 45,
+              "DocumentIndex": 44,
               "Title": "GetComponentPropertiesTool.cs",
               "DocumentMoniker": "C:\\Unity Projects\\Outlaw Horizon\\Library\\PackageCache\\com.unity.ai.assistant@e1f49a972172\\Modules\\Unity.AI.Assistant.Tools\\GameObject\\GetComponentPropertiesTool.cs",
               "RelativeDocumentMoniker": "Library\\PackageCache\\com.unity.ai.assistant@e1f49a972172\\Modules\\Unity.AI.Assistant.Tools\\GameObject\\GetComponentPropertiesTool.cs",
@@ -725,7 +712,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 50,
+              "DocumentIndex": 49,
               "Title": "GravityUpgrade.cs",
               "DocumentMoniker": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\Upgrades\\GravityUpgrade.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Upgrades\\GravityUpgrade.cs",
@@ -737,7 +724,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 49,
+              "DocumentIndex": 48,
               "Title": "Upgrade.cs",
               "DocumentMoniker": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\Upgrades\\Upgrade.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Upgrades\\Upgrade.cs",
@@ -749,7 +736,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 47,
+              "DocumentIndex": 46,
               "Title": "WindUpgrade.cs",
               "DocumentMoniker": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\Upgrades\\WindUpgrade.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Upgrades\\WindUpgrade.cs",
@@ -761,7 +748,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 48,
+              "DocumentIndex": 47,
               "Title": "IModifierUpgrade.cs",
               "DocumentMoniker": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\Upgrades\\IModifierUpgrade.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Upgrades\\IModifierUpgrade.cs",
@@ -773,7 +760,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 57,
+              "DocumentIndex": 56,
               "Title": "GravityButtonController.cs",
               "DocumentMoniker": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\UI\\GravityButtonController.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\UI\\GravityButtonController.cs",
@@ -785,7 +772,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 54,
+              "DocumentIndex": 53,
               "Title": "BasicRigidBodyPush.cs",
               "DocumentMoniker": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Starter Assets\\Runtime\\Common\\BasicRigidBodyPush.cs",
               "RelativeDocumentMoniker": "Assets\\Starter Assets\\Runtime\\Common\\BasicRigidBodyPush.cs",
@@ -797,7 +784,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 56,
+              "DocumentIndex": 55,
               "Title": "Level3Script.cs",
               "DocumentMoniker": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\Level3Script.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Level3Script.cs",
@@ -809,7 +796,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 52,
+              "DocumentIndex": 51,
               "Title": "Snapshot.cs",
               "DocumentMoniker": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\Snapshot.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Snapshot.cs",
@@ -821,7 +808,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 55,
+              "DocumentIndex": 54,
               "Title": "SavingUIController.cs",
               "DocumentMoniker": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\SavingUIController.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\SavingUIController.cs",
@@ -833,7 +820,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 53,
+              "DocumentIndex": 52,
               "Title": "StarterAssetsInputs.cs",
               "DocumentMoniker": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Starter Assets\\Runtime\\InputSystem\\StarterAssetsInputs.cs",
               "RelativeDocumentMoniker": "Assets\\Starter Assets\\Runtime\\InputSystem\\StarterAssetsInputs.cs",
@@ -846,12 +833,12 @@
           ]
         },
         {
-          "DockedWidth": 128,
-          "SelectedChildIndex": 4,
+          "DockedWidth": 94,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "GloveScript.cs",
               "DocumentMoniker": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\GloveScript.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\GloveScript.cs",
@@ -863,19 +850,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 3,
               "Title": "ModifierAffectedObject.cs",
               "DocumentMoniker": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\Modifiers\\ModifierAffectedObject.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Modifiers\\ModifierAffectedObject.cs",
               "ToolTip": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\Modifiers\\ModifierAffectedObject.cs",
               "RelativeToolTip": "Assets\\Scripts\\Modifiers\\ModifierAffectedObject.cs",
-              "ViewState": "AgIAAG0AAAAAAAAAAAAcwH0AAAAQAAAAAAAAAA==",
+              "ViewState": "AgIAAJIAAAAAAAAAAAAAAJIAAABmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-19T19:37:04.794Z"
+              "WhenOpened": "2026-09-19T19:37:04.794Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 9,
               "Title": "ModifierShader.cs",
               "DocumentMoniker": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\Modifiers\\ModifierShader.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Modifiers\\ModifierShader.cs",
@@ -887,32 +875,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "GravityProvider.cs",
               "DocumentMoniker": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\Modifiers\\GravityProvider.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Modifiers\\GravityProvider.cs",
               "ToolTip": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\Modifiers\\GravityProvider.cs",
               "RelativeToolTip": "Assets\\Scripts\\Modifiers\\GravityProvider.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-02T15:56:45.63Z"
+              "WhenOpened": "2026-09-02T15:56:45.63Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 6,
               "Title": "WindProvider.cs",
               "DocumentMoniker": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\Modifiers\\WindProvider.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Modifiers\\WindProvider.cs",
               "ToolTip": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\Modifiers\\WindProvider.cs",
               "RelativeToolTip": "Assets\\Scripts\\Modifiers\\WindProvider.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAABUAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-02T09:49:46.912Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 59,
+              "DocumentIndex": 58,
               "Title": "BaseState.cs",
               "DocumentMoniker": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\PlayerFSM\\BaseState.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\PlayerFSM\\BaseState.cs",
@@ -924,7 +913,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 10,
               "Title": "PlayerStateMachine.cs",
               "DocumentMoniker": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\PlayerFSM\\PlayerStateMachine.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\PlayerFSM\\PlayerStateMachine.cs",
@@ -936,7 +925,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 11,
               "Title": "ModifierAnimatedObject.cs",
               "DocumentMoniker": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\Modifiers\\ModifierAnimatedObject.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Modifiers\\ModifierAnimatedObject.cs",
@@ -948,7 +937,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 26,
               "Title": "ModifierParticleProperties.cs",
               "DocumentMoniker": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\Particles\\ModifierParticleProperties.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Particles\\ModifierParticleProperties.cs",
@@ -960,7 +949,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 58,
+              "DocumentIndex": 57,
               "Title": "AirborneState.cs",
               "DocumentMoniker": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\PlayerFSM\\AirborneState.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\PlayerFSM\\AirborneState.cs",
@@ -972,7 +961,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 30,
               "Title": "LedgeGrabState.cs",
               "DocumentMoniker": "C:\\Unity Projects\\Outlaw Horizon\\Assets\\Scripts\\PlayerFSM\\LedgeGrabState.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\PlayerFSM\\LedgeGrabState.cs",

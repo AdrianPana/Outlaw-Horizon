@@ -10,7 +10,7 @@ public class GravityUpgrade : Upgrade, IModifierUpgrade
     {
         if (player.TryGetComponent<GloveScript>(out var gloveScript))
         {
-            gloveScript.hasGravityAbility = true;
+            gloveScript.ToggleUpgrade(this, true);
         }
     }
 
@@ -18,7 +18,7 @@ public class GravityUpgrade : Upgrade, IModifierUpgrade
     {
         if (player.TryGetComponent<GloveScript>(out var gloveScript))
         {
-            gloveScript.hasGravityAbility = false;
+            gloveScript.ToggleUpgrade(this, false);
         }
     }
 }
