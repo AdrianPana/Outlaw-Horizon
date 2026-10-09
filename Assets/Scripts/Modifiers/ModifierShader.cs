@@ -5,9 +5,9 @@ using Game.Modifiers;
 [RequireComponent(typeof(Renderer))]
 public class ModifierShader : MonoBehaviour
 {
-    private Color windColor = new Color32(0, 193, 255, 255);
-    private Color gravityColor = new Color32(252, 110, 81, 255);
-    private Color thirdColor = new Color32(150, 0, 180, 255);
+    private Color windColor = new Color32(0, 162, 255, 255);
+    private Color gravityColor = new Color32(245, 115, 88, 200);
+    private Color thirdColor = new Color32(189, 37, 219, 200);
     private Color _fallbackColor = Color.black;
 
     [HideInInspector, Min(0f)] public float _intensity = 1f;
@@ -17,9 +17,9 @@ public class ModifierShader : MonoBehaviour
     private static readonly int MainTextureID = Shader.PropertyToID("_Main_Texture");
 
     [SerializeField] private Material _modifiableMaterial;
-    [SerializeField] private static float _idleIntensity = 0.3f;
-    [SerializeField] private static float _inRangeIntensity = 0.8f;
-    [SerializeField] private static float _influencedIntensity = 1.5f;
+    [SerializeField] private static float _idleIntensity = 0.1f;
+    [SerializeField] private static float _inRangeIntensity = 0.4f;
+    [SerializeField] private static float _influencedIntensity = 1f;
     private Material[] _materials;
 
     private AbstractModifierObject modifierObject => GetComponent<AbstractModifierObject>();

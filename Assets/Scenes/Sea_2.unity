@@ -285,8 +285,7 @@ MonoBehaviour:
   gloveUI: {fileID: 26301552}
   universalStateManagerScriptableObject: {fileID: 11400000, guid: e84650500f9712844a17aa61d1d8358a, type: 2}
   currentSection: {fileID: 0}
-  windMenuUI: {fileID: 832520784}
-  gravityMenuUI: {fileID: 125286514}
+  abilityMenuUI: {fileID: 0}
   postProcessingVolume: {fileID: 9150705468954007429, guid: 05bb2aca10e4e72489c5d5af7cd696c7, type: 3}
   menuTimeScale: 0
   range: 60
@@ -346,11 +345,6 @@ Transform:
   - {fileID: 637087460}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -207.16, z: 0}
---- !u!1 &125286514 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6709712549468670412, guid: 705e95805bace4c4b937cd2794860260, type: 3}
-  m_PrefabInstance: {fileID: 255435979}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &125286515 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1402221052856985902, guid: 705e95805bace4c4b937cd2794860260, type: 3}
@@ -2222,7 +2216,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Modifiers.WindProvider
   stateManager: {fileID: 11400000, guid: e84650500f9712844a17aa61d1d8358a, type: 2}
-  windStrength: 10
 --- !u!114 &684211967
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2235,6 +2228,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69db6e5ec9d823e49accbb63ea7d387c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShipMoveScript
+  stateManager: {fileID: 0}
   behaviorType: 0
   obstacleMask:
     serializedVersion: 2
@@ -2261,7 +2255,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Modifiers.GravityProvider
   stateManager: {fileID: 11400000, guid: e84650500f9712844a17aa61d1d8358a, type: 2}
-  gravityStrength: 5
 --- !u!1001 &729927681
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2655,11 +2648,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -4627201780074792067, guid: cbf3b0bad77b9904882fc1982d9926cc, type: 3}
---- !u!1 &832520784 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9116392728196872315, guid: 49bc3d64301492f4e8e40c312cc4e2ab, type: 3}
-  m_PrefabInstance: {fileID: 6738190802396275591}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &897577413
 PrefabInstance:
   m_ObjectHideFlags: 0

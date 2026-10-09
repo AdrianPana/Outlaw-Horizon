@@ -43,10 +43,16 @@ public class ModifierControlledObject : AbstractPhysicsModifierObject
         }
         else
         {
-            if (IsGrounded())
+            if (currentVerticalVelocity.y > 0)
+            {
                 currentVerticalVelocity = Vector3.zero;
+            }
+
+            if (IsGrounded())
+                if (currentVerticalVelocity.y < 0f)
+                    currentVerticalVelocity = Vector3.zero;
             else
-                currentVerticalVelocity += Vector3.down * passiveGravityStrength * Time.fixedDeltaTime;
+                currentVerticalVelocity += passiveGravityStrength * Time.fixedDeltaTime * Vector3.down;
         }
     }
 }

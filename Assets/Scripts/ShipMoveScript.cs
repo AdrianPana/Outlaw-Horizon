@@ -2,7 +2,7 @@ using Game.Resources;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class ShipMoveScript : ModifierAffectedObject
+public class ShipMoveScript : ModifierAmbientObject
 {
     [SerializeField] private float rotationSpeed = 5.0f;
 

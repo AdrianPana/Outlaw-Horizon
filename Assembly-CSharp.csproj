@@ -87,7 +87,9 @@
     <Compile Include="Assets\Scripts\Modifiers\ModifierAmbientObject.cs" />
     <Compile Include="Assets\Scripts\ModifierTimer.cs" />
     <Compile Include="Assets\Scripts\Upgrades\UpgradeManager.cs" />
+    <Compile Include="Assets\Scripts\FloatScript.cs" />
     <Compile Include="Assets\Scripts\CannonBallScript.cs" />
+    <Compile Include="Assets\Scripts\WaveManager.cs" />
     <Compile Include="Assets\Scripts\UniversalStateManagerScriptableObject.cs" />
     <Compile Include="Assets\Scripts\UI\WheelButtonController.cs" />
     <Compile Include="Assets\Scripts\Modifiers\ModifierControlledObject.cs" />
@@ -96,6 +98,7 @@
     <Compile Include="Assets\Scripts\Modifiers\AbstractPhysicsModifierObject.cs" />
     <Compile Include="Assets\Scripts\UI\GloveUI.cs" />
     <Compile Include="Assets\Scripts\SectionManager.cs" />
+    <Compile Include="Assets\Scripts\WaterManager.cs" />
     <Compile Include="Assets\Scripts\SceneChangerScript.cs" />
     <Compile Include="Assets\Scripts\PlayerFSM\PlayerStateMachine.cs" />
     <Compile Include="Assets\Scripts\Upgrades\IModifierUpgrade.cs" />
@@ -127,6 +130,7 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
     <None Include="Assets\Slavic Village\Slavic World Free\URP_Support\URP Info.txt" />
+    <None Include="Assets\Shaders\Gerstner.hlsl" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\SDFFunctions.hlsl" />
     <None Include="Assets\Starter Assets\Sample\Environment\Shaders\Built-in_RP\Triplanar.shader" />
