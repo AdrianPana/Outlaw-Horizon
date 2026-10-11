@@ -19,21 +19,22 @@ public class PhysicsChecker
 
     private void CheckGround()
     {
-        // Cast from capsule center
-        Vector3 spherePos = ctx.rb.position + Vector3.up * ctx.capsuleCollider.center.y;
+        float radius = ctx.capsuleCollider.radius;
+        Vector3 capsuleCenter = ctx.rb.position + Vector3.up * ctx.capsuleCollider.center.y;
 
-        // Distance from center to bottom of capsule, plus detection buffer
-        float halfHeight = ctx.capsuleCollider.height / 2f;
-        float castDistance = halfHeight + ctx.groundedCastDistance;
+        // Sphere bottom starts at feet + stepHeight, so taller ledges are ignored
+        Vector3 castOrigin = ctx.rb.position + Vector3.up * (ctx.stepHeight + radius);
 
-        if (Physics.SphereCast(spherePos, ctx.capsuleCollider.radius, Vector3.down,
+        float castDistance = ctx.stepHeight + ctx.groundedCastDistance;
+
+        if (Physics.SphereCast(castOrigin, radius, Vector3.down,
             out RaycastHit hit, castDistance,
             ctx.groundLayers, QueryTriggerInteraction.Ignore))
         {
             ctx.isGrounded = true;
             ctx.onLedge = false;
             ctx.groundHit = hit;
-            ctx.distanceToGround = spherePos.y - hit.point.y;
+            ctx.distanceToGround = capsuleCenter.y - hit.point.y; // keep hover math unchanged
             ctx.rideable = hit.collider.GetComponent<Rideable>();
         }
         else
