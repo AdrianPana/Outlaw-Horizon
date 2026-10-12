@@ -23,6 +23,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Sea_2.unity
     guid: eedb684c0c27a414d97b8de6804b2ea0
+  - enabled: 1
+    path: Assets/Scenes/Wind_Dungeon_Intro.unity
+    guid: 6e94ccd0490e8524d9055bbb774561b3
+  - enabled: 1
+    path: Assets/Scenes/Wind_Dungeon_Main.unity
+    guid: 09e4dbfb17ad3cb4aa2cb3ee6c67cecd
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

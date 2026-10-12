@@ -32,6 +32,7 @@ public class ModifierControlledObject : AbstractPhysicsModifierObject
 
     public override void ApplyVerticalVelocity(Vector3 gravityForce, bool hasWind, bool hasGravity)
     {
+        Debug.Log(hasGravity + " " + currentVerticalVelocity);
         if (hasGravity)
         {
             Vector3 targetVertical = gravityForce * speed;
@@ -43,16 +44,19 @@ public class ModifierControlledObject : AbstractPhysicsModifierObject
         }
         else
         {
-            if (currentVerticalVelocity.y > 0)
-            {
+            // Provider ended: drop leftover upward velocity
+            if (currentVerticalVelocity.y > 0f)
                 currentVerticalVelocity = Vector3.zero;
-            }
 
             if (IsGrounded())
+            {
                 if (currentVerticalVelocity.y < 0f)
                     currentVerticalVelocity = Vector3.zero;
+            }
             else
+            {
                 currentVerticalVelocity += passiveGravityStrength * Time.fixedDeltaTime * Vector3.down;
+            }
         }
     }
 }

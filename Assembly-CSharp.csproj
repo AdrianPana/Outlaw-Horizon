@@ -105,6 +105,7 @@
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\Scripts\Resources.cs" />
     <Compile Include="Assets\Scripts\UI\WindWheelController.cs" />
+    <Compile Include="Assets\Scripts\Laser.cs" />
     <Compile Include="Assets\Scripts\Upgrades\UpgradePickup.cs" />
     <Compile Include="Assets\Scripts\PlayerFSM\GroundedState.cs" />
     <Compile Include="Assets\Scripts\Modifiers\WindProvider.cs" />
