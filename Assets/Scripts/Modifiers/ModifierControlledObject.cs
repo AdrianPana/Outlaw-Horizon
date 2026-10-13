@@ -32,7 +32,6 @@ public class ModifierControlledObject : AbstractPhysicsModifierObject
 
     public override void ApplyVerticalVelocity(Vector3 gravityForce, bool hasWind, bool hasGravity)
     {
-        Debug.Log(hasGravity + " " + currentVerticalVelocity);
         if (hasGravity)
         {
             Vector3 targetVertical = gravityForce * speed;

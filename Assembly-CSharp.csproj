@@ -86,6 +86,7 @@
     <Compile Include="Assets\Scripts\ObjectInteractScript.cs" />
     <Compile Include="Assets\Scripts\Modifiers\ModifierAmbientObject.cs" />
     <Compile Include="Assets\Scripts\ModifierTimer.cs" />
+    <Compile Include="Assets\Scripts\Button.cs" />
     <Compile Include="Assets\Scripts\Upgrades\UpgradeManager.cs" />
     <Compile Include="Assets\Scripts\FloatScript.cs" />
     <Compile Include="Assets\Scripts\CannonBallScript.cs" />
@@ -98,6 +99,7 @@
     <Compile Include="Assets\Scripts\Modifiers\AbstractPhysicsModifierObject.cs" />
     <Compile Include="Assets\Scripts\UI\GloveUI.cs" />
     <Compile Include="Assets\Scripts\SectionManager.cs" />
+    <Compile Include="Assets\Scripts\IActivatable.cs" />
     <Compile Include="Assets\Scripts\WaterManager.cs" />
     <Compile Include="Assets\Scripts\SceneChangerScript.cs" />
     <Compile Include="Assets\Scripts\PlayerFSM\PlayerStateMachine.cs" />
@@ -120,6 +122,7 @@
     <Compile Include="Assets\Scripts\InteractorScript.cs" />
     <Compile Include="Assets\Scripts\Upgrades\GravityUpgrade.cs" />
     <Compile Include="Assets\Scripts\CannonScript.cs" />
+    <Compile Include="Assets\Scripts\ActivatableGate.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

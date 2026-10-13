@@ -42,7 +42,7 @@ public class Laser : MonoBehaviour
         Vector3 start = laserOrigin;
         Vector3 end = start + transform.forward * maxDistance;
 
-        if (Physics.Raycast(laserOrigin, transform.forward, out RaycastHit hit, maxDistance, layerMask))
+        if (Physics.Raycast(laserOrigin, transform.forward, out RaycastHit hit, maxDistance, layerMask, QueryTriggerInteraction.Ignore))
         {
             end = hit.point;
             
